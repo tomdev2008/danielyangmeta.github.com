@@ -1,0 +1,537 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8">
+<title>Surely,I am Joking</title>
+
+<meta name="author" content="danielyang">
+
+
+  <meta name="description " content="本文记录了一些关于端口映射基础知识。">
+
+<link rel="shortcut icon" href="/public/img/favicon.png" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="/public/css/bootstrap.css">
+<link rel="stylesheet" href="/public/css/font-awesome.css">
+<link rel="stylesheet" href="/public/js/prettify/prettify.css">
+<link rel="stylesheet" href="/public/css/base.css">
+<link href="/atom.xml" rel="alternate" title="Surely,I am Joking" type="application/atom+xml"></head>
+<body>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 aside visible-md visible-lg">
+  <div class="row">
+
+<!-- 第一列 -->
+    <div class="col-md-3 col-xs-3 aside1">
+      <div>
+        <br>
+        <a class="pjaxlink" href="/">
+          <img src="/public/img/logo.png" class="img-circle avatar img-thumbnail"></a>
+        <br>
+        <br>
+        <ul class="nav nav-pills nav-stacked">
+          
+          <li>
+            <a style="color: #333333 " href="#技术" data-toggle="tab">技术</a>
+          </li>
+          
+          <li>
+            <a style="color: #333333 " href="#解题" data-toggle="tab">解题</a>
+          </li>
+          
+          <li>
+            <a style="color: #333333 " href="#资源" data-toggle="tab">资源</a>
+          </li>
+          
+          <li>
+            <a style="color: #333333 " href="#工具" data-toggle="tab">工具</a>
+          </li>
+          
+          <li>
+            <a style="color: #333333 " href="#tags" data-toggle="tab">简集</a>
+          </li>
+          <li>
+            <a style="color: #333333 " href="#me" data-toggle="tab">关于</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="aside1_bottom hidden-xs" >
+        <table class="table table-condensed" >
+          <tr>
+            <td>
+              <a href="/atom.xml" target="_blank" > <i class="fa fa-rss fa-2x"></i>
+              </a>
+            </td>
+            <td>
+              <a href="mailto:danielyangmeta@gmail.com"> <i class="fa fa-envelope-o fa-2x"></i>
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+<!-- 第二列 -->
+    <div class="col-md-9 col-xs-9 aside2">
+      <div class="row">
+        <div class="tab-content">
+
+          
+          <div class="tab-pane" id="技术">
+            <div class="list-group">
+              <br>
+              <div class="center aside2_pagetitle">技术</div>
+              
+              <a href="/2014/tech-how-to-config-haskell-environment.html" class="list-group-item pjaxlink clearfix">Windows 下设置 Haskell 的开发环境</a>
+              
+              <a href="/2014/security-how-to-become-a-hacker.html" class="list-group-item pjaxlink clearfix">如何成为一名黑客</a>
+              
+              <a href="/2014/tech-setup-windows-server-2003.html" class="list-group-item pjaxlink clearfix">我的 Windows Server 2003 设置</a>
+              
+              <a href="/2014/network-wang-luo-zhong-guan-jian-she-bei-de-qu-bie.html" class="list-group-item pjaxlink clearfix">网络中关键设备</a>
+              
+              <a href="/2014/network-duan-kou-ying-she.html" class="list-group-item pjaxlink clearfix">端口映射</a>
+              
+              <a href="/2014/tech-config-vmware-machine-connect-to-internet.html" class="list-group-item pjaxlink clearfix">VMware 虚拟机访问互联网</a>
+              
+            </div>
+          </div>
+          
+          <div class="tab-pane" id="解题">
+            <div class="list-group">
+              <br>
+              <div class="center aside2_pagetitle">解题</div>
+              
+              <a href="/2015/algorithms-he-dian-zhan-wen-ti.html" class="list-group-item pjaxlink clearfix">核电站问题</a>
+              
+              <a href="/2014/algorithms-shu-zi-san-jiao-xing.html" class="list-group-item pjaxlink clearfix">数字三角形</a>
+              
+            </div>
+          </div>
+          
+          <div class="tab-pane" id="资源">
+            <div class="list-group">
+              <br>
+              <div class="center aside2_pagetitle">资源</div>
+              
+              <a href="/2014/resources-opensoc.html" class="list-group-item pjaxlink clearfix">OpenSOC</a>
+              
+              <a href="/2014/resources-css.html" class="list-group-item pjaxlink clearfix">CSS</a>
+              
+              <a href="/2014/resources-ubuntu-14-dot-04-install-scripts.html" class="list-group-item pjaxlink clearfix">Ubuntu 14.04</a>
+              
+              <a href="/2014/resources-mysql.html" class="list-group-item pjaxlink clearfix">MySQL</a>
+              
+            </div>
+          </div>
+          
+          <div class="tab-pane" id="工具">
+            <div class="list-group">
+              <br>
+              <div class="center aside2_pagetitle">工具</div>
+              
+              <a href="/2015/tools-maven.html" class="list-group-item pjaxlink clearfix">Maven</a>
+              
+              <a href="/2014/tools-vagrant.html" class="list-group-item pjaxlink clearfix">Vagrant</a>
+              
+              <a href="/2014/tools-vim.html" class="list-group-item pjaxlink clearfix">VIM</a>
+              
+              <a href="/2014/tools-Sublime.html" class="list-group-item pjaxlink clearfix">Sublime</a>
+              
+              <a href="/2014/tools-git.html" class="list-group-item pjaxlink clearfix">Git</a>
+              
+              <a href="/2014/tools-How-to-use-Octopress.html" class="list-group-item pjaxlink clearfix">Octopress</a>
+              
+            </div>
+          </div>
+          
+
+          <div class="tab-pane" id="tags">
+            <br>
+            <div class="panel-group" id="accordion">
+              <div class="center aside2_pagetitle">简集</div>
+              
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#VMware">VMware</a>
+                    <span class="badge pull-right">1</span>
+                  </h4>
+                </div>
+                <div id="VMware" class="panel-collapse collapse">
+                  
+                  <a  href='/2014/tech-config-vmware-machine-connect-to-internet.html' class="list-group-item pjaxlink">VMware 虚拟机访问互联网</a>
+                  
+                </div>
+              </div>
+              
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#Algorithms">Algorithms</a>
+                    <span class="badge pull-right">2</span>
+                  </h4>
+                </div>
+                <div id="Algorithms" class="panel-collapse collapse">
+                  
+                  <a  href='/2015/algorithms-he-dian-zhan-wen-ti.html' class="list-group-item pjaxlink">核电站问题</a>
+                  
+                  <a  href='/2014/algorithms-shu-zi-san-jiao-xing.html' class="list-group-item pjaxlink">数字三角形</a>
+                  
+                </div>
+              </div>
+              
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#MySQL">MySQL</a>
+                    <span class="badge pull-right">1</span>
+                  </h4>
+                </div>
+                <div id="MySQL" class="panel-collapse collapse">
+                  
+                  <a  href='/2014/resources-mysql.html' class="list-group-item pjaxlink">MySQL</a>
+                  
+                </div>
+              </div>
+              
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#Ubuntu">Ubuntu</a>
+                    <span class="badge pull-right">1</span>
+                  </h4>
+                </div>
+                <div id="Ubuntu" class="panel-collapse collapse">
+                  
+                  <a  href='/2014/resources-ubuntu-14-dot-04-install-scripts.html' class="list-group-item pjaxlink">Ubuntu 14.04</a>
+                  
+                </div>
+              </div>
+              
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#Setup">Setup</a>
+                    <span class="badge pull-right">3</span>
+                  </h4>
+                </div>
+                <div id="Setup" class="panel-collapse collapse">
+                  
+                  <a  href='/2014/tech-how-to-config-haskell-environment.html' class="list-group-item pjaxlink">Windows 下设置 Haskell 的开发环境</a>
+                  
+                  <a  href='/2014/tech-setup-windows-server-2003.html' class="list-group-item pjaxlink">我的 Windows Server 2003 设置</a>
+                  
+                  <a  href='/2014/resources-ubuntu-14-dot-04-install-scripts.html' class="list-group-item pjaxlink">Ubuntu 14.04</a>
+                  
+                </div>
+              </div>
+              
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#Tool">Tool</a>
+                    <span class="badge pull-right">6</span>
+                  </h4>
+                </div>
+                <div id="Tool" class="panel-collapse collapse">
+                  
+                  <a  href='/2015/tools-maven.html' class="list-group-item pjaxlink">Maven</a>
+                  
+                  <a  href='/2014/tools-vagrant.html' class="list-group-item pjaxlink">Vagrant</a>
+                  
+                  <a  href='/2014/tools-vim.html' class="list-group-item pjaxlink">VIM</a>
+                  
+                  <a  href='/2014/tools-Sublime.html' class="list-group-item pjaxlink">Sublime</a>
+                  
+                  <a  href='/2014/tools-git.html' class="list-group-item pjaxlink">Git</a>
+                  
+                  <a  href='/2014/tools-How-to-use-Octopress.html' class="list-group-item pjaxlink">Octopress</a>
+                  
+                </div>
+              </div>
+              
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#Network">Network</a>
+                    <span class="badge pull-right">2</span>
+                  </h4>
+                </div>
+                <div id="Network" class="panel-collapse collapse">
+                  
+                  <a  href='/2014/network-wang-luo-zhong-guan-jian-she-bei-de-qu-bie.html' class="list-group-item pjaxlink">网络中关键设备</a>
+                  
+                  <a  href='/2014/network-duan-kou-ying-she.html' class="list-group-item pjaxlink">端口映射</a>
+                  
+                </div>
+              </div>
+              
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#Windows">Windows</a>
+                    <span class="badge pull-right">1</span>
+                  </h4>
+                </div>
+                <div id="Windows" class="panel-collapse collapse">
+                  
+                  <a  href='/2014/tech-setup-windows-server-2003.html' class="list-group-item pjaxlink">我的 Windows Server 2003 设置</a>
+                  
+                </div>
+              </div>
+              
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#Security">Security</a>
+                    <span class="badge pull-right">1</span>
+                  </h4>
+                </div>
+                <div id="Security" class="panel-collapse collapse">
+                  
+                  <a  href='/2014/security-how-to-become-a-hacker.html' class="list-group-item pjaxlink">如何成为一名黑客</a>
+                  
+                </div>
+              </div>
+              
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#Haskell">Haskell</a>
+                    <span class="badge pull-right">1</span>
+                  </h4>
+                </div>
+                <div id="Haskell" class="panel-collapse collapse">
+                  
+                  <a  href='/2014/tech-how-to-config-haskell-environment.html' class="list-group-item pjaxlink">Windows 下设置 Haskell 的开发环境</a>
+                  
+                </div>
+              </div>
+              
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#Web">Web</a>
+                    <span class="badge pull-right">1</span>
+                  </h4>
+                </div>
+                <div id="Web" class="panel-collapse collapse">
+                  
+                  <a  href='/2014/resources-css.html' class="list-group-item pjaxlink">CSS</a>
+                  
+                </div>
+              </div>
+              
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#OpenSOC">OpenSOC</a>
+                    <span class="badge pull-right">1</span>
+                  </h4>
+                </div>
+                <div id="OpenSOC" class="panel-collapse collapse">
+                  
+                  <a  href='/2014/resources-opensoc.html' class="list-group-item pjaxlink">OpenSOC</a>
+                  
+                </div>
+              </div>
+              
+            </div>
+          </div>
+
+          <div class="tab-pane" id="me">
+            <div class="list-group">
+              <br>
+              <div class="center aside2_pagetitle">作者</div>
+              <a style="color: #333333 " href="/about.html" class="list-group-item pjaxlink clearfix"> 作者介绍 </a>
+              <a style="color: #333333 " href="/archive.html" class="list-group-item pjaxlink clearfix">我的足迹</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+      <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12 aside3">
+        <div id="container">
+          <div id="pjax"><div class="row">
+  <div class="col-md-12 aside3-title visible-md visible-lg" >
+    <a href="/" id="aside3_title_a">
+      <br>
+      <div class="pagetitle">端口映射</div>
+      <br>
+    </a>
+  </div>
+
+  <div class="col-md-12 aside3-title hidden-lg hidden-md" >
+    <a href="/" id="aside3_title_a">
+      <div class="pagetitle">Surely,I am Joking</div>
+    </a>
+  </div>
+
+  <div class="col-md-12 aside3-content">
+    <div class="wrapper">
+      <!-- 目录 -->
+<div class="content">
+	<h3>
+		<a href="javascript:;" id="content_btn">[目录]</a>
+	</h3>
+
+	<div id="content_table" style="display:none;">
+		<div id="nav"></div>
+	</div>
+	
+	<br>
+</div>
+      <div class="cc-footer">
+	<ul>
+		作者：danielyang
+	</ul>
+</div>
+      <div id="content"><h2 id="x00-">0x00 引言</h2>
+
+<blockquote>
+  <p>内网的一台电脑要上因特网，就需要端口映射，端口映射分为动态和静态。</p>
+</blockquote>
+
+<h2 id="x01-">0x01 端口映射</h2>
+
+<h3 id="section">动态端口映射</h3>
+<p>内网中的一台电脑要访问新浪网，会向NAT网关发送数据包，包头中包括对方(就是新浪网)IP、端口和本机IP、端口，NAT网关会把本机IP、端口替换成自己的公网IP、一个未使用的端口，并且会记下这个映射关系，为以后转发数据包使用。然后再把数据发给新浪网，新浪网收到数据后做出反应，发送数据到NAT网关的那个未使用的端口，然后NAT网关将数据转发给内网中的那台电脑，实现内网和公网的通讯.当连接关闭时，NAT网关会释放分配给这条连接的端口，以便以后的连接可以继续使用。 动态端口映射其实就是NAT网关的工作方式。 </p>
+
+<h3 id="section-1">静态端口映射</h3>
+<p>就是在NAT网关上开放一个固定的端口，然后设定此端口收到的数据要转发给内网哪个IP和端口，不管有没有连接，这个映射关系都会一直存在。就可以让公网主动访问内网的一个电脑。NAT网关可以是交换机、路由器或电脑。 </p>
+
+<h2 id="x02-nat">0x02 什么是内网、什么是公网、什么是NAT？</h2>
+
+<p>现在很多关于端口映射的文章都严重的误导人，许多不懂的人把端口映射软件用在自己的电脑上，其实端口映射是要在网关上做的！！！而网关很少是电脑，大部分人也不能控制网关，所以那几个端口映射的软件基本没用。 </p>
+
+<p>NAT原理简介、各种 ADSL Modem 及路由器的端口映射方法 </p>
+
+<h2 id="x03-nat">0x03 NAT原理简介</h2>
+
+<p>NAT英文全称是“Network Address Translation”，中文意思是“网络地址转换”，它是一个IETF(Internet Engineering Task Force, Internet工程任务组)标准，允许一个整体机构以一个公用IP（Internet Protocol）地址出现在Internet上。顾名思义，它是一种把内部私有网络地址（IP地址）翻译成合法网络IP地址的技术。 </p>
+
+<p>简单地说，NAT就是在局域网内部网络中使用内部地址，而当内部节点要与外部网络进行通讯时，就在网关（可以理解为出口，打个比方就像院子的门一样）处，将 内部地址替换成公用地址，从而在外部公网（internet）上正常使用，NAT可以使多台计算机共享Internet连接，这一功能很好地解决了公共 IP地址紧缺的问题。通过这种方法，您可以只申请一个合法IP地址，就把整个局域网中的计算机接入Internet中。这时，NAT屏蔽了内部网络，所有内部网计算机对于公共网络来说是不可见的，而内部网计算机用户通常不会意识到NAT的存在。如图2所示。这里提到的内部地址，是指在内部网络中分配给节点 的私有IP地址，这个地址只能在内部网络中使用，不能被路由（一种网络技术，可以实现不同路径转发）。虽然内部地址可以随机挑选，但是通常使用的是下面的 地址：10.0.0.0~10.255.255.255，172.16.0.0~172.16.255.255，192.168.0.0~192.168.255.255。NAT将这些无法在互联网上使用的保留IP地址翻译成可以在互联网上使用的合法IP地址。而全 局地址，是指合法的IP地址，它是由NIC（网络信息中心）或者ISP(网络服务提供商)分配的地址，对外代表一个或多个内部局部地址，是全球统一的可寻 址的地址。 </p>
+
+<p>NAT 功能通常被集成到路由器、防火墙、ISDN路由器或者单独的NAT设备中。比如Cisco路由器中已经加入这一功能，网络管理员只需在路由器的IOS中设 置NAT功能，就可以实现对内部网络的屏蔽。再比如防火墙将WEB Server的内部地址192.168.1.1映射为外部地址202.96.23.11，外部访问202.96.23.11地址实际上就是访问访问 192.168.1.1。另外资金有限的小型企业来说，现在通过软件也可以实现这一功能。Windows 98 SE、Windows 2000 都包含了这一功能。 </p>
+
+<h2 id="x04-nat">0x04 NAT技术类型</h2>
+
+<p>NAT有三种类型：静态NAT(Static NAT)、动态地址NAT(Pooled NAT)、网络地址端口转换NAPT（Port－Level NAT）。 </p>
+
+<p>其中静态NAT设置起来最为简单和最容易实现的一种，内部网络中的每个主机都被永久映射成外部网络中的某个合法的地址。而动态地址NAT则是在外部网络中定 义了一系列的合法地址，采用动态分配的方法映射到内部网络。NAPT则是把内部地址映射到外部网络的一个IP地址的不同端口上。根据不同的需要，三种 NAT方案各有利弊。 </p>
+
+<p>动态地址NAT只是转换IP地址，它为每一个内部的IP地址分配一个临时的外部IP地址，主要应用于拨号，对于频繁的远程联接也可以采用动态NAT。当远程用户联接上之后，动态地址NAT就会分配给他一个IP地址，用户断开时，这个IP地址就会被释放而留待以后使用。 </p>
+
+<p>网络地址端口转换NAPT（Network Address Port Translation）是人们比较熟悉的一种转换方式。NAPT普遍应用于接入设备中，它可以将中小型的网络隐藏在一个合法的IP地址后面。NAPT与 动态地址NAT不同，它将内部连接映射到外部网络中的一个单独的IP地址上，同时在该地址上加上一个由NAT设备选定的TCP端口号。 在Internet 中使用NAPT时，所有不同的信息流看起来好像来源于同一个IP地址。这个优点在小型办公室内非常实用，通过从ISP处申请的一个IP地址，将多个连接通 过NAPT接入Internet。实际上，许多SOHO远程访问设备支持基于PPP的动态IP地址。这样，ISP甚至不需要支持NAPT，就可以做到多个内部IP地址共用一个外部IP地址上Internet，虽然这样会导致信道的一定拥塞，但考虑到节省的ISP上网费用和易管理的特点，用NAPT还是很值 得的。 </p>
+
+<p>ADSL Modem 的端口映射讲解，如果ADSL本身就带有路由功能，就需要在ADSL的“管理界面”中设置相应的端口映射。 设置的方法可能会因为ADSL不同的品牌和型号，在设置的方法上也会有所不同。我们收集和总结了一些常见ADSL的端口映射的方法，请大家参照相关的型号 进行设置。如果你所使用的ADSL猫不在我们总结的范围之内，请PM给我们，我们会尽快想办法补充上的。</p>
+
+</div>
+      <br>
+      <hr>
+      <div class="cc-footer">
+	<h3>文档信息</h3>
+	<ul>
+		<li>作者：danielyang</li>
+		<li>
+			版权声明：署名-非商业性使用-禁止演绎 4.0（
+			<a href="http://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh_TW#">创意共享4.0许可证</a>
+			）
+		</li>
+		<li>
+			创作日期：
+			<span>2014年07月17日</span>
+		</li>
+		<li>
+			更新日期：
+			<span>2015年01月21日</span>
+		</li>
+	</ul>
+</div>
+      <br>
+      <hr><!-- <div id="disqus_thread">
+<button type="button" name="chezguile" class="btn btn-default show-commend">显示评论</button>
+</div>
+-->
+<div id="disqus_thread"></div>
+
+	<script type="text/javascript">
+	    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	    var disqus_shortname = 'chezguile'; // required: replace example with your forum shortname
+
+	    /* * * DON'T EDIT BELOW THIS LINE * * */
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+	</script>
+
+	<noscript>
+		Please enable JavaScript to view the
+		<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+	</noscript>
+</div>
+    <br>
+    <footer class="footer center">
+ 	<p>
+		&copy; 2015
+		<a href="https://danielyangmeta.github.com/" target="_blank" title="Surely I am Joking"> danielyang </a>
+		.
+	</p>
+	<p>
+		Built with love... and 
+		<a href="//jekyllrb.com/" target="_blank" title="Transform your plain text into static websites and blogs.">Jekyll</a>, 
+		<a href="//getbootstrap.com/" target="_blank" title="Bootstrap is the most popular HTML, CSS, and JS framework for developing responsive, mobile first projects on the web.">Bootstrap</a>, 
+		<a href="http://pages.github.com/" target="_blank">GitHub Pages</a>, and 
+		<a href="http://developer.github.com/v3/" target="_blank">API</a>
+		. 
+	</p>
+</footer>
+    <br></div>
+</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hidden-lg hidden-md" style="position:fixed;right:10px;top:5px;">
+	<button id="nav_btn" class="btn panel-heading-background-color"> <i class="fa fa-2x fa-columns "></i>
+	</button>
+</div>
+
+<div class="visible-md visible-lg" style="position:fixed;right:10px;bottom:5px;">
+	<form accept-charset="GBK" target="_blank" method="POST" action="https://shenghuo.alipay.com/send/payment/fill.htm">
+		<input type="hidden" value="" name="optEmail">
+		<input type="hidden" value="" name="payAmount">
+		<input id="title" type="hidden" value="" name="title">
+		<input type="hidden" value="" name="memo">
+		<input type="image" src="/public/img/alipay.png" value="转账" name="pay" width="118">
+	</form>
+</div>
+
+<script type="text/javascript" src="/public/js/jquery.js"></script>
+<script type="text/javascript" src="/public/js/bootstrap.js"></script>
+<script src="/public/js/jquery.pjax.js"></script>
+<script src="/public/js/prettify/prettify.js"></script>
+<script src="/public/js/base.js"></script>
+<script>$('a[href="#技术"]').tab('show');</script>
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-57857388-1', 'danielyangmeta.github.io');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>

@@ -1,0 +1,2276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Surely,I am Joking</title>
+    <link>https://danielyangmeta.github.com/</link>
+    <description>Surely I am Joking</description>
+    <pubDate>Wed, 21 Jan 2015 10:46:16 +0800</pubDate>
+    <lastBuildDate>Wed, 21 Jan 2015 10:46:16 +0800</lastBuildDate>
+    <atom:link href="https://danielyangmeta.github.com//feed.xml" rel="self" type="application/rss+xml"/>
+
+  
+    <item>
+      <title>Maven</title>
+      <description>&lt;h2 id=&quot;x01-centos--openjdk&quot;&gt;0x01 CentOS 卸载 OpenJDK&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;yum list installed |grep java
+
+yum -y remove java-1.7.0-openjdk*
+yum -y remove tzdata-java.noarch
+
+yum -y list java*
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x02-centos--maven&quot;&gt;0x02 CentOS 安装 Maven&lt;/h2&gt;
+
+&lt;p&gt;OpenJDK 的安装目录和 Oracle JDK的安装目录不一样。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export M2_HOME=/usr/local/apache-maven/apache-maven-3.2.5
+export MAVEN_OPTS=&quot;-Xms256m -Xmx512m&quot;
+M2=$M2_HOME/bin
+PATH=$M2:$PATH
+export JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk-1.7.0.71.x86_64/jre/
+export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+export PATH=$PATH:$JAVA_HOME/bin
+
+source /etc/profile
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x03--maven-&quot;&gt;0x03 修改 Maven 的库地址&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;${user.home}/.m2/settings.xml
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x04-maven-phases&quot;&gt;0x04 Maven Phases&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;mvn validate：      验证工程是否正确，所有需要的资源是否可用。 
+mvn compile：       编译项目的源代码。   
+mvn test：          使用合适的单元测试框架来测试已编译的源代码。这些测试不需要已打包和布署。 
+mvn Package：       把已编译的代码打包成可发布的格式，比如jar。 
+mvn integration-test： 如有需要，将包处理和发布到一个能够进行集成测试的环境。 
+mvn verify：        运行所有检查，验证包是否有效且达到质量标准。 
+mvn install：       把包安装在本地的repository中，可以被其他工程作为依赖来使用。 
+mvn Deploy：        在集成或者发布环境下执行，将最终版本的包拷贝到远程的repository，使得其他的开发者或者工程可以共享。 
+mvn clean：         清除先前构建的artifacts（在maven中，把由项目生成的包都叫作artifact）。 
+mvn site：          为项目生成文档站点。 
+mvn idea:idea       提供 IntelliJ IDEA 工程支持
+mvn eclipse:eclipse 提供 Eclipse IDE 工程支持
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Phases 和 goals 可以按顺序执行：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mvn clean dependency:copy-dependencies package
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这条命令会先清理项目，然后复制依赖，最后执行 package Phases	&lt;/p&gt;
+
+&lt;h2 id=&quot;x05-standard-directory-layout&quot;&gt;0x05 Standard Directory Layout&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;src/main/java       Application/Library sources
+src/main/resources	Application/Library resources
+src/main/filters	Resource filter files
+src/main/config     Configuration files
+src/main/scripts	Application/Library scripts
+src/main/webapp  	Web application sources
+src/test/java       Test sources
+src/test/resources	Test resources
+src/test/filters	Test resource filter files
+src/it              Integration Tests (primarily for plugins)
+src/assembly        Assembly descriptors
+src/site	        Site
+LICENSE.txt	        Project&#39;s license
+NOTICE.txt	        Notices and attributions required by libraries that the project depends on
+README.txt	        Project&#39;s readme
+&lt;/code&gt;&lt;/pre&gt;
+
+</description>
+      <pubDate>Wed, 07 Jan 2015 00:00:00 +0800</pubDate>
+      <link>https://danielyangmeta.github.com//2015/tools-maven.html</link>
+      <guid isPermaLink="true">https://danielyangmeta.github.com//2015/tools-maven.html</guid>
+
+      
+      <category>Tool</category>
+      
+
+      
+      <category>工具</category>
+      
+      
+    </item>
+  
+    <item>
+      <title>核电站问题</title>
+      <description>&lt;h2 id=&quot;x01-&quot;&gt;0x01 核电站问题&lt;/h2&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;问题描述&lt;/h3&gt;
+
+&lt;p&gt;一个核电站有N个放核物质的坑，坑排列在一条直线上。如果连续3个坑中放入核物质，则会发生爆炸，于是，在某些坑中可能不放核物质。现在，请你计算：对于给定的N，求不发生爆炸的放置核物质的方案总数。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;输入数据&lt;/h3&gt;
+
+&lt;p&gt;输入文件有多行，每行对应一个正整数 N &amp;lt;= 40;&lt;/p&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;输出要求&lt;/h3&gt;
+
+&lt;p&gt;输出文件有多行，每行只有一个正整数，表示方案总数。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;输入样例&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;1
+2
+3
+4
+10
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;输出样例&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;2
+4
+7
+13
+504
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x02-&quot;&gt;0x02 解题思路&lt;/h2&gt;
+
+&lt;p&gt;用动态规划。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-5&quot;&gt;状态转移方程：&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;f[i] = 2 * f[i - 1] - f[i - 4]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x03-&quot;&gt;0x03 代码&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;iostream&amp;gt; 
+using namespace std;
+unsigned long long f[60] = { 0 };
+int main()
+{
+	int i = 2, n;
+	f[0] = f[1] = 1;
+	while (cin &amp;gt;&amp;gt; n)
+	{
+		if (0 != f[n + 1]) cout &amp;lt;&amp;lt; f[n + 1];
+		else {
+			for (; i &amp;lt; n + 2; i++)
+			{
+				f[i] = 2 * f[i - 1] - f[i - 4];
+			}
+			cout &amp;lt;&amp;lt; f[n + 1] &amp;lt;&amp;lt; endl;
+		}
+	}
+	return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+      <pubDate>Fri, 02 Jan 2015 00:00:00 +0800</pubDate>
+      <link>https://danielyangmeta.github.com//2015/algorithms-he-dian-zhan-wen-ti.html</link>
+      <guid isPermaLink="true">https://danielyangmeta.github.com//2015/algorithms-he-dian-zhan-wen-ti.html</guid>
+
+      
+      <category>Algorithms</category>
+      
+
+      
+      <category>解题</category>
+      
+      
+    </item>
+  
+    <item>
+      <title>Vagrant</title>
+      <description>&lt;h2 id=&quot;x00-&quot;&gt;0x00 引言&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Vagrant是一个基于Ruby的管理工具，常用于搭建和配置轻量级的、可再生的和便携式的开发或测试环境，可以使用这种方法搭建跨平台开发环境。它只是一种工具，如果你觉得开发时并不好，那么你只能简化你自己的工作流。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;x01-&quot;&gt;0x01 安装&lt;/h2&gt;
+
+&lt;h3 id=&quot;vagrant&quot;&gt;安装Vagrant&lt;/h3&gt;
+
+&lt;p&gt;choco install vagrant&lt;/p&gt;
+
+&lt;h3 id=&quot;virtualbox&quot;&gt;安装Virtualbox&lt;/h3&gt;
+
+&lt;p&gt;choco install virtualbox&lt;br /&gt;
+choco install virtualbox.extensionpack&lt;/p&gt;
+
+&lt;h2 id=&quot;x02-&quot;&gt;0x02 使用&lt;/h2&gt;
+
+&lt;h3 id=&quot;box&quot;&gt;下载启动Box&lt;/h3&gt;
+&lt;p&gt;在Vagrant中，box是一种打包好的镜像，通过这个镜像，可以生成相应的虚拟机。box可以通过&lt;a href=&quot;http://www.vagrantbox.es/&quot;&gt;官方网站&lt;/a&gt;下载，也可以自己制作，在团队内分享。&lt;/p&gt;
+
+&lt;p&gt;官方的Box可以在创建时自动下载。例如以下步骤：进入一个vagrant虚拟机目录，一个目录管理一个虚拟机.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;vagrant init hashicorp/precise32 # 创建一个ubuntu的虚拟机
+vagrant up # 启动这个虚拟机
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;通过这个步骤，vagrant会去box列表中找&lt;code&gt;hashicorp/precise32&lt;/code&gt;这个镜像，如果没有就去官方下载。Box被保存在&lt;code&gt;~/.vagrant&lt;/code&gt;下。通过命令&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;vagrant box list 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可以查看已经下载的box。如果想以这个box再建立一个虚拟机，只要再创建一个目录，例如&lt;code&gt;~/Documents/Vagrant/Ubuntu32&lt;/code&gt;，然后执行&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;vagrant init hashicorp/precise32
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;即可。&lt;/p&gt;
+
+&lt;p&gt;如果直接离线下载好了 box 文件，可以通过以下命令添加&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; vagrant box add OpenSOC .\centos65-x86_64-20140116.box
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这样添加后，可以把你下载的 box 包删除了。&lt;/p&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;操作虚拟机&lt;/h3&gt;
+
+&lt;p&gt;操作虚拟机时，必须进入刚刚建立的目录中去，这个目录中必须含有&lt;code&gt;init&lt;/code&gt;命令建立的Vagrantfile文件。常用命令有&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ vagrant init       # 初始化
+$ vagrant up         # 启动虚拟机
+$ vagrant halt       # 关闭虚拟机
+$ vagrant reload     # 重启虚拟机
+$ vagrant ssh        # SSH 至虚拟机
+$ vagrant status     # 查看虚拟机运行状态
+$ vagrant destroy    # 销毁当前虚拟机
+$ vagrant box add
+$ vagrant box list
+$ vagrant box remove
+$ vagrant box repackage
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;共享文件夹&lt;/h3&gt;
+&lt;p&gt;通过Vagrant建立的虚拟机和Mac共享文件非常容易，虚拟机中&lt;code&gt;/vagrant&lt;/code&gt;目录会映射到我们本地虚拟机目录中。例如&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd ~/Documents/Vagrant/Ubuntu
+vagrant up
+vagrant ssh
+cd /vagrant
+ls
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这个时候，我们会看到，这里显示的文件和&lt;code&gt;~/Documents/Vagrant/Ubuntu&lt;/code&gt;下是一样的。&lt;/p&gt;
+
+&lt;h3 id=&quot;box-1&quot;&gt;共享Box&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;vagrant package --base my-virtual-machine
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可以可以将一个虚拟机打包成Box，供别人使用。别人只要用打包的box来创建一个虚拟机即可。&lt;/p&gt;
+
+&lt;h2 id=&quot;x03-vagrantfile&quot;&gt;0x03 Vagrantfile&lt;/h2&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;网络配置&lt;/h3&gt;
+
+&lt;p&gt;全网访问&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;config.vm.network :forwarded_port, guest: 80, host: 8080
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;私有模式&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;config.vm.network :private_network, ip: &quot;192.168.1.104&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;局域网&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;config.vm.network :public_network
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;目录映射&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;config.vm.synced_folder &quot;wwwroot/&quot;, &quot;/var/www&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;还可以在 Vagrantfile 中配置自己要执行的文件，配置虚拟机内存大小。&lt;/p&gt;
+
+&lt;h2 id=&quot;x04-&quot;&gt;0x04 参考文献&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;http://docs.vagrantup.com/v2/&quot;&gt;Vagrant Docs&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blog.segmentfault.com/fenbox/1190000000264347&quot;&gt;使用 Vagrant 打造跨平台开发环境&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blog.smdcn.net/article/1308.html&quot;&gt;使用Vagrant在Windows下部署开发环境&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+      <pubDate>Sat, 27 Dec 2014 00:00:00 +0800</pubDate>
+      <link>https://danielyangmeta.github.com//2014/tools-vagrant.html</link>
+      <guid isPermaLink="true">https://danielyangmeta.github.com//2014/tools-vagrant.html</guid>
+
+      
+      <category>Tool</category>
+      
+
+      
+      <category>工具</category>
+      
+      
+    </item>
+  
+    <item>
+      <title>OpenSOC</title>
+      <description>&lt;h2 id=&quot;x00-&quot;&gt;0x00 引言&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;思科在BroCON大会上开源了其安全大数据分析架构OpenSOC。OpenSOC是一个针对网络包和流的大数据分析框架，它是大数据分析与安全分析技术的结合, 能够实时的检测网络异常情况并且可以扩展很多节点，它的存储使用开源项目Hadoop，实时索引使用开源项目ElasticSearch，在线流分析使用著名的开源项目Storm。开源时还没到稳定版，所以对于个人用户来说不是很友好。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;x01-opensoc-&quot;&gt;0x01 OpenSoc 的组成&lt;/h2&gt;
+
+&lt;p&gt;OpenSOC 是 cisco 公司的一个开源项目，bro 项目中包含 OpenSOC ，所以应该 bro 项目是 OpenSOC 的一个封装。&lt;/p&gt;
+
+&lt;p&gt;2 Network Capture Cards (Recommend Napatech NT20E2-CAP)&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;component&lt;/th&gt;
+      &lt;th&gt;function&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Apache Flume 1.4.0 +&lt;/td&gt;
+      &lt;td&gt;Telemetry Capture Layer&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Apache Kafka 0.8.1+&lt;/td&gt;
+      &lt;td&gt;Data Bus&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Apache Storm 0.9 +&lt;/td&gt;
+      &lt;td&gt;Stream Processor&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Apache Hadoop 2.x (any distribution)&lt;/td&gt;
+      &lt;td&gt;Cloud Platform&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Apache Hive 12 + (13 recommended)&lt;/td&gt;
+      &lt;td&gt;Long-Term Data Store&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Apache Hbase 0.94+&lt;/td&gt;
+      &lt;td&gt;Long-Term Packet Store&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Elastic Search 1.1 +&lt;/td&gt;
+      &lt;td&gt;Real-Time Index and Search&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;MySQL 5.6+&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Kibana&lt;/td&gt;
+      &lt;td&gt;Visualization Platform&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;mysql、kibana、elastic search、opensoc&lt;/p&gt;
+
+&lt;p&gt;OpenSOC-Streaming&lt;br /&gt;
+OpenSOC-Aggregation&lt;br /&gt;
+OpenSOC-ML&lt;/p&gt;
+
+&lt;h2 id=&quot;x02-survey-of-algorithms-used-by-opensoc&quot;&gt;0x02 Survey of Algorithms Used by OpenSOC&lt;/h2&gt;
+
+&lt;h3 id=&quot;offline&quot;&gt;Offline&lt;/h3&gt;
+
+&lt;p&gt;Hypothesis Tests&lt;/p&gt;
+
+&lt;p&gt;Decision Trees/Random Forests&lt;/p&gt;
+
+&lt;p&gt;Association Rules (Apriori)&lt;/p&gt;
+
+&lt;p&gt;BIRCH/DBSCAN Clustering&lt;/p&gt;
+
+&lt;p&gt;Auto Regressive (AR) Moving Average (MA)&lt;/p&gt;
+
+&lt;h3 id=&quot;online&quot;&gt;Online&lt;/h3&gt;
+
+&lt;h4 id=&quot;stream-clustering&quot;&gt;Stream Clustering&lt;/h4&gt;
+
+&lt;p&gt;StreamKM++: computes a small weighted sample of the data stream and it uses the kmeans++ algorithm as a randomized seeding technique to choose the first values for the clusters.&lt;/p&gt;
+
+&lt;p&gt;CluStream: micro-clusters are temporal extensions of cluster feature vectors. The microclusters are stored at snapshots in time following a pyramidal pattern.&lt;/p&gt;
+
+&lt;p&gt;ClusTree: It is a parameter free algorithm automatically adapting to the speed of the stream and it is capable of detecting concept drift, novelty, and outliers in the stream.&lt;/p&gt;
+
+&lt;p&gt;DenStream: uses dense micro-clusters (named core-micro-cluster) to summarize clusters. To maintain and distinguish the potential clusters and outliers, this method presents coremicro-cluster and outlier micro-cluster structures.&lt;/p&gt;
+
+&lt;p&gt;D-Stream: maps each input data record into a grid and it computes the grid density. The grids are clustered based on the density. This algorithm adopts a density decaying technique to capture the dynamic changes of a data stream.&lt;/p&gt;
+
+&lt;p&gt;CobWeb: uses a classification tree. Each node in a classification tree represents a class (concept) and is labeled by a probabilistic concept that summarizes the attribute-value distributions of objects classified under the node&lt;/p&gt;
+
+&lt;h4 id=&quot;stream-classification&quot;&gt;Stream Classification&lt;/h4&gt;
+
+&lt;p&gt;Hoeffding Tree (VFDT)：incremental, anytime decision tree induction algorithm that is capable of learning from massive data streams, assuming that the distribution generating examples does not change over time&lt;/p&gt;
+
+&lt;p&gt;Half-Space Trees：ensemble model that randomly spits data into half spaces. They are created online and detect anomalies by their deviations in placement within the forest relative to other data from the same window&lt;/p&gt;
+
+&lt;h4 id=&quot;outlier-detection&quot;&gt;Outlier Detection&lt;/h4&gt;
+
+&lt;p&gt;Median Absolute Deviation: Telemetry is anomalous if the deviation of its latest datapoint with respect to the median is X times larger than the median of deviations &lt;/p&gt;
+
+&lt;p&gt;Standard Deviation from Average: Telemetry is anomalous if the absolute value of the average of the latest three datapoint minus the moving average is greater than three standard deviations of the average.&lt;/p&gt;
+
+&lt;p&gt;Standard Deviation from Moving Average: Telemetry is anomalous if the absolute value of the average of the latest three datapoints minus the moving average is greater than three standard deviations of the moving average.&lt;/p&gt;
+
+&lt;p&gt;Mean Subtraction Cumulation: Telemetry is anomalous if the value of the next datapoint in the series is farther than three standard deviations out in cumulative terms after subtracting the mean from each data point &lt;/p&gt;
+
+&lt;p&gt;Least Squares: Telemetry is anomalous if the average of the last three datapoints on a projected least squares model is greater than three sigma&lt;/p&gt;
+
+&lt;p&gt;Histogram Bins: Telemetry is anomalous if the average of the last three datapoints falls into a histogram bin with less than x &lt;/p&gt;
+
+&lt;h3 id=&quot;approximation-for-streaming&quot;&gt;Approximation for Streaming&lt;/h3&gt;
+
+&lt;p&gt;Skip Lists&lt;/p&gt;
+
+&lt;p&gt;HyperLogLog&lt;/p&gt;
+
+&lt;p&gt;Bloom Filters&lt;/p&gt;
+
+&lt;p&gt;Sketches&lt;/p&gt;
+
+&lt;p&gt;Digest&lt;/p&gt;
+
+&lt;h2 id=&quot;x03-&quot;&gt;0x03 参考文献&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/OpenSOC/opensoc/wiki/CONTRIBUTING.md&quot;&gt;OpenSOC CONTRIBUTING&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.bro.org/sitemap/index.html&quot;&gt;www.bro.org&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.bro.org/sphinx-git/index.html&quot;&gt;Bro Manual&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.bro.org/documentation/index.html&quot;&gt;bro Documentation and Training&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.bro.org/community/software.html&quot;&gt;Related Software&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.bro.org/community/traces.html&quot;&gt;bro Packet Traces&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://github.com/grutz/bro/blob/master/doc/install/install.rst&quot;&gt;bro Installing Bro&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.bro.org/documentation/exercises/index.html&quot;&gt;bro Exercises&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.bro.org/research/index.html&quot;&gt;Research&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;http://try.bro.org/#/trybro&quot;&gt;Try Bro&lt;/a&gt;&lt;/p&gt;
+</description>
+      <pubDate>Tue, 23 Dec 2014 00:00:00 +0800</pubDate>
+      <link>https://danielyangmeta.github.com//2014/resources-opensoc.html</link>
+      <guid isPermaLink="true">https://danielyangmeta.github.com//2014/resources-opensoc.html</guid>
+
+      
+      <category>OpenSOC</category>
+      
+
+      
+      <category>资源</category>
+      
+      
+    </item>
+  
+    <item>
+      <title>CSS</title>
+      <description>&lt;h2 id=&quot;x00-&quot;&gt;0x00 引言&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;各种选择器可以组合使用。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;x01-&quot;&gt;0x01 基本概念&lt;/h2&gt;
+
+&lt;p&gt;行内元素&lt;span&gt; &lt;/span&gt;，块级元素&amp;lt;div&amp;gt; &amp;lt;/div&amp;gt;。&lt;/p&gt;
+
+&lt;p&gt;CSS 规则由两个主要的部分构成：选择器，以及一条或多条声明：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;selector {declaration1; declaration2; ... declarationN }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果值为若干单词，则要给值加引号：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;p {font-family: &quot;sans serif&quot;;}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;层叠次序：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;浏览器缺省设置
+外部样式表
+内部样式表（位于 &amp;lt;head&amp;gt; 标签内部）
+内联样式（在 HTML 元素内部）
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;选择器的分组：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;h1,h2,h3,h4,h5,h6 {
+  color: green;
+  }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;继承：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;body  {
+ font-family: Verdana, sans-serif;
+ }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;整个网页的字体就是 Verdana    &lt;/p&gt;
+
+&lt;h2 id=&quot;x02-&quot;&gt;0x02 选择器&lt;/h2&gt;
+
+&lt;p&gt;id 选择器和类选择器都能用作派生选择器&lt;/p&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;派生选择器（元素选择器，类型选择器）&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;li strong {
+    font-style: italic;
+    font-weight: normal;
+  }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;id-&quot;&gt;id 选择器&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;#red {color:red;}
+#green {color:green;}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;类选择器&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;.center {text-align: center}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;属性选择器&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;[title]
+{
+color:red;
+}	
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;属性和值选择器&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[title=W3School]
+{
+border:5px solid blue;
+}	
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;选择器&lt;/th&gt;
+      &lt;th&gt;描述&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;[attribute]&lt;/td&gt;
+      &lt;td&gt;用于选取带有指定属性的元素。&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;[attribute=value]&lt;/td&gt;
+      &lt;td&gt;用于选取带有指定属性和值的元素。&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;[attribute~=value]&lt;/td&gt;
+      &lt;td&gt;用于选取属性值中包含指定词汇的元素。&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;[attribute  =value]&lt;/td&gt;
+      &lt;td&gt;用于选取带有以指定值开头的属性值的元素，该值必须是整个单词。&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;[attribute^=value]&lt;/td&gt;
+      &lt;td&gt;匹配属性值以指定值开头的每个元素。&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;[attribute$=value]&lt;/td&gt;
+      &lt;td&gt;匹配属性值以指定值结尾的每个元素。&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;[attribute*=value]&lt;/td&gt;
+      &lt;td&gt;匹配属性值中包含指定值的每个元素。&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;通配符选择器&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;* {color:red;}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;后代选择器&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;h1 em {color:red;}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面这个规则会把作为 h1 元素后代的 em 元素的文本变为 红色。&lt;/p&gt;
+
+&lt;h2 id=&quot;x03-classid&quot;&gt;0x03 class与id&lt;/h2&gt;
+
+&lt;p&gt;class 选择器用来公用，id 选择器用于操作。&lt;/p&gt;
+
+&lt;h2 id=&quot;x04-htmlcss&quot;&gt;0x04 html引用css方法&lt;/h2&gt;
+
+&lt;p&gt;1、直接在div中使用css样式制作div+css网页&lt;br /&gt;
+2、html中使用style自带式&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;style type=&quot;text/css&quot;&amp;gt; 
+&amp;lt;!-- 
+.ceshi {font-size:14px; color:#FF0000;}/*这里是设置CSS的样式内容*/ 
+--&amp;gt; 
+&amp;lt;/style&amp;gt; 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;3、使用@import引用外部CSS文件&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;style type=&quot;text/css&quot;&amp;gt; 
+&amp;lt;!-- 
+@import url(wcss.css);/*这里是通过@import引用CSS的样式内容*/ 
+--&amp;gt; 
+&amp;lt;/style&amp;gt; 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;4、使用link引用外部CSS文件（推荐此方法）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;link rel=&quot;stylesheet&quot; href=&quot;wcss.css&quot; type=&quot;text/css&quot; /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x05-examples&quot;&gt;0x05 examples&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;#E F{color:red;}          选择 E 元素后所有 F 后代元素           
+#E &amp;gt; F{color:red;}       E &amp;gt; F 表示选择E元素的所有子F元素，只选择一代
+#E + F{color:inherit;} 相邻兄弟选择器可以选择紧接在另一元素后的元素，而且他们具有一个相同的父元素
+#E F:nth-child(2){color:red}	
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;E+F表示HTML中紧随E的F元素。	&lt;/p&gt;
+
+&lt;p&gt;nth-child是个伪类的用法，如F:nth-child(2)就表示在F的父元素中选择位居第二位的F。&lt;/p&gt;
+</description>
+      <pubDate>Mon, 22 Dec 2014 00:00:00 +0800</pubDate>
+      <link>https://danielyangmeta.github.com//2014/resources-css.html</link>
+      <guid isPermaLink="true">https://danielyangmeta.github.com//2014/resources-css.html</guid>
+
+      
+      <category>Web</category>
+      
+
+      
+      <category>资源</category>
+      
+      
+    </item>
+  
+    <item>
+      <title>VIM</title>
+      <description>&lt;h2 id=&quot;x00-&quot;&gt;0x00 引言&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;本来习惯linux方式，但驱动太差，只能把 Vim 安在Windows上了。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;x01--windows-&quot;&gt;0x01 在 Windows 上如何复制粘贴&lt;/h2&gt;
+
+&lt;p&gt;Windows to vim Shift+Insert, vim to Windows ‘%p&lt;/p&gt;
+
+&lt;p&gt;VIM具有多个剪贴板，并且和系统剪贴板是完全独立的。在 Vim 中输入：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;:reg
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可以看到之前复制过的所有内容。&lt;/p&gt;
+</description>
+      <pubDate>Wed, 17 Dec 2014 00:00:00 +0800</pubDate>
+      <link>https://danielyangmeta.github.com//2014/tools-vim.html</link>
+      <guid isPermaLink="true">https://danielyangmeta.github.com//2014/tools-vim.html</guid>
+
+      
+      <category>Tool</category>
+      
+
+      
+      <category>工具</category>
+      
+      
+    </item>
+  
+    <item>
+      <title>Sublime</title>
+      <description>&lt;h2 id=&quot;x00-&quot;&gt;0x00 引言&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;编辑器从 notepad 、notepad +  + 、editplus、UE 到 gedit 。前面的有些要么觉得他功能太简单，要么不符合我的审美。Vim Emacs 在 Linux 系统下磕磕碰碰用了几个月，但周围人都用的 Windows ，传递文件很不方便，回到 Windows 后，不喜欢 Gvim 的 UI，Emacs 启动速度慢，最后试用了 Sublime，觉得很喜欢。但是我还是心中在怀念 Vim 和 Emacs 的快捷键方式。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;x01-&quot;&gt;0x01 常用的包&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;Package Control         包管理工具
+Sublime CodeIntel       代码自动提示
+SublimeLinter           支持lint语法的插件
+SublimeEnhancements
+Bracket Highlighter     括号匹配
+NodeJs
+Smart Markdown          markdow 折叠功能 tab
+Markdown Preview
+Jekyll
+prefixr
+Emmet
+SublimeHaskell
+TAG                     html/css 自动格式化
+Terminal
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x02-build-system&quot;&gt;0x02 Build System&lt;/h2&gt;
+&lt;p&gt;可以当作基本的IDE，&lt;/p&gt;
+
+&lt;h2 id=&quot;x03-&quot;&gt;0x03 常用快捷键&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;key&lt;/th&gt;
+      &lt;th&gt;function&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;kbd&gt; Ctrl + K, B  &lt;/kbd&gt;&lt;/td&gt;
+      &lt;td&gt;侧边栏开关&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;kbd&gt; Ctrl + Shift + [ &lt;/kbd&gt;&lt;/td&gt;
+      &lt;td&gt;折叠代码&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;kbd&gt;   Ctrl + Shift + ] &lt;/kbd&gt;&lt;/td&gt;
+      &lt;td&gt;展开代码&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;kbd&gt;   Ctrl + T   &lt;/kbd&gt;&lt;/td&gt;
+      &lt;td&gt;添加时间&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;kbd&gt;   Ctrl + Z  &lt;/kbd&gt;&lt;/td&gt;
+      &lt;td&gt;撤销&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;kbd&gt;   Ctrl + Y    &lt;/kbd&gt;&lt;/td&gt;
+      &lt;td&gt;恢复撤销&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;kbd&gt;   Ctrl + Shift + P  &lt;/kbd&gt;&lt;/td&gt;
+      &lt;td&gt;命令面板&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;kbd&gt;   Ctrl + Alt + P  &lt;/kbd&gt;&lt;/td&gt;
+      &lt;td&gt;切换项目&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;文件&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;key&lt;/th&gt;
+      &lt;th&gt;function&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;kbd&gt; Ctrl + O&lt;/kbd&gt;&lt;/td&gt;
+      &lt;td&gt;打开文件&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;kbd&gt; Ctrl + Shift + N &lt;/kbd&gt;&lt;/td&gt;
+      &lt;td&gt;新建窗口&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;kbd&gt; Ctrl + ]        &lt;/kbd&gt;&lt;/td&gt;
+      &lt;td&gt;缩进&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;kbd&gt; Ctrl + L   &lt;/kbd&gt;&lt;/td&gt;
+      &lt;td&gt;选择整行&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;kbd&gt; Ctrl + Shift + K    &lt;/kbd&gt;&lt;/td&gt;
+      &lt;td&gt;删除整行&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;kbd&gt; Ctrl + J        &lt;/kbd&gt;&lt;/td&gt;
+      &lt;td&gt;合并行&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;kbd&gt; Ctrl + Shift + ↑ &lt;/kbd&gt;&lt;/td&gt;
+      &lt;td&gt;上行互换&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;kbd&gt; Ctrl + /     &lt;/kbd&gt;&lt;/td&gt;
+      &lt;td&gt;注释整行&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;kbd&gt; Ctrl  +  Shift  +  / &lt;/kbd&gt;&lt;/td&gt;
+      &lt;td&gt;块注释开关&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;书签&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;key&lt;/th&gt;
+      &lt;th&gt;function&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Ctrl + F2&lt;/td&gt;
+      &lt;td&gt;设置书签&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;F2&lt;/td&gt;
+      &lt;td&gt;下一个书签&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Shift + F2&lt;/td&gt;
+      &lt;td&gt;上一个书签&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Alt + F2&lt;/td&gt;
+      &lt;td&gt;选择所有书签&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Ctrl + Shift + F2&lt;/td&gt;
+      &lt;td&gt;清除所有书签&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;查找&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;key&lt;/th&gt;
+      &lt;th&gt;function&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;F3&lt;/td&gt;
+      &lt;td&gt;查找下一个&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Shift + F3&lt;/td&gt;
+      &lt;td&gt;查找上一个&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Ctrl + H&lt;/td&gt;
+      &lt;td&gt;替换&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Ctrl + Shift + H&lt;/td&gt;
+      &lt;td&gt;替换下一个&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Ctrl + Shift + F&lt;/td&gt;
+      &lt;td&gt;查询文件&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Ctrl + G&lt;/td&gt;
+      &lt;td&gt;到达行&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Ctrl + ,&lt;/td&gt;
+      &lt;td&gt;匹配&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;x04-project&quot;&gt;0x04 Project&lt;/h2&gt;
+
+&lt;p&gt;可以将不同的文件组成项目，然后再不同项目之间切换。&lt;/p&gt;
+
+&lt;p&gt;project_name.sublime-project：包含工程定义，该文件会被记录到版本控制中。&lt;/p&gt;
+
+&lt;p&gt;project_name.sublime-workspace：包含用户工程中对文件的操作数据。&lt;/p&gt;
+
+&lt;h2 id=&quot;x05-&quot;&gt;0x05 ?&lt;/h2&gt;
+
+&lt;p&gt;谁还记得没有插件的 Sublime 是什么样子吗？&lt;/p&gt;
+
+</description>
+      <pubDate>Wed, 17 Dec 2014 00:00:00 +0800</pubDate>
+      <link>https://danielyangmeta.github.com//2014/tools-Sublime.html</link>
+      <guid isPermaLink="true">https://danielyangmeta.github.com//2014/tools-Sublime.html</guid>
+
+      
+      <category>Tool</category>
+      
+
+      
+      <category>工具</category>
+      
+      
+    </item>
+  
+    <item>
+      <title>Windows 下设置 Haskell 的开发环境</title>
+      <description>&lt;h2 id=&quot;x00-&quot;&gt;0x00 引言&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Haskell 是一种标准化的，通用的纯函数编程语言，有非限定性语义和强静态类型。它的命名源自美国逻辑学家Haskell Brooks Curry，他在数学逻辑方面上的工作使得函数式编程语言有了广泛的基础。这个人很有名，它名字三个词语中有两个字都是计算机科学家绕不过的地方。pandoc 就是 Haskell 写成的，本文是在学习了 Scheme 后，决定学习下 Haskell 是，在 Windows 8.1 环境下的安装记录。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;x01--haskell-platform&quot;&gt;0x01 安装 Haskell Platform&lt;/h2&gt;
+
+&lt;p&gt;去下载 Haskell 安装包。安装完后，进入 CMD ，执行 cabal update，去仓库更新。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cabal install bytestring aeson haskell-src-exts haddock ghc-mod stylish-haskell
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x02--sublimehaskell-&quot;&gt;0x02 安装 SublimeHaskell 插件&lt;/h2&gt;
+
+&lt;p&gt;因为从 Emacs 到使用 Sublime 有一段时间了，正好 Sublime 下有一个 Haskell 开发插件。 CTRL + SHIFT + p，安装 SublimeHaskell 插件。&lt;/p&gt;
+
+&lt;p&gt;安装完后，进入 Preferences -&amp;gt; Package Settings -&amp;gt; SublimeHaskell -&amp;gt; Settings User 输入以下内容。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+    &quot;enable_hdevtools&quot;: false,
+    &quot;inspect_modules&quot;: false,
+    &quot;add_to_PATH&quot;: [ &quot;.../AppData/Roaming/cabal/bin&quot; ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x03-&quot;&gt;0x03 测试&lt;/h2&gt;
+
+&lt;p&gt;新建一个 .hs 结尾文件，输入“main”并回车，会产生以下文档：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;module Main where
+
+main = putStrLn &quot;Hello World &quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在其中添加 main :: IO () 后 CRTL + b。&lt;/p&gt;
+
+</description>
+      <pubDate>Tue, 16 Dec 2014 00:00:00 +0800</pubDate>
+      <link>https://danielyangmeta.github.com//2014/tech-how-to-config-haskell-environment.html</link>
+      <guid isPermaLink="true">https://danielyangmeta.github.com//2014/tech-how-to-config-haskell-environment.html</guid>
+
+      
+      <category>Haskell</category>
+      
+      <category>Setup</category>
+      
+
+      
+      <category>技术</category>
+      
+      
+    </item>
+  
+    <item>
+      <title>如何成为一名黑客</title>
+      <description>&lt;h2 id=&quot;x00-foreword&quot;&gt;0x00 Foreword&lt;/h2&gt;
+
+&lt;p&gt;Nowadays, every other college or school student wants to be a hacker. Due to media hype, the term hacker is considered both cool and criminal at the same time. Now, since my blog is basically about my journey into hacking, I receive many emails on how to become a hacker. “I’m a beginner in hacking, how should I start?” or “I want to be able to hack my friend’s Facebook account” are some of the more frequent queries. In this article I will attempt to answer these and more. I will give detailed technical instructions on how to get started as a beginner and how to evolve as you gain more knowledge and expertise in the domain. Hacking is a skill. And you must remember that if you want to learn hacking solely for the fun of hacking into your friend’s facebook account or email, things will not work out for you. You should decide to learn hacking because of your fascination for technology and your desire to be an expert in computer systems.&lt;/p&gt;
+
+&lt;p&gt;“Being a hacker is lots of fun, but it’s a kind of fun that takes lots of effort. The effort takes motivation.”&lt;/p&gt;
+
+&lt;p&gt;The first important step to becoming a hacker is to read this &lt;a href=&quot;http://www.catb.org/esr/faqs/hacker-howto.html&quot;&gt;article by Eric Raymond&lt;/a&gt; It has become the de-facto standard guideline for aspiring hackers.&lt;/p&gt;
+
+&lt;h2 id=&quot;x01-the-hacker-mindset&quot;&gt;0x01 The hacker mindset&lt;/h2&gt;
+
+&lt;p&gt;In order to become a hacker, you must start thinking like one. We encounter all kinds of technology in our real life. Look at them from a hacker’s perspective by thinking of ways to hack them. Hacking is not only about computers. It is also about how you use logic and ingenuity to solve the problems you encounter in your day today life. Nothing is really hack-proof. Auto-rickshaw meters, electronic voting machines, electronic doors, biometric systems, cars and even a yatch have all been hacked in the past. Whenever you encounter any technology, think about how it can be exploited to perform another action. You should possess a natural curiosity for solving puzzles and taking up challenges.&lt;/p&gt;
+
+&lt;h2 id=&quot;x02-know-your-technology&quot;&gt;0x02 Know your technology&lt;/h2&gt;
+
+&lt;p&gt;Becoming a hacker is no easy task. It will not happen in days or weeks. It will take you many months and  even years to reach to the level where you can call yourself a hacker. The main reason for this is that being a hacker requires a lot of technical know-how. If you want to hack a computer, it only seems logical that you first know how it works, right? You should be familiar with the ins and outs of computers and know a little bit about everything in the IT domain. For this, you need to learn many things. This learning phase is when most aspiring hackers will give up.&lt;/p&gt;
+
+&lt;h2 id=&quot;x03-general-it-knowledge&quot;&gt;0x03 General IT knowledge:&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;  · Learn how to install Windows and Linux. Use VirtualBox or VMware to practice this.
+  · Learn networking concepts like IP address, subnets, TCP/IP, OSI model, LAN,WAN
+  · Functions of switch, router, firewall, access point etc
+  · What is DNS, DHCP, SNMP, ARP, NAT?
+  · What is HTTP, FTP, Telnet, RDP, SSH, POP, SMTP, SSL, NetBios?
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;These bullet points are just bare minimum concepts, and you have to learn them thoroughly. For instance, you need to know how data travels through the OSI layers, and the role of each layer in the data transfer.&lt;/p&gt;
+
+&lt;p&gt;I would recommend taking a networking course  such as CompTIA’s N+ certification. &lt;/p&gt;
+
+&lt;h2 id=&quot;x04-programming--languages&quot;&gt;0x04 Programming  Languages&lt;/h2&gt;
+
+&lt;p&gt;Programming knowledge is necessary, although not mandatory to become a hacker. Some of the world’s best hackers started out as programmers. If you know programming, you will be able to dissect code and analyze it. You will be able to write your own scripts or your own hacking tools. So, which programming language should you learn then? HTML and JavaScript are languages of the internet. So make sure you learn them first. they are also incredibly easy to grasp and learn.  If your are enrolled in an undergraduate computer science degree, you will most probably be learning C,C++ and Java. These three major languages are good and you should keep learning them, but for a hacker, Python is the best language. “Why?” You ask. Because python is an extremely powerful language and it easy to learn at the same time. With Python you can achieve your results with minimal coding, and it does not need to be compiled. That means, just as you finish writing a script, you can immediately run it without having to compile it. And later on in life, if you decide to become a programmer instead of a hacker, Python can develop GUI applications also. In fact, a large part of YouTube is written in Python.&lt;/p&gt;
+
+&lt;p&gt;Another language you should learn is PHP. PHP is also free and open source. It is a server side scripting language, meaning, login pages and other web based forms are handled by PHP. Knowledge of ASP. NET will also be helpful. You should also know MySQL commands and syntax. This knowledge will be vital later when you perform SQL injection attacks against websites. Download XAMPP package and start practicing PHP and MySQL&lt;br /&gt;
+Another important thing to note is that most colleges will not teach you advanced programming concepts. File handling and Network socket programming are two very important concepts you should familiarize yourself with, regardless of the language.&lt;/p&gt;
+
+&lt;h2 id=&quot;x05-open-source&quot;&gt;0x05 Open Source&lt;/h2&gt;
+
+&lt;p&gt;The hacker community is a big supporter of Open Source software. You should contribute to open source projects when you can. In order to improve your programming skills, you can start an open source project and work on it. Download the source code of popular open source projects and study the code. Sourceforge and Github are excellent starting points. Alternatively, start your own project and post the source code online. This will help you get recognition.&lt;/p&gt;
+
+&lt;h2 id=&quot;x06-linux&quot;&gt;0x06 Linux&lt;/h2&gt;
+
+&lt;p&gt;The Windows operating system may be easy and convenient for most users, but it is certainly not suited for hackers. With the exception of few windows only tools, most hacking tools run best under Linux environment. I have given a list of 10 best hacking tools here. 9 out of those 10 tools run best under Linux. You can use any Linux distribution like Ubuntu or Fedora, but BackTrack and Kali are two major Linux distros specifically designed for hackers. They come loaded with all the popular hacking tools, saving you from the trouble of downloading them yourself. If you are not comfortable with leaving windows as yet, you can use VirtualBox to install BackTrack in your system, or you can dual boot your operating systems.&lt;/p&gt;
+
+&lt;p&gt;Information Technology is a huge field. If you look at your college or university, your professors know about programming concepts and theory, the System Administrator knows about networks and systems, the website developers know web programming and designing. You, as a hacker, must know all these things and more.&lt;/p&gt;
+
+&lt;p&gt;Even under the domain of hacking, there are many sub categories like web application security, network security, digital forensics, reverse engineering etc. Nobody can be good at everything. After you have adequate knowledge and experience in “general” hacking, you can choose a speciality and become an expert in it.&lt;/p&gt;
+
+&lt;p&gt;Now, let’s talk about actual hacking. Create your own virtual lab and practice hacking. Here is a guide on how to do this. Learn the top ten hacking tools thoroughly and apply them in your practice. If you have a good understanding of the theoretical concepts of hacking and other technologies, these tools will be a breeze to use. Practice web application hacking using live websites that are meant to be hacked. A good example is www.hackthissite.org. There are plenty of other such websites. Google is your best friend.&lt;/p&gt;
+
+&lt;p&gt;One good way to learn hacking is to download pdf and video resources and studying them. CBT-nuggets and other institutes’ video tutorials are available in torrents. YouTube hosts plenty of tutorials on every topic. Take a look at www.securitytube.net as well.&lt;/p&gt;
+
+&lt;p&gt;I would recommend a method that I used when I started off. Start by maintaining a journal and make a list of all the hacks you want to achieve. Example, if you are in college, your objective may be - bypassing web filtration, accessing the attendance logs etc. Work on these objectives until you achieve them. Similarly, your objective may be to get into someone’s system. Work on it consistently without giving up until you are successful. Record everything in your journal. This will help you reflect on how far you have come.&lt;/p&gt;
+
+&lt;p&gt;Keep practicing and keep learning. That is the only way to go. If you are in college, don’t waste your time partying or facebooking. Time is precious. Utilize your every waking moment. If you know people who have websites or small companies, talk to them and ask them to give you a chance at performing penetration tests(ethical hacking) for their websites and networks. This will give you real world experience. You must, however, remember to get their permission in writing. Hacking someone’s website or system without written authorization is illegal and you could very well end up in jail. Verbal authorization is not valid in a court of law. Once you are able to hack their websites, write a report and submit to them.&lt;/p&gt;
+
+&lt;p&gt;So, that is how you become a hacker! As you can see, becoming a hacker is a long process so if you are in it only for the heck of it this is not the domain for you. After all that has been said, you should remember to be ethical at all times. Ethical hacking is a risky domain if you are careless and you do not want to end up in the wrong side of law.&lt;/p&gt;
+
+</description>
+      <pubDate>Tue, 11 Nov 2014 00:00:00 +0800</pubDate>
+      <link>https://danielyangmeta.github.com//2014/security-how-to-become-a-hacker.html</link>
+      <guid isPermaLink="true">https://danielyangmeta.github.com//2014/security-how-to-become-a-hacker.html</guid>
+
+      
+      <category>Security</category>
+      
+
+      
+      <category>技术</category>
+      
+      
+    </item>
+  
+    <item>
+      <title>Git</title>
+      <description>&lt;h2 id=&quot;x00-&quot;&gt;0x00 引言&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Git是一个分布式版本控制／软件配置管理软件，原是Linux内核开发者林纳斯·托瓦兹（Linus Torvalds）为更好地管理Linux内核开发而设计。本文记录了一些基本概念和基本操作，当然关于使用 Git 最重要的其实不是明白这些。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;x01-git&quot;&gt;0x01 Git关键字&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;HEAD：指针
+工作区
+版本库(working tree)
+暂存区(index)：add命令将文件添加到暂存区
+已跟踪(staging)（未更新、已修改、已放入暂存区）
+未跟踪(unstage)
+仓库：commit将文件从暂存区添加到仓库
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x02-&quot;&gt;0x02 版本管理可以细分为&lt;/h2&gt;
+
+&lt;p&gt;本地分支管理、远程分支管理、补丁管理、暂存（index）管理、&lt;/p&gt;
+
+&lt;h2 id=&quot;x03-git&quot;&gt;0x03 Git安装&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x04-git&quot;&gt;0x04 Git配置&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;git config --global user.name &quot;name&quot;
+git config --global user.email &quot;name@gmail.com&quot;
+git config --global color.ui true
+git config -l #list all the Git config
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这样配置完后，保存在~/。gitconfig&lt;/p&gt;
+
+&lt;h2 id=&quot;x05-git&quot;&gt;0x05 Git查看帮助&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;git help 
+git help -show            #查看show命令的子命令
+git add -h                #查看git add命令的帮助文件
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x06-git&quot;&gt;0x06 Git常用命令（查看、添加、提交、删除、找回、重置）&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;git show 356f6def9d3fb7f3b9032ff5aa4b9110d4cca87e（哈希值，可以是具体某个文件的，也可以是某一次全部提交） 
+
+checkout                              #重写工作区
+git checkout（git checkout HEAD）     #汇总显示工作区、暂存区与HEAD的差异
+git checkout master                   #取出master版本的HEAD
+git checkout -- filename              #把filename文件从HEAD中checkouut。相当于取消自上次执行git add filename以来的本地修改。
+git checkout branch --filename        #用branch分支filename 来替换暂存区和工作区文件。
+git checkout . (git checkout -- .)    #用暂存区的文件代替所有现有项目文件。
+
+
+git add              #命令主要用于把我们要提交的文件的信息添加到索引库(暂存区)中。当我们使用git commit时，git将依据索引库中的内容来进行文件的提交。
+git add filename     #
+git add .            #将修改过的工作文件提交暂存区
+git add -u           #表示 add to index only files modified or deleted and not those created 
+git add -i [&amp;lt;path&amp;gt;]  #命令查看&amp;lt;path&amp;gt;中被所有修改过或已删除文件但没有提交的文件。
+
+git commit                 #是将那些已经add到暂存区的文件commit到库中。
+git commit filemame
+git commit .
+git commit -a              #将git add, git rm和git commit等操作都合并在一起做。
+git comnit -m &quot;what u want to &quot;
+git commit -am &quot;what u want to &quot;
+git commit -amend          #?
+
+git rm filename          #删除文件，并从版本库中删除。
+git rm -r dire           #删除文件，并从库中移除。
+git rm filename --cached #从版本库中删除文件，但不删除文件。
+
+reset                                                    #命令可以去掉一些多余的状态和版本信息。
+git reset [--hard|soft|mixed|merge|keep] [brank or HEAD] #reset命令是有mode的。
+git reset filename
+git reset -- .
+git resert --hard                                        #恢复最近一次提交过的状态，即放弃上次提交后的所有本次修改
+
+git revert         #撤销某次操作，此次操作之前和之后的commit和history都会保留，并且把这次撤销作为一次最新的提交
+git revert HEAD    #撤销前一次commit
+git revert HEAD^   #撤销前前一次commit
+git revert &amp;lt;id&amp;gt;   
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x07-&quot;&gt;0x07 查看三区的不同&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;git diff filename             #比较当前文件（工作区文件）和暂存区（索引区）文件的差异。
+git diff &amp;lt;id&amp;gt; &amp;lt;id&amp;gt;            #比较两次提交之间的差异
+git diff &amp;lt;branch1&amp;gt;..&amp;lt;branch2&amp;gt; # 在两个分支之间比较 
+git diff --staged             # 比较暂存区和版本库差异
+git diff --cached             # 比较暂存区和版本库差异
+git diff --stat               # 仅仅比较统计信息
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x08-git-show&quot;&gt;0x08 查看提交记录和git show有些类似&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;git log
+git log &amp;lt;file&amp;gt;                   # 查看该文件每次提交记录
+git log -p &amp;lt;file&amp;gt;                # 查看每次详细修改内容的diff
+git log -p -2                    # 查看最近两次详细修改内容的diff
+git log --stat                   # 查看提交统计信息
+git log --pretty=oneline --graph #精简信息显示方式
+git log --pretty=format:&quot;%h - %an, %ar : %s&quot; --graph
+git log --pretty=oneline filename
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x09-&quot;&gt;0x09 本地分支管理&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;git branch -r 
+git br -r           # 查看远程分支
+git br &amp;lt;new_branch&amp;gt; # 创建新的分支
+git br -v           # 查看各个分支最后提交信息
+git br --merged     # 查看已经被合并到当前分支的分支
+git br --no-merged  # 查看尚未被合并到当前分支的分支
+
+git co &amp;lt;branch&amp;gt;     # 切换到某个分支
+git co -b &amp;lt;new_branch&amp;gt; # 创建新的分支，并且切换过去
+git co -b &amp;lt;new_branch&amp;gt; &amp;lt;branch&amp;gt;  # 基于branch创建新的new_branch
+
+git co $id          # 把某次历史提交记录checkout出来，但无分支信息，切换到其他分支会自动删除
+git co $id -b &amp;lt;new_branch&amp;gt;  # 把某次历史提交记录checkout出来，创建成一个分支
+
+git br -d &amp;lt;branch&amp;gt;  # 删除某个分支
+git br -D &amp;lt;branch&amp;gt;  # 强制删除某个分支 (未被合并的分支被删除的时候需要强制)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x10-rebase&quot;&gt;0x10 分支合并和rebase&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;git merge &amp;lt;branch&amp;gt;               # 将branch分支合并到当前分支
+git merge origin/master --no-ff  # 不要Fast-Foward合并，这样可以生成merge提交
+
+git rebase master &amp;lt;branch&amp;gt;       # 将master rebase到branch，相当于：
+git co &amp;lt;branch&amp;gt; &amp;amp;&amp;amp; git rebase master &amp;amp;&amp;amp; git co master &amp;amp;&amp;amp; git merge &amp;lt;branch&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x11-git&quot;&gt;0x11 Git补丁管理&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;git diff &amp;gt; ../sync.patch         # 生成补丁
+git apply ../sync.patch          # 打补丁
+git apply --check ../sync.patch  # 测试补丁能否成功
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x12-git&quot;&gt;0x12 Git暂存管理&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;git stash                        # 暂存
+git stash list                   # 列所有stash
+git stash apply                  # 恢复暂存的内容
+git stash drop                   # 删除暂存区
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x13-git&quot;&gt;0x13 Git远程分支管理&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;git pull                         # 抓取远程仓库所有分支更新并合并到本地
+git pull --no-ff                 # 抓取远程仓库所有分支更新并合并到本地，不要快进合并
+git fetch origin                 # 抓取远程仓库更新
+git merge origin/master          # 将远程主分支合并到本地当前分支
+git co --track origin/branch     # 跟踪某个远程分支创建相应的本地分支
+git co -b &amp;lt;local_branch&amp;gt; origin/&amp;lt;remote_branch&amp;gt;  # 基于远程分支创建本地分支，功能同上
+
+git push                         # push所有分支
+git push origin master           # 将本地主分支推到远程主分支
+git push -u origin master        # 将本地主分支推到远程(如无远程主分支则创建，用于初始化远程仓库)
+git push origin &amp;lt;local_branch&amp;gt;   # 创建远程分支， origin是远程仓库名
+git push origin &amp;lt;local_branch&amp;gt;:&amp;lt;remote_branch&amp;gt;  # 创建远程分支
+git push origin :&amp;lt;remote_branch&amp;gt;  #先删除本地分支(git br -d &amp;lt;branch&amp;gt;)，然后再push删除远程分支
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x14-git&quot;&gt;0x14 Git远程仓库管理&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;git remote -v                    # 查看远程服务器地址和仓库名称
+git remote show origin           # 查看远程服务器仓库状态
+git remote add origin git@github:robbin/robbin_site.git         # 添加远程仓库地址
+git remote set-url origin git@github.com:robbin/robbin_site.git # 设置远程仓库地址(用于修改远程仓库地址)
+git remote rm &amp;lt;repository&amp;gt;       # 删除远程仓库
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x15-&quot;&gt;0x15 创建远程仓库&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;git clone --bare robbin_site robbin_site.git  # 用带版本的项目创建纯版本仓库
+scp -r my_project.git git@git.csdn.net:~      # 将纯仓库上传到服务器上
+mkdir robbin_site.git &amp;amp;&amp;amp; cd robbin_site.git &amp;amp;&amp;amp; git --bare init # 在服务器创建纯仓库
+git remote add origin git@github.com:robbin/robbin_site.git    # 设置远程仓库地址
+git push -u origin master                                      # 客户端首次提交
+git push -u origin develop  # 首次将本地develop分支提交到远程develop分支，并且track
+git remote set-head origin master   # 设置远程仓库的HEAD指向master分支
+#也可以命令设置跟踪远程库和本地库
+git branch --set-upstream master origin/master
+git branch --set-upstream develop origin/develop
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+      <pubDate>Sun, 26 Oct 2014 00:00:00 +0800</pubDate>
+      <link>https://danielyangmeta.github.com//2014/tools-git.html</link>
+      <guid isPermaLink="true">https://danielyangmeta.github.com//2014/tools-git.html</guid>
+
+      
+      <category>Tool</category>
+      
+
+      
+      <category>工具</category>
+      
+      
+    </item>
+  
+    <item>
+      <title>我的 Windows Server 2003 设置</title>
+      <description>&lt;h2 id=&quot;x00-&quot;&gt;0x00 引言&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;熟悉任何东西都不可能完全重头开始，最佳的实践是：重一个经典模型开始，不断重复这个经典的模式，不断的通过经典补充你缺失的概念。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;x01-&quot;&gt;0x01 自动登陆&lt;/h2&gt;
+
+&lt;p&gt;方法1：打开注册表(运行-&amp;gt;“Regedit”)，再打开: &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;HKEY_LOCAL_MACHIN|SOFTWARE|MicroSoft|Windows NT|CurrentVersion |Winlogon
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在此段中按右键，新建 二个字符串段，AutoAdminLogon=“1”，DefaultPassword=“Password”。 注意，一定要为Administrator设置一个密码，否则不能实现自启动。 然后，重新启动 Windows即可实现自动登录。 &lt;/p&gt;
+
+&lt;p&gt;方法2：管理工具 -&amp;gt; Local Security Settings（本地安全策略） -&amp;gt; 本地策略 -&amp;gt; 安全选项 -&amp;gt; interactive logon: Do not require CTRL+ALT+DEL，启用之。 &lt;/p&gt;
+
+</description>
+      <pubDate>Sat, 02 Aug 2014 00:00:00 +0800</pubDate>
+      <link>https://danielyangmeta.github.com//2014/tech-setup-windows-server-2003.html</link>
+      <guid isPermaLink="true">https://danielyangmeta.github.com//2014/tech-setup-windows-server-2003.html</guid>
+
+      
+      <category>Windows</category>
+      
+      <category>Setup</category>
+      
+
+      
+      <category>技术</category>
+      
+      
+    </item>
+  
+    <item>
+      <title>网络中关键设备</title>
+      <description>&lt;h2 id=&quot;x00-&quot;&gt;0x00 引言&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;网络上的设备不是从一开始就时这样丰富的，是在其短暂的历史中，由于不同的需求的出现，用来解决不同的问题。当你在心中建立来他们的场景变化，其实关于网络的进化历史，你已经懂得了一点点^^。当然每一层都存在不同的路由算法。这些也不是问题。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;x01-&quot;&gt;0x01 物理层设备&lt;/h2&gt;
+
+&lt;p&gt;中继器：repeater，为模拟设备，用来连接两根电缆段，以延长网络距离的互联设备，属于物理层，起信号的放大和中转作用。中继器并不关心帧、分组和头，只关心电压值。&lt;/p&gt;
+
+&lt;p&gt;集线器：Hub，是一种共享设备，类似一个多端口的中继器，也属于物理层。集线器有许多条的输入线路，他将这些输入线路连接起来。在任何一条线路上到达的帧都将被发送到所有其他的线路上。如果两帧同时到达，则他们将会冲突，就好像他们在同一根线路上一样。也就是说，整个集线器构成了一个冲突域，连接在同一个集线器上的所有线路必须运行在同样的速度上。与中继器不同的是，集线器不对输入的信号进行放大。&lt;/p&gt;
+
+&lt;h2 id=&quot;x02-&quot;&gt;0x02 二层设备（数据链路层）&lt;/h2&gt;
+
+&lt;p&gt;网桥：bridge，连接多个不同LAN的设备（如802.3到802.11），运行在数据链路层上，通过查看数据链路层的地址（即MAC地址）完成帧转发的任务（即可以判断一个数据帧是属于网络A还是网络B），同时可以分割因域内集线器过多造成的广播风暴。类似一个底层的路由器（路由器工作在网络层，根据网络地址进行转发）。注意和中继器的区别：中继器复制所有他看到的数据，而网桥则可以区别对待那些该转发的和不该转发的数据。另外，网桥中的每条线路都有他自己的冲突域，这个与集线器不同。&lt;/p&gt;
+
+&lt;p&gt;交换机：Switch，基于MAC地址识别，能完成封装、转发数据包功能的网络设备，工作在数据链路层。由于交换机中有一张路由表，如果找到目标地址就可以将数据发送到指定地址，否则发送到所有端口；而集线器只是将数据广播发送到所有的端口，因此速度较交换机慢。交换机一般用在连接独立的计算机，而网桥一般用来连接独立的LAN。现在有些交换机为提高帧的传送速度，不采用传统的存储-转发模式，而是直通型交换模式，即一旦目标头域已经进来而输出线路又可以使用，就传送该帧。&lt;/p&gt;
+
+&lt;h2 id=&quot;x03-&quot;&gt;0x03 三层设备（网络层）&lt;/h2&gt;
+
+&lt;p&gt;路由器：Router。工作在网络层。根据分组信息选择路由线路，类似网桥。由于在网路层，帧头和帧尾已经被剥掉，因此路由器并不知道帧信息，也不知道该分组来自于哪个LAN。&lt;/p&gt;
+
+&lt;p&gt;网关：Gateway，有传输网关和应用网关，分别工作在传输层和应用层。&lt;/p&gt;
+
+&lt;h2 id=&quot;x04-&quot;&gt;0x04 网桥难点&lt;/h2&gt;
+
+&lt;p&gt;下面关注网桥处理帧的几个难点（以从802.11到802.3为例）：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;不同的LAN使用的帧格式不同，因此在复制操作时需要重新填充格式。&lt;/li&gt;
+  &lt;li&gt;不同的LAN工作的速率不尽相同，网桥需要尽快的转发这些数据。&lt;/li&gt;
+  &lt;li&gt;不同的LAN有不同的最大帧长度，若不匹配则会丢弃（把帧分成小片不属于数据链路层协议该提供的功能）。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;本地网桥的路由算法：&lt;/p&gt;
+
+&lt;p&gt;网桥通过其内部的一张大的散列表，查找一帧的目标地址。该散列表列出了每一个可能的目标地址，并指明了该帧属于哪一条输出线路（LAN）。当最初网桥被插入进来的时候，所以的散列表都是空的，所有的网桥都不知道哪个目标地址该往哪里去，因此网桥采用逆向学习法（backwardlearning。通过检测来自LAN1的帧的源地址A判断可从LAN1到达地址A）记录这些目标地址。当机器和网桥被加电或断电或移动异地时，网桥中的定期扫描散列表进程会清空对应表项。&lt;/p&gt;
+
+&lt;p&gt;对于一个进入网桥的帧，该帧在网桥中如何被路由取决于他在哪个LAN上到达以及他的目标地址在哪个LAN上，过程如下：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;如果目标LAN和源LAN相同，则丢弃该帧，不转发；&lt;/li&gt;
+  &lt;li&gt;如果目标LAN和源LAN不相同，则转发该帧；&lt;/li&gt;
+  &lt;li&gt;如果目标LAN未知，即散列表中无该目标LAN，则使用扩散法，广播输出到所有接入的LAN中（除了进入的那个LAN）。&lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+      <pubDate>Thu, 17 Jul 2014 00:00:00 +0800</pubDate>
+      <link>https://danielyangmeta.github.com//2014/network-wang-luo-zhong-guan-jian-she-bei-de-qu-bie.html</link>
+      <guid isPermaLink="true">https://danielyangmeta.github.com//2014/network-wang-luo-zhong-guan-jian-she-bei-de-qu-bie.html</guid>
+
+      
+      <category>Network</category>
+      
+
+      
+      <category>技术</category>
+      
+      
+    </item>
+  
+    <item>
+      <title>端口映射</title>
+      <description>&lt;h2 id=&quot;x00-&quot;&gt;0x00 引言&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;内网的一台电脑要上因特网，就需要端口映射，端口映射分为动态和静态。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;x01-&quot;&gt;0x01 端口映射&lt;/h2&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;动态端口映射&lt;/h3&gt;
+&lt;p&gt;内网中的一台电脑要访问新浪网，会向NAT网关发送数据包，包头中包括对方(就是新浪网)IP、端口和本机IP、端口，NAT网关会把本机IP、端口替换成自己的公网IP、一个未使用的端口，并且会记下这个映射关系，为以后转发数据包使用。然后再把数据发给新浪网，新浪网收到数据后做出反应，发送数据到NAT网关的那个未使用的端口，然后NAT网关将数据转发给内网中的那台电脑，实现内网和公网的通讯.当连接关闭时，NAT网关会释放分配给这条连接的端口，以便以后的连接可以继续使用。 动态端口映射其实就是NAT网关的工作方式。 &lt;/p&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;静态端口映射&lt;/h3&gt;
+&lt;p&gt;就是在NAT网关上开放一个固定的端口，然后设定此端口收到的数据要转发给内网哪个IP和端口，不管有没有连接，这个映射关系都会一直存在。就可以让公网主动访问内网的一个电脑。NAT网关可以是交换机、路由器或电脑。 &lt;/p&gt;
+
+&lt;h2 id=&quot;x02-nat&quot;&gt;0x02 什么是内网、什么是公网、什么是NAT？&lt;/h2&gt;
+
+&lt;p&gt;现在很多关于端口映射的文章都严重的误导人，许多不懂的人把端口映射软件用在自己的电脑上，其实端口映射是要在网关上做的！！！而网关很少是电脑，大部分人也不能控制网关，所以那几个端口映射的软件基本没用。 &lt;/p&gt;
+
+&lt;p&gt;NAT原理简介、各种 ADSL Modem 及路由器的端口映射方法 &lt;/p&gt;
+
+&lt;h2 id=&quot;x03-nat&quot;&gt;0x03 NAT原理简介&lt;/h2&gt;
+
+&lt;p&gt;NAT英文全称是“Network Address Translation”，中文意思是“网络地址转换”，它是一个IETF(Internet Engineering Task Force, Internet工程任务组)标准，允许一个整体机构以一个公用IP（Internet Protocol）地址出现在Internet上。顾名思义，它是一种把内部私有网络地址（IP地址）翻译成合法网络IP地址的技术。 &lt;/p&gt;
+
+&lt;p&gt;简单地说，NAT就是在局域网内部网络中使用内部地址，而当内部节点要与外部网络进行通讯时，就在网关（可以理解为出口，打个比方就像院子的门一样）处，将 内部地址替换成公用地址，从而在外部公网（internet）上正常使用，NAT可以使多台计算机共享Internet连接，这一功能很好地解决了公共 IP地址紧缺的问题。通过这种方法，您可以只申请一个合法IP地址，就把整个局域网中的计算机接入Internet中。这时，NAT屏蔽了内部网络，所有内部网计算机对于公共网络来说是不可见的，而内部网计算机用户通常不会意识到NAT的存在。如图2所示。这里提到的内部地址，是指在内部网络中分配给节点 的私有IP地址，这个地址只能在内部网络中使用，不能被路由（一种网络技术，可以实现不同路径转发）。虽然内部地址可以随机挑选，但是通常使用的是下面的 地址：10.0.0.0~10.255.255.255，172.16.0.0~172.16.255.255，192.168.0.0~192.168.255.255。NAT将这些无法在互联网上使用的保留IP地址翻译成可以在互联网上使用的合法IP地址。而全 局地址，是指合法的IP地址，它是由NIC（网络信息中心）或者ISP(网络服务提供商)分配的地址，对外代表一个或多个内部局部地址，是全球统一的可寻 址的地址。 &lt;/p&gt;
+
+&lt;p&gt;NAT 功能通常被集成到路由器、防火墙、ISDN路由器或者单独的NAT设备中。比如Cisco路由器中已经加入这一功能，网络管理员只需在路由器的IOS中设 置NAT功能，就可以实现对内部网络的屏蔽。再比如防火墙将WEB Server的内部地址192.168.1.1映射为外部地址202.96.23.11，外部访问202.96.23.11地址实际上就是访问访问 192.168.1.1。另外资金有限的小型企业来说，现在通过软件也可以实现这一功能。Windows 98 SE、Windows 2000 都包含了这一功能。 &lt;/p&gt;
+
+&lt;h2 id=&quot;x04-nat&quot;&gt;0x04 NAT技术类型&lt;/h2&gt;
+
+&lt;p&gt;NAT有三种类型：静态NAT(Static NAT)、动态地址NAT(Pooled NAT)、网络地址端口转换NAPT（Port－Level NAT）。 &lt;/p&gt;
+
+&lt;p&gt;其中静态NAT设置起来最为简单和最容易实现的一种，内部网络中的每个主机都被永久映射成外部网络中的某个合法的地址。而动态地址NAT则是在外部网络中定 义了一系列的合法地址，采用动态分配的方法映射到内部网络。NAPT则是把内部地址映射到外部网络的一个IP地址的不同端口上。根据不同的需要，三种 NAT方案各有利弊。 &lt;/p&gt;
+
+&lt;p&gt;动态地址NAT只是转换IP地址，它为每一个内部的IP地址分配一个临时的外部IP地址，主要应用于拨号，对于频繁的远程联接也可以采用动态NAT。当远程用户联接上之后，动态地址NAT就会分配给他一个IP地址，用户断开时，这个IP地址就会被释放而留待以后使用。 &lt;/p&gt;
+
+&lt;p&gt;网络地址端口转换NAPT（Network Address Port Translation）是人们比较熟悉的一种转换方式。NAPT普遍应用于接入设备中，它可以将中小型的网络隐藏在一个合法的IP地址后面。NAPT与 动态地址NAT不同，它将内部连接映射到外部网络中的一个单独的IP地址上，同时在该地址上加上一个由NAT设备选定的TCP端口号。 在Internet 中使用NAPT时，所有不同的信息流看起来好像来源于同一个IP地址。这个优点在小型办公室内非常实用，通过从ISP处申请的一个IP地址，将多个连接通 过NAPT接入Internet。实际上，许多SOHO远程访问设备支持基于PPP的动态IP地址。这样，ISP甚至不需要支持NAPT，就可以做到多个内部IP地址共用一个外部IP地址上Internet，虽然这样会导致信道的一定拥塞，但考虑到节省的ISP上网费用和易管理的特点，用NAPT还是很值 得的。 &lt;/p&gt;
+
+&lt;p&gt;ADSL Modem 的端口映射讲解，如果ADSL本身就带有路由功能，就需要在ADSL的“管理界面”中设置相应的端口映射。 设置的方法可能会因为ADSL不同的品牌和型号，在设置的方法上也会有所不同。我们收集和总结了一些常见ADSL的端口映射的方法，请大家参照相关的型号 进行设置。如果你所使用的ADSL猫不在我们总结的范围之内，请PM给我们，我们会尽快想办法补充上的。&lt;/p&gt;
+
+</description>
+      <pubDate>Thu, 17 Jul 2014 00:00:00 +0800</pubDate>
+      <link>https://danielyangmeta.github.com//2014/network-duan-kou-ying-she.html</link>
+      <guid isPermaLink="true">https://danielyangmeta.github.com//2014/network-duan-kou-ying-she.html</guid>
+
+      
+      <category>Network</category>
+      
+
+      
+      <category>技术</category>
+      
+      
+    </item>
+  
+    <item>
+      <title>Octopress</title>
+      <description>&lt;h2 id=&quot;x00-&quot;&gt;0x00 引言&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Octopress是一款基于 Jekyll 的优秀的静态化博客系统，也是一个本地化的博客系统。如果你是 Github 深度用户，一定知道可用用 Github Pages 托管静态 Blog。学计算机，就应该多动手，这样才能有成就感。作为一名动手的 programer 还是需要一个 Blog 的。不过我现在已经不用 Octopress 搭建的 Blog 了。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;x01-github&quot;&gt;0x01 什么是github?&lt;/h2&gt;
+
+&lt;p&gt;github 是一个源代码托管平台，有很多类似的比如gitcafe等。&lt;/p&gt;
+
+&lt;h3 id=&quot;github-pages&quot;&gt;什么是github pages?&lt;/h3&gt;
+
+&lt;p&gt;github pages 是github的一个创新，来增加github的layers。更多有关github pages的文档，见：&lt;a href=&quot;http://pages.github.com/&quot;&gt;http://pages.github.com/&lt;/a&gt;。&lt;/p&gt;
+
+&lt;h3 id=&quot;github-pages-1&quot;&gt;为什么用github pages?&lt;/h3&gt;
+
+&lt;p&gt;用github pages搭建博客，你可以享受到免费的服务器，免费的流量和相对不错的服务体验。另外，这种blog对于控制欲强悍的程序员来说，很适合，一切由你决定，还有近乎0成本迁移到任意服务器。&lt;/p&gt;
+
+&lt;h2 id=&quot;x02-octopress&quot;&gt;0x02 什么是octopress?&lt;/h2&gt;
+
+&lt;p&gt;octopress提供了一组自动化的工具和模版帮助用户简化博客系统的创建。octopress生成的博客系统可以被方便地部署到github pages及heroku，当然，由于生成的是静态文件，你也可以将其部署到任何一个你自己的vhost或server。&lt;/p&gt;
+
+&lt;p&gt;octopress的安装文档见：&lt;a href=&quot;http://octopress.org/docs/setup/&quot;&gt;http://octopress.org/docs/setup/&lt;/a&gt;。本文接下来的部分会详细介绍如何用github pages和octopress部署一个自己的博客，及简单介绍如何进行写作。&lt;/p&gt;
+
+&lt;h2 id=&quot;x03-&quot;&gt;0x03 安装&lt;/h2&gt;
+
+&lt;h3 id=&quot;repository&quot;&gt;创建博客repository项目&lt;/h3&gt;
+
+&lt;p&gt;在你的github账号下创建名为yourname.github.com的repository项目。&lt;/p&gt;
+
+&lt;h3 id=&quot;ruby-git&quot;&gt;安装ruby ，git&lt;/h3&gt;
+
+&lt;p&gt;如果你的系统中没有ruby或者 &lt;code&gt;ruby --version&lt;/code&gt; 的版本不是1.9.3，请使用 &lt;a href=&quot;https://rvm.io/rvm/install/&quot;&gt;rvm&lt;/a&gt; 或者你熟悉的version manager安装1.9.3.&lt;/p&gt;
+
+&lt;p&gt;使用rvm安装ruby 1.9.3:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl -L https://get.rvm.io | bash -s stable --ruby   #安装rvm
+$ sudo apt-get install git ruby ruby-dev -y
+$ rvm install 1.9.3
+$ rvm use 1.9.3
+$ rvm rubygems latest
+ruby 1.9.3p0 (2011-10-30 revision 33570) [x86_64-darwin12.2.0]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;octopress&quot;&gt;设置octopress&lt;/h3&gt;
+
+&lt;h4 id=&quot;section&quot;&gt;安装依赖&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git clone git://github.com/imathis/octopress.git octopress
+$ cd octopress
+$ gem install bundler
+$ bundle install   #不要用root权限，使用root权限后以后不能再用普通用户
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&quot;section-1&quot;&gt;安装缺省的模版&lt;/h4&gt;
+
+&lt;p&gt;使用rake install 后会产生三个目录&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;source:来自于.themes\classic目录中的source，并添加来_posts目录
+sass:来自于.themes\classic目录中的source
+public: 
+
+$ rake install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&quot;repository-1&quot;&gt;设置博客使用的repository&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;$ rake setup_github_pages
+Enter the read/write url for your repository
+(For example, &#39;git@github.com:your_username/your_username.github.com)
+Repository url: 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;请输入：&lt;code&gt;git@github.com:yourname/yourname.github.com.git&lt;/code&gt; (将yourname替换成你的github登录名)&lt;/p&gt;
+
+&lt;p&gt;这个步骤rake会做很多事情：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;在.git/config中替换origin为你输入的repository，并把原来的origin写到octopress中。&lt;/li&gt;
+  &lt;li&gt;创建新的branch source并切换到这个branch。&lt;/li&gt;
+  &lt;li&gt;在生成的_deploy目录下，初始化git repository为你的repository。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;以下是两个git config的内容，just for your information。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;~/projects/octopress$ cat .git/config 
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	ignorecase = true
+[remote &quot;octopress&quot;]
+	url = git://github.com/imathis/octopress.git
+	fetch = +refs/heads/*:refs/remotes/octopress/*
+[branch &quot;source&quot;]
+	remote = origin
+	merge = refs/heads/master
+	rebase = true
+[remote &quot;origin&quot;]
+	url = git@github.com:tyrchen/tyrchen.github.com.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+
+~/projects/octopress$ cat _deploy/.git/config 
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	ignorecase = true
+[remote &quot;origin&quot;]
+	url = git@github.com:tyrchen/tyrchen.github.com.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&quot;section-2&quot;&gt;创建博文&lt;/h4&gt;
+
+&lt;p&gt;接下来可以试试创建一个新的博文：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ rake new_post[&quot;My first blog&quot;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这会在source/_posts下创建一个以时间和标题为名称的markdown文件，它就是你的第一篇博文。&lt;/p&gt;
+
+&lt;p&gt;使用：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ rake preview
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;rake会启动一个server，打开浏览器访问 &lt;a href=&quot;http://localhost:4000&quot;&gt;http://localhost:4000&lt;/a&gt; 可以看到你的最新更改。&lt;/p&gt;
+
+&lt;h4 id=&quot;section-3&quot;&gt;部署你的博客&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;$ rake gen_deploy
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这个命令会把_deploy下的内容重新生成一遍，然后提交到你的repository。但你并不能立马访问你的博客，需要等待几分钟的样子。&lt;/p&gt;
+
+&lt;h4 id=&quot;section-4&quot;&gt;保存你的更改&lt;/h4&gt;
+
+&lt;p&gt;当你完成修改后，需要使用git工具提交修改。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git add .
+$ git commit -m &quot;notes&quot;
+$ git push origin source    
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最后一句可以不要，这样源代码就不会上传&lt;/p&gt;
+
+&lt;h4 id=&quot;section-5&quot;&gt;撰写博文&lt;/h4&gt;
+
+&lt;p&gt;博客系统搭建好之后，如何撰写博文呢？你要使用 &lt;code&gt;rake new_post&lt;/code&gt; 命令创建一篇新的文章，然后使用称手的markdown编辑器进行编辑即可。可选择的markdown编辑器很多，vim，sublime text 2，textmate 2等等。我个人喜欢sublime text 2。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-6&quot;&gt;个性化&lt;/h2&gt;
+
+&lt;h3 id=&quot;section-7&quot;&gt;添加个人域名&lt;/h3&gt;
+&lt;p&gt;在octopress目录下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ echo &#39;blog.yourdomain.com&#39; &amp;gt;&amp;gt; source/CNAME
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后在你的DNS服务商，如 &lt;a href=&quot;http://dnspod.cn&quot;&gt;dnspod.cn&lt;/a&gt;，添加相应的CNAME指向 yourname.github.com。如果你要使用顶级域名，如 &lt;code&gt;http://yourdomain.com&lt;/code&gt; 访问你的博客，则需要使用A记录指向 &lt;code&gt;207.97.227.245&lt;/code&gt;。详细内容请参考：&lt;a href=&quot;http://octopress.org/docs/deploying/github/&quot;&gt;http://octopress.org/docs/deploying/github/&lt;/a&gt;。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-8&quot;&gt;设置博客&lt;/h3&gt;
+
+&lt;p&gt;主要设置文件包括：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;_config.yml       # Main config (Jekyll&#39;s settings)
+Rakefile          # Configs for deployment
+config.rb         # Compass config
+config.ru         # Rack config 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;主要设置内容：&lt;br /&gt;
+    设置网站的description和keywords&lt;br /&gt;
+    设置首页&lt;br /&gt;
+    导航栏设置&lt;br /&gt;
+    设置文件版权&lt;br /&gt;
+按照 &lt;a href=&quot;http://octopress.org/docs/configuring/&quot;&gt;http://octopress.org/docs/configuring/&lt;/a&gt; 的说明进行设置即可。注意把不需要的asides都删除，免得加载不必要的js，拖累访问速度。&lt;/p&gt;
+
+&lt;h2 id=&quot;x04-configyml-&quot;&gt;0x04 我的_config.yml 的配置&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;url: http://chez-guile.github.io
+title: Chez
+subtitle: 一个迷失的人
+author: Chez-Guile
+simple_search: http://google.com/search
+description: Hello Everyone. I am a Vimer,Emacser and i am using Ubuntu,Now.
+
+github_user: Chez-Guile
+github_repo_count: 1
+github_show_profile_link: true
+github_skip_forks: true
+
+# Disqus Comments
+disqus_short_name: chezguile
+disqus_show_comment_count: true
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-9&quot;&gt;使用主题&lt;/h3&gt;
+
+&lt;p&gt;本文使用了 &lt;a href=&quot;https://github.com/shashankmehta/greyshade&quot;&gt;https://github.com/shashankmehta/greyshade&lt;/a&gt; 的主题。使用方法很简单：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd octopress
+$ git clone git@github.com:shashankmehta/greyshade.git .themes/greyshade
+$ echo &quot;\$greyshade: color;&quot; &amp;gt;&amp;gt; sass/custom/_colors.scss //Substitue &#39;color&#39; with your highlight color 0x000000
+$ rake &quot;install[greyshade]&quot;
+$ rake generate
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-10&quot;&gt;更新&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;git pull octopress master     # Get the latest Octopress
+bundle install                # Keep gems updated
+rake update_source            # update the template&#39;s source
+rake update_style             # update the template&#39;s style
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x05-&quot;&gt;0x05 常用命令&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;$ rake setup_github_pages
+$ rake new_post[&quot;name&quot;]
+$ rake generate
+$ rake preview
+$ rake watch   # 监控source 和sass 目录的变动
+$ rake deploy
+$ rake gen_deploy
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x06-&quot;&gt;0x06 所需工具&lt;/h2&gt;
+
+&lt;p&gt;git rvm(这个工具的使用还是应该学会的) edit ruby &lt;/p&gt;
+
+&lt;h2 id=&quot;x07-&quot;&gt;0x07 常见错误及其解决方案&lt;/h2&gt;
+
+&lt;p&gt;1：Make sure that &lt;code&gt;gem install RedCloth -v &#39;4.2.9&#39;&lt;/code&gt; succeeds before bundling.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo apt-get install ruby-dev
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;2：RVM is not a function, selecting rubies with ‘rvm use …’ will not work.&lt;br /&gt;
+You need to change your terminal settings to allow shell login.&lt;br /&gt;
+Please visit https://rvm.io/workflow/screen/ for example.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ bash --login
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;3：这个文件名不能出现标点符号。数字和数学符号&lt;/p&gt;
+
+&lt;p&gt;4：You have already activated rake 0.9.2.2, but your Gemfile requires rake 0.9.2. Consider using bundle exec.&lt;/p&gt;
+
+&lt;p&gt;可以在rake install命令前添加bundle exec或者直接修改octopress目录文件Gemfile,修改rake版本为当前版本&lt;/p&gt;
+
+&lt;p&gt;5：/home/chez/.rvm/gems/ruby-1.9.3-p547/gems/execjs-2.2.2/lib/execjs/runtimes.rb:51:in `autodetect’: Could not find a JavaScript runtime. See https://github.com/sstephenson/execjs for a list of available runtimes. (ExecJS::RuntimeUnavailable)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install nodejs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x07--1&quot;&gt;0x07 参考文献&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://octopress.org&quot;&gt;Octopress&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://justcoding.iteye.com/blog/1959737&quot;&gt;Octopress 配置&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+      <pubDate>Sun, 29 Jun 2014 00:00:00 +0800</pubDate>
+      <link>https://danielyangmeta.github.com//2014/tools-How-to-use-Octopress.html</link>
+      <guid isPermaLink="true">https://danielyangmeta.github.com//2014/tools-How-to-use-Octopress.html</guid>
+
+      
+      <category>Tool</category>
+      
+
+      
+      <category>工具</category>
+      
+      
+    </item>
+  
+    <item>
+      <title>Ubuntu 14.04</title>
+      <description>&lt;h2 id=&quot;x00-&quot;&gt;0x00 引言&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Ubuntu 是一个以桌面应用为主的GNU/Linux操作系统，其名称来自非洲南部祖鲁语或科萨语的“ubuntu”一词（译为乌班图），意思是“人性”、“我的存在是因为大家的存在”，这种词汇是非洲传统的一种价值观。本文是我在安装时进行的一些脚本操作。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;x01-&quot;&gt;0x01 脚本&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;iconv -f gbk -t utf8 shujujiegou.txt &amp;gt; shujujiegou.txt.utf8 
+#1.如果你只是想查看其它编码格式的文件或者想解决用Vim查看文件乱码的问题，那么你可以在
+#~/.vimrc（在/etc目录下面）文件中添加以下内容：
+set encoding=utf-8 fileencodings=ucs-bom,utf-8,cp936
+#其中encoding是vim的默认显示编码格式，fileencodings是vim#打开文件时检测的编码格式，存在这种类型的编码即转换为utf-8编码。
+
+#shell文件名是以sh结尾的
+#shell文件是以#！/bin/sh开头的文件
+#shell文件执行前你需要先赋予其执行的权限sudo chmod +x test.sh
+
+
+# install chinese language [language support]
+#可以设置隐私和禁用在线搜索结果
+sudo apt-get install python-software-properties -y # 支持PPA源添加
+sudo add-apt-repository ppa:webupd8team/y-ppa-manager 
+sudo add-apt-repository ppa:darklordpaunik8880/darkminttrustytahr2 
+sudo add-apt-repository ppa:kilian/f.lux
+sudo wget -q -O – https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+sudo apt-get update
+sudo apt-get install y-ppa-manager
+sudo apt-get install apt-fast 
+#sudo apt-fast install fluxgui
+sudo apt-fast install google-chrome-stable
+#sudo apt-get purge fcitx* -y
+#sudo apt-get purge autoremove -y
+# install sogou input      [kylin]
+# sogou 拼音bug多
+#sudo apt-get remove sogoupinyin
+# install wps 64bit    
+deb http://mirrors.163.com/ubuntu/ trusty main restricted universe multiverse
+deb http://mirrors.163.com/ubuntu/ trusty-security main restricted universe multiverse
+deb http://mirrors.163.com/ubuntu/ trusty-updates main restricted universe multiverse
+deb http://mirrors.163.com/ubuntu/ trusty-proposed main restricted universe multiverse
+deb http://mirrors.163.com/ubuntu/ trusty-backports main restricted universe multiverse
+deb-src http://mirrors.163.com/ubuntu/ trusty main restricted universe multiverse
+deb-src http://mirrors.163.com/ubuntu/ trusty-security main restricted universe multiverse
+deb-src http://mirrors.163.com/ubuntu/ trusty-updates main restricted universe multiverse
+deb-src http://mirrors.163.com/ubuntu/ trusty-proposed main restricted universe multiverse
+deb-src http://mirrors.163.com/ubuntu/ trusty-backports main restricted universe multiverse
+# Google Repository
+deb http://dl.google.com/linux/deb/ stable non-free main
+sudo apt-fast install vim-gnome -y
+sudo apt-fast install synaptic -y
+sudo apt-fast install ubuntu-restricted-extras -y #重要的额外程序 
+sudo apt-fast install git gitk git-gui git-svn -y #版本管理 
+sudo apt-fast install texlive-full -y
+sudo apt-fast install r-basey -y
+#sudo apt-fast install chromium-browser -y
+sudo apt-fast install tmux -y
+sudo apt-fast install unity-tweak-tool -y
+sudo apt-fast install vlc -y
+sudo apt-fast install uget -y
+sudo apt-fast install emacs -y
+sudo apt-fast install virtualbox -y
+sudo apt-fast install dropbox -y
+sudo apt-fast install stardict
+#sudo apt-get install goldendict -y #词典 
+sudo apt-fast install qBittorrent -y
+sudo apt-fast install texmaker -y
+sudo apt-fast install OmegaT -y #文献翻译工具
+#sudo apt-fast install ipython -y
+sudo apt-fast install rake -y
+sudo apt-fast install unetbootin -y
+sudo apt-get install python-pip python-dev build-essential -y
+sudo apt-fast install curl -y
+sudo apt-fast install ruby-dev -y   #这个包必须要，因为安装octopress的时候需要
+#google-chrome-stable
+#xdg-open #自带
+#tex -version
+#emacs 配置 .emacs.d
+git clone  https://github.com/redguardtoo/emacs.d.git
+#先修改文件名加.
+emacs -nw --batch -l ~/.emacs.d/init.el -f package-refresh-contents
+sudo apt-fast install w3m -y
+#sudo apt-fast install lua -y
+#sudo apt-fast install aspell -y 这个好像系统自带
+sudo apt-fast install sbcl -y
+sudo apt-fast install tidy -y
+sudo apt-fast install zip  unzip  xsel -y
+sudo apt-fast install clang ctags node.js -y
+sudo apt-fast install npm -y
+sudo npm install -g csslint
+sudo apt-fast install python-pip -y
+sudo pip install pyflakes
+sudo pip install jsbeautifier
+sudo apt-fast install global -y
+install using firefox MozRepl
+#在这之前需要修改ruby源
+gem sources --remove https://rubygems.org/ or http://rubygems.org/
+gem sources -a https://ruby.taobao.org/
+gem sources -l
+gem install bundler –pre  #安装最新版的bundler，听说速度很快
+#终于发现maximum-awesome-squared和maximum-awesome的不同里，管理插件的工具不一样，然后安装的插件也不一样
+#ruby的管理光就bundle
+https://github.com/justaparth/maximum-awesome-linux.git
+# git clone https://github.com/tsironis/maximum-awesome-squared.git 
+https://github.com/dlbewley/tmux-scripts.git#最后tmux我用的是这个
+# git pull &amp;amp;&amp;amp; rake #更新方法
+#tmux配置 .tmux.conf git clone https://github.com/tony/tmux-config.git ~/.tmux-tony
+#git clone https://github.com/tony/awesome-config.git ~/.config/awesome &amp;amp;&amp;amp; cd ~/.config/awesome &amp;amp;&amp;amp; git submodule init &amp;amp;&amp;amp; git submodule update &amp;amp;&amp;amp; less ~/.config/awesome/README.md
+
+#配置xdg-open
+#vim  git clone  https://github.com/square/maximum-awesome  这个暂时不支持linux，但网上有修改版支持linux的
+git clone https://github.com/tony/tmux-config.git ~/.tmux-tony
+ln -s ~/.tmux-tony/.tmux.conf ~/.tmux.conf
+cd ~/.tmux-tony
+git submodule init
+git submodule update
+cd ~/.tmux-tony/vendor/tmux-mem-cpu-load
+cmake .
+make
+sudo make install
+cd ~
+tmux source-file ~/.tmux.conf
+sudo pip install psutil
+sudo cp ~/.tmux-tony/vendor/basic-cpu-and-memory.tmux /usr/local/bin/tmux-mem-cpu-load
+sudo chmod +x /usr/local/bin/tmux-mem-cpu-load
+#test -z &quot;$TMUX&quot;&amp;amp;&amp;amp;(tmux attach || tmux new-session)
+
+#vim配置
+#git clone git://github.com/amix/vimrc.git ~/.vim_runtime  #感觉这个版本很好用
+#使用github前需要先配置key
+ssh-keygen -t rsa -C &quot;EMAIL&quot; #生成
+ssh -T git@github.com    #add
+sudo add-apt-repository ppa:n-muench/calibre 
+sudo apt-get update 
+sudo apt-get install calibre
+
+sudo apt-get -y purge hplip*                     #打印  
+sudo apt-get -y purge printer-driver*               #打印驱动 
+sudo apt-get purge landscape-client-ui-install -y #远程控制 
+sudo apt-get purge deja-dup -y #备份 
+sudo apt-get purge simple-scan -y #
+sudo apt-get purge brasero* -y #
+sudo apt-get purge ubuntuone* -y #Ubuntu One 
+sudo apt-get purge indicator-messages -y #托盘消息图标 
+sudo apt-get purge empathy* telepathy* -y #聊天 
+#sudo apt-get purge gwibber* -y #微博 
+#sudo apt-get purge thunderbird -y #邮件
+#sudo apt-get purge transmission-* -y #BT 
+sudo apt-get purge xul-ext-ubufox -y #Firefox的Ubuntu扩展 
+#sudo apt-get purge gnome-orca -y ＃屏幕阅读 
+sudo apt-get purge onboard -y #屏幕键盘 
+sudo apt-get purge simple-scan -y #扫描 
+sudo apt-get purge totem -y #电影播放 
+#sudo apt-get purge pitivi -y #视频编辑 
+#sudo apt-get -y purge bluez*                     #卸载蓝牙 
+sudo apt-get purge gnome-sudoku gnome-mahjongg -y
+sudo apt-get -y purge gnomine            #扫雷  
+sudo apt-get purge  rhythmbox* -y
+sudo apt-get -y purge gnome-orca*         #屏幕阅读  
+sudo apt-get -y   purge usb-creator-gtk            #启动盘创建器  
+#sudo apt-get purge software-center -y
+#xubuntu
+sudo apt-get purge gigolo -y
+sudo apt-get purge gmusicbrowser -y
+sudo apt-get purge gnome-bluetooth -y
+sudo apt-get purge xchat* -y
+sudo apt-get purge xfburn* -y
+#end
+
+在系统设置-安全与隐私中设置安全选项
+在appearance里设置是否全局菜单和多工作区
+git 配置
+TeamViz 还没有安装
+#sudo apt-get install unattended-upgrades -y #阻止系统更新。 这个软件已经自带，自己配置以下就可以了
+sudo apt-get install p7zip-full p7zip-rar unrar -y #压缩解压 
+sudo apt-get install build-essential g++-multilib  -y
+sudo apt-get install filezilla -y #FTP客户端 
+sudo apt-get install gtkorphan -y #清理孤儿包 
+sudo apt-get install driconf -y 在开源驱动情况下可以用来调节纹理
+
+
+选择性安装
+
+
+sudo apt-get install dconf-editor  #编辑key/value数据库，可以让桌面显示home目录等。
+
+#安装codeblock和w的脚本
+
+#!/bin/bash
+sudo apt-get install build-essential -y
+sudo apt-get install gdb -y
+sudo apt-get install codeblocks 
+sudo apt-get install codeblocks-dbg 
+sudo apt-get install wxformbuilder  #用google的比较好
+sudo apt-get install libwxbase2.8 -y
+sudo apt-get install libwxbase2.8-dev -y
+sudo apt-get install libwxgtk2.8-0 -y
+sudo apt-get install libwxgtk2.8-dev -y
+sudo apt-get install libwxgtk2.8-dbg -y
+sudo apt-get install wx-common -y
+sudo apt-get install wx2.8-headers -y
+sudo apt-get install wx2.8-i18n -y
+sudo apt-get install wx2.8-examples -y
+sudo apt-get install wx2.8-doc -y
+
+sudo add-apt-repository ppa:maarten-baert/simplescreenrecorder 
+sudo apt-get update 
+sudo apt-get install simplescreenrecorder 
+sudo apt-get install simplescreenrecorder-lib:i386
+
+sudo add-apt-repository ppa:webupd8team/java 
+sudo apt-get install oracle-java7-installer
+
+sudo add-apt-repository ppa:lainme/pidgin-lwqq
+sudo apt-get update
+sudo apt-get install pidgin-lwqq
+sudo apt-get install pidgin
+
+sudo apt-get install libavformat-extra-53 libavcodec-extra-53	
+sudo add-apt-repository ppa:peterlevi/ppa           自动换桌面
+sudo apt-get update
+sudo apt-get install variety     
+
+# no need
+sudo apt-get install libav-tools -y #视频转换 
+sudo apt-get install openshot -y #视频编辑 
+sudo apt-get install audacity -y #音频编辑 
+sudo apt-get install furiusisomount -y #虚拟光驱 
+sudo apt-get install tuxpaint tuxmath gcompris -y #幼儿教育 
+sudo apt-get install mingw-w64 g++-mingw-w64 clang cmake valgrind meld autoconf astyle -y #开发windows 程序。 
+sudo apt-get install &quot;^libxcb.*&quot; libx11-xcb-dev libglu1-mesa-dev libxrender-dev libedit-dev libfontconfig1-dev -y #Qt5 暂时不用QT编程，那就不装
+sudo apt-get install exfalso -y #ID3修改 
+sudo apt-get install lm-sensors -y #温度检测 
+sudo apt-get install system-config-samba -y #局域网共享 
+sudo apt-get install nautilus-open-terminal -y #右键终端 
+sudo apt-get install mplayer vlc smplayer -y #电影播放
+sudo apt-get install indicator-cpufreq -y #CPU频率调节 
+sudo apt-get install indicator-weather -y #天气 
+sudo apt-get install mldonkey-server -y #下载 
+sudo apt-get install ia32-libs -y #64位系统跑32位程序 
+#安装GCC-4.7编译器 
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test 
+sudo apt-fast install gcc-4.7 gcc-4.7-multilib g++-4.7 g++-4.7-multilib 
+Universal USB Installer
+universal Netboot Installer  
+ImageUSB
+  
+sudo apt-get -y purge gucharmap                  #字符映射表  
+sudo apt-get -y purge gnome-power-manager      #电源统计  
+sudo apt-get -y purge gnome-system-log            #日志查看器  
+sudo apt-get -y purge landscape-client-ui-install   #管理服务  
+sudo apt-get -y purge aptitude                     #软件包管理   
+sudo apt-get -y purge yelp*                        #帮助   
+sudo apt-get -y purge update-*                     #自动更新    
+sudo apt-get -y purge apport*            #问题报告  
+sudo apt-get -y purge whoopsie         #崩溃报告  
+sudo apt-get -y purge xdiagnose         #卸载X诊断  
+sudo apt-get -y purge checkbox*         #系统测试  
+sudo apt-get -y purge gnome-nettool      #网络工具  
+sudo apt-get -y purge samba-common*   #samba共享  
+sudo apt-get -y purge wget               #下载器  
+sudo apt-get -y purge whois               #查询域名信息   
+sudo apt-get -y purge file-roller         #归档管理器  
+sudo apt-get -y purge mahjongg         #对对碰  
+sudo apt-get -y purge sol                  #纸牌王  
+sudo apt-get -y purge wodim            #命令刻碟  
+
+sudo apt-get install linux-headers-$(uname -r)
+apt-get clean &amp;amp;&amp;amp; apt-get update &amp;amp;&amp;amp; apt-get upgrade -y &amp;amp;&amp;amp; apt-get dist-upgrade -y 
+apt-get install unrar unace rar unrar p7zip zip unzip p7zip-full p7zip-rar file-roller -y 
+root@kali:~# leafpad /etc/gdm3/daemon.conf #允许自动登录
+用vim编辑过的文件会备份下来，以~结尾。在vimrc中添加set nobackup。
+ubuntu 系统默认没有安装vim和emacs，需要自己安装的
+ls Desktop 能显示Desktop文件下有什么文件
+&lt;/code&gt;&lt;/pre&gt;
+
+</description>
+      <pubDate>Sun, 29 Jun 2014 00:00:00 +0800</pubDate>
+      <link>https://danielyangmeta.github.com//2014/resources-ubuntu-14-dot-04-install-scripts.html</link>
+      <guid isPermaLink="true">https://danielyangmeta.github.com//2014/resources-ubuntu-14-dot-04-install-scripts.html</guid>
+
+      
+      <category>Ubuntu</category>
+      
+      <category>Setup</category>
+      
+
+      
+      <category>资源</category>
+      
+      
+    </item>
+  
+    <item>
+      <title>MySQL</title>
+      <description>&lt;h2 id=&quot;x00-&quot;&gt;0x00 引言&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;本来最好的学习方案是：小时候对数学和计算机的基本概念要有所了解。学习的时候不能人浮于事，而是要多学习基础课程（多读基础教程）。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;x01-&quot;&gt;0x01 设置支持中文&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;ps -aux|grep mysql              #检查Mysql服务器系统进程
+netstat -nlt|grep 3306          #检查mysql服务器占用的端口
+sudo /etc/init.d/mysql status   #通过启动命令检查mysql服务器状态
+service mysql status            #通过系统服务命令检查mysql服务器状态
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;修改mysql服务器的配置&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo vi /etc/mysql/my.cnf  #将字符编码设置为UTF-8
+
+[client]
+default-character-set = utf8
+[mysqld]
+character-set-server=utf8
+collation-server=utf8_general_ci
+
+sudo vi /etc/mysql/my.cnf  然mysql服务器能被运程访问
+
+#bind-address =127.0.0.1
+sudo /etc/init.d/mysql restart
+show variables like &#39;%char%&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x02-&quot;&gt;0x02 新建用户&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;grant all on databasename.* to new_user@&#39;%&#39; identified by &#39;password&#39;
+grant all on databasename.* to new_user@localhost identified by &#39;password&#39;
+
+mysql -u new_user -p -h 192.168.2.21
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;添加一个远程用户，名为username密码为password&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;GRANT ALL PRIVILEGES ON *.* TO username@&quot;%&quot; IDENTIFIED BY &#39;password&#39;
+
+CREATE USER &#39;username&#39;@&#39;host&#39; IDENTIFIED BY &#39;password&#39;; 
+
+SET PASSWORD FOR &#39;username&#39;@&#39;host&#39; = PASSWORD
+
+(&#39;newpassword&#39;);如果是当前登陆用户用SET PASSWORD = PASSWORD(&quot;newpassword&quot;); 
+
+DROP USER &#39;username&#39;@&#39;host&#39;;           #删除用户
+REVOKE SELECT ON *.* FROM &#39;pig&#39;@&#39;%&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+      <pubDate>Sun, 29 Jun 2014 00:00:00 +0800</pubDate>
+      <link>https://danielyangmeta.github.com//2014/resources-mysql.html</link>
+      <guid isPermaLink="true">https://danielyangmeta.github.com//2014/resources-mysql.html</guid>
+
+      
+      <category>MySQL</category>
+      
+
+      
+      <category>资源</category>
+      
+      
+    </item>
+  
+    <item>
+      <title>数字三角形</title>
+      <description>&lt;h2 id=&quot;x01-&quot;&gt;0x01 数字三角形问题&lt;/h2&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;问题描述&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;7 
+3 8 
+8 1 0 
+2 7 4 4 
+4 5 2 6 5 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上图的数字三角形。从三角形的顶部到底部有很多条不同的路径。对于每条路径，把路径上面的数加起来可以得到一个和，和最大的路径称为最佳路径。你的任务就是求出最佳路径上的数字之和。&lt;/p&gt;
+
+&lt;p&gt;注意：路径上的每一步只能从一个数走到下一层上和它最近的左边的数或者右边的数。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;输入数据&lt;/h3&gt;
+
+&lt;p&gt;输入的第一行是一个整数 N (1 &amp;lt; N &amp;lt;= 100)，给出三角形的行数。下面的 N行给出数字三角形。数字三角形上的数的范围都在 0和 100之间。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;输出要求&lt;/h3&gt;
+
+&lt;p&gt;输出最大的和。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;输入样例&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;5 
+7 
+3 8 
+8 1 0 
+2 7 4 4 
+4 5 2 6 5 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;输出样例&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;30 
+193
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x02-&quot;&gt;0x02 解题思路&lt;/h2&gt;
+
+&lt;p&gt;从题目上看，如果不适用打表技术，会存在很多重复计算，一定会影响效率。所以使用动态规划方法。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-5&quot;&gt;状态转移方程：&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;1: a_max[i][j] = max(a_max[i - 1][j - 1], a_max[i - 1][j]) + a[i][j]; #下三角形
+2: a_max[i-1][j] = max(a_max[i][j], a_max[i][j + 1]) + a[i-1][j];     #上三角形
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x03-&quot;&gt;0x03 代码&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;#include&amp;lt;iostream&amp;gt;
+using namespace std;
+
+int max(int, int);
+void init();
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	int a[100][100] = { 0 },a_max[100][100] = { 0 };
+	int  T = 0, N = 0, i = 0, j = 0, ans = 0;
+
+	cin &amp;gt;&amp;gt; T;
+	while (T--)
+	{
+		cin &amp;gt;&amp;gt; N;
+		for (i = 1; i &amp;lt;= N; i++)
+			for (j = 1; j &amp;lt;= i; j++)
+			{
+				cin &amp;gt;&amp;gt; a[i][j];
+				a_max[i][j] = max(a_max[i - 1][j - 1], a_max[i - 1][j]) + a[i][j];
+			}
+				
+		for (i = 1; i &amp;lt;= N; i++)
+		{
+			if (a_max[N][i] &amp;gt; ans)
+				ans = a_max[N][i];
+		}
+		cout &amp;lt;&amp;lt; ans &amp;lt;&amp;lt; endl;
+		init();
+	}
+
+	int k;
+	cin &amp;gt;&amp;gt; k;
+	return 0;
+}
+int max(int a, int b)
+{
+	if (a &amp;gt;= b) 
+		return a;
+	else
+		return b;
+}
+void init()
+{
+	int a[100][100] = { 0 }, a_max[100][100] = { 0 };
+	int  T = 0, N = 0, i = 0, j = 0, max = 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+      <pubDate>Sun, 29 Jun 2014 00:00:00 +0800</pubDate>
+      <link>https://danielyangmeta.github.com//2014/algorithms-shu-zi-san-jiao-xing.html</link>
+      <guid isPermaLink="true">https://danielyangmeta.github.com//2014/algorithms-shu-zi-san-jiao-xing.html</guid>
+
+      
+      <category>Algorithms</category>
+      
+
+      
+      <category>解题</category>
+      
+      
+    </item>
+  
+    <item>
+      <title>VMware 虚拟机访问互联网</title>
+      <description>&lt;h2 id=&quot;x00-&quot;&gt;0x00 引言&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;以前只知道linux环境下很适合模拟计算机网络、操作系统的工作环境，今天才切切实实地感受了一下，对技术爱好者，十二分推荐!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;x01-vmware-&quot;&gt;0x01 VMware 虚拟机连接网络的三种方法&lt;/h2&gt;
+
+&lt;p&gt;虚拟机上设置静态IP的做法。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;1、问题：由于业务需要，个人笔记本电脑上用VMware安装了3台Ubuntu虚拟机，现要求pc机连入局域网后，四台机器(3台ubuntu虚拟机+1台宿主机)能上网，并且，虚拟机要使用某一网段的固定IP。
+
+2、思路：在pc上安装了若干虚拟机，可认为这是独立的机器，虚拟机和宿主机的连接方式有桥接模式、NAT模式、Host-Only模式，结合本人需求，采用NAT+固定IP的模式。
+
+3、理论：
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x02--networkadapter-&quot;&gt;0x02 虚拟机 NetworkAdapter 三种方式的区别&lt;/h2&gt;
+
+&lt;p&gt;VMware在安装时默认安装了两块虚拟网卡，VMnet1和VMnet8，另外还有VMnet0。这些虚拟网卡的配置都是由VMware虚拟机自动生成的，一般来说不需要用户自行设置。&lt;/p&gt;
+
+&lt;p&gt;VMware提供了三种网络连接模式，分别为&lt;/p&gt;
+
+&lt;h3 id=&quot;bridgedvmnet0dhcp&quot;&gt;1)、bridged(桥接模式):默认使用VMnet0，不提供DHCP服务&lt;/h3&gt;
+
+&lt;p&gt;虚拟机上设置静态IP的做法&lt;/p&gt;
+
+&lt;p&gt;在桥接模式下，虚拟机和宿主计算机处于同等地位，虚拟机就像是一台真实主机一样存在于局域网中。因此在桥接模式下，我们就要像对待其他真实计算机一样为其配置IP、网关、子网掩码等等。&lt;/p&gt;
+
+&lt;p&gt;当我们可以自由分配局域网IP时，使用桥接模式就可以虚拟出一台真实存在的主机。&lt;/p&gt;
+
+&lt;h3 id=&quot;natvmnet8dhcp&quot;&gt;2)、NAT(网络地址转换模式):默认使用VMnet8，提供DHCP服务&lt;/h3&gt;
+
+&lt;p&gt;虚拟机上设置静态IP的做法&lt;/p&gt;
+
+&lt;p&gt;在NAT模式下，宿主计算机相当于一台开启了DHCP功能的路由器，而虚拟机则是内网中的一台真实主机，通过路由器(宿主计算机)DHCP动态获得网络参数。因此在NAT模式下，虚拟机可以访问外部网络，反之则不行，因为虚拟机属于内网。&lt;/p&gt;
+
+&lt;p&gt;使用NAT模式的方便之处在于，我们不需要做任何网络设置，只要宿主计算机可以连接到外部网络，虚拟机也可以。&lt;/p&gt;
+
+&lt;p&gt;NAT模式通常也是大学校园网VMware最普遍采用的连接模式，因为我们一般只能拥有一个外部IP。很显然，在这种情况下，非常适合使用NAT模式。&lt;/p&gt;
+
+&lt;h3 id=&quot;host-onlyvmnet1dhcp&quot;&gt;3)、Host-only(主机模式):默认使用VMnet1，提供DHCP服务&lt;/h3&gt;
+
+&lt;p&gt;虚拟机上设置静态IP的做法&lt;/p&gt;
+
+&lt;p&gt;在Host-only模式下，相当于虚拟机通过双绞线和宿主计算机直连，而宿主计算机不提供任何路由服务。因此在Host-only模式下，虚拟机可以和宿主计算机互相访问，但是虚拟机无法访问外部网络。&lt;/p&gt;
+
+&lt;p&gt;当我们要组成一个与物理网络相隔离的虚拟网络时，无疑非常适合使用Host-only模式。&lt;/p&gt;
+
+&lt;h2 id=&quot;x03-&quot;&gt;0x03 解决方案&lt;/h2&gt;
+
+&lt;p&gt;1)打开VMware，Edit-&amp;gt;Virtual network editor。&lt;/p&gt;
+
+&lt;p&gt;由于NAT模式默认使用的虚拟网卡为VMnet8，并且使用DHCP协议自动给虚拟机分配IP，因此，要在此处取消DHCP功能，同时设置SubnetIP为自己所要的网段。&lt;/p&gt;
+
+&lt;p&gt;2)在虚拟机的启动界面，分别设置3台机器的Network adapter为NAT模式。&lt;/p&gt;
+
+&lt;p&gt;3)在宿主机中找到vMnet8，设置IP为网段内的IP，同时设置子网掩码、网关、DNS等。&lt;/p&gt;
+
+&lt;p&gt;4)在ubuntu的终端命令行，&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo gedit  /etc/network/interfaces #在打开的文件中输入IP、子网掩码、网关：
+auto eth0
+iface eth0 inet static
+address  10.37.12.23
+netmask  255.255.255.0
+gateway10.37.12.1
+
+$ sudo gedit  /etc/resolv.conf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在打开的文件中输入当前网络的DNS，如&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;nameserver 202.98.0.68
+
+sudo/etc/init.d/networking  restart #重启网卡命令 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;当然，如果不想用命令行操作，也可以在ubuntu的桌面右上角manual network configuration中进行设置。&lt;/p&gt;
+
+&lt;p&gt;但是，无论怎么设置，都要根据自己实际情况、当前的网络环境而定。&lt;/p&gt;
+
+</description>
+      <pubDate>Thu, 01 May 2014 00:00:00 +0800</pubDate>
+      <link>https://danielyangmeta.github.com//2014/tech-config-vmware-machine-connect-to-internet.html</link>
+      <guid isPermaLink="true">https://danielyangmeta.github.com//2014/tech-config-vmware-machine-connect-to-internet.html</guid>
+
+      
+      <category>VMware</category>
+      
+
+      
+      <category>技术</category>
+      
+      
+    </item>
+          
+
+  </channel>
+</rss>
