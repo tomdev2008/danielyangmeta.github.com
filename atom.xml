@@ -4,8 +4,8 @@
     <title>Surely,I am Joking</title>
     <link>https://danielyangmeta.github.com/</link>
     <description>Surely I am Joking</description>
-    <pubDate>Wed, 21 Jan 2015 10:46:16 +0800</pubDate>
-    <lastBuildDate>Wed, 21 Jan 2015 10:46:16 +0800</lastBuildDate>
+    <pubDate>Thu, 22 Jan 2015 19:35:05 +0800</pubDate>
+    <lastBuildDate>Thu, 22 Jan 2015 19:35:05 +0800</lastBuildDate>
     <atom:link href="https://danielyangmeta.github.com//feed.xml" rel="self" type="application/rss+xml"/>
 
   
@@ -661,7 +661,7 @@ border:5px solid blue;
     </item>
   
     <item>
-      <title>VIM</title>
+      <title>Vim</title>
       <description>&lt;h2 id=&quot;x00-&quot;&gt;0x00 引言&lt;/h2&gt;
 
 &lt;blockquote&gt;
@@ -1255,7 +1255,7 @@ git branch --set-upstream develop origin/develop
     </item>
   
     <item>
-      <title>我的 Windows Server 2003 设置</title>
+      <title>Windows Server 2003</title>
       <description>&lt;h2 id=&quot;x00-&quot;&gt;0x00 引言&lt;/h2&gt;
 
 &lt;blockquote&gt;
@@ -2024,23 +2024,168 @@ show variables like &#39;%char%&#39;;
 
 &lt;pre&gt;&lt;code&gt;grant all on databasename.* to new_user@&#39;%&#39; identified by &#39;password&#39;
 grant all on databasename.* to new_user@localhost identified by &#39;password&#39;
-
 mysql -u new_user -p -h 192.168.2.21
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;添加一个远程用户，名为username密码为password&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;GRANT ALL PRIVILEGES ON *.* TO username@&quot;%&quot; IDENTIFIED BY &#39;password&#39;
-
 CREATE USER &#39;username&#39;@&#39;host&#39; IDENTIFIED BY &#39;password&#39;; 
-
 SET PASSWORD FOR &#39;username&#39;@&#39;host&#39; = PASSWORD
-
 (&#39;newpassword&#39;);如果是当前登陆用户用SET PASSWORD = PASSWORD(&quot;newpassword&quot;); 
-
 DROP USER &#39;username&#39;@&#39;host&#39;;           #删除用户
 REVOKE SELECT ON *.* FROM &#39;pig&#39;@&#39;%&#39;;
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x03-&quot;&gt;0x03 如何创建视图&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;CREATE or REPLACE view view_will as select college.collegeid,mat.stuid,sum(score.chinese+score.math+score.english+score.complex) from college,mat,score where college.collegeid=mat.first_will and mat.stuid=score.stuid group by SCORE.STUID,COLLEGE.COLLEGEID,MAT.STUID having sum(score.chinese+score.math+score.english+score.complex)&amp;gt;500
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x04-mysql-&quot;&gt;0x04 MySQL 常用命令&lt;/h2&gt;
+
+&lt;p&gt;0:安装和登录&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install mysql-server 
+use root
+pad root
+mysql -u root 
+mysql -u root -p
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;1:使用SHOW语句找出在服务器上当前存在什么数据库：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql&amp;gt; SHOW DATABASES;                            
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;2、创建一个数据库MYSQLDATA&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql&amp;gt; CREATE DATABASE MYSQLDATA;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;3:选择你所创建的数据库&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql&amp;gt; USE MYSQLDATA; (按回车键出现Database changed 时说明操作成功！)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;4:查看现在的数据库中存在什么表&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql&amp;gt; SHOW TABLES;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;5:创建一个数据库表&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql&amp;gt; CREATE TABLE MYTABLE (name VARCHAR(20), sex CHAR(1));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;6:显示表的结构：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql&amp;gt; DESCRIBE MYTABLE;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;7:往表中加入记录&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql&amp;gt; insert into MYTABLE values (”hyq”,”M”);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;8:用文本方式将数据装入数据库表中（例如D:/mysql.txt）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql&amp;gt; LOAD DATA LOCAL INFILE “D:/mysql.txt” INTO TABLE MYTABLE;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;9:导入.sql文件命令（例如D:/mysql.sql）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql&amp;gt;use database;
+mysql&amp;gt;source d:/mysql.sql;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;10:删除表&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql&amp;gt;drop TABLE MYTABLE;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;11:清空表&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql&amp;gt;delete from MYTABLE;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;12:更新表中数据&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql&amp;gt;update MYTABLE set sex=”f” where name=’hyq’;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;以下是无意中在网络看到的使用MySql的管理心得,&lt;/p&gt;
+
+&lt;p&gt;在windows中MySql以服务形式存在，在使用前应确保此服务已经启动，未启动可用net start mysql命令启动。而Linux中启动时可用“/etc/rc.d/init.d/mysqld start”命令，注意启动者应具有管理员权限。&lt;/p&gt;
+
+&lt;p&gt;刚安装好的MySql包含一个含空密码的root帐户和一个匿名帐户，这是很大的安全隐患，对于一些重要的应用我们应将安全性尽可能提高，在这里应把匿名帐户删除、 root帐户设置密码，可用如下命令进行：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;use mysql;
+delete from User where User=”&quot;;
+update User set Password=PASSWORD(’newpassword’) where User=’root’;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果要对用户所用的登录终端进行限制，可以更新User表中相应用户的Host字段，在进行了以上更改后应重新启动数据库服务，此时登录时可用如下类似命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql -uroot -p;
+mysql -uroot -pnewpassword;
+mysql mydb -uroot -p;
+mysql mydb -uroot -pnewpassword;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面命令参数是常用参数的一部分，详细情况可参考文档。此处的mydb是要登录的数据库的名称。&lt;/p&gt;
+
+&lt;p&gt;在 进行开发和实际应用中，用户不应该只用root用户进行连接数据库，虽然使用root用户进行测试时很方便，但会给系统带来重大安全隐患，也不利于管理技 术的提高。我们给一个应用中使用的用户赋予最恰当的数据库权限。如一个只进行数据插入的用户不应赋予其删除数据的权限。MySql的用户管理是通过 User表来实现的，添加新用户常用的方法有两个，一是在User表插入相应的数据行，同时设置相应的权限；二是通过GRANT命令创建具有某种权限的用 户。其中GRANT的常用用法如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grant all on mydb.* to NewUserName@HostName identified by “password” ;
+grant usage on *.* to NewUserName@HostName identified by “password”;
+grant select,insert,update on mydb.* to NewUserName@HostName identified by “password”;
+grant update,delete on mydb.TestTable to NewUserName@HostName identified by “password”;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;若要给此用户赋予他在相应对象上的权限的管理能力，可在GRANT后面添加WITH GRANT OPTION选项。而对于用插入User表添加的用户，Password字段应用PASSWORD 函数进行更新加密，以防不轨之人窃看密码。对于那些已经不用的用户应给予清除，权限过界的用户应及时回收权限，回收权限可以通过更新User表相应字段， 也可以使用REVOKE操作。&lt;/p&gt;
+
+&lt;p&gt;下面给出本人从&lt;a href=&quot;http://www.cn-java.com&quot;&gt;其它资料&lt;/a&gt;获得的对常用权限的解释：&lt;/p&gt;
+
+&lt;p&gt;全局管理权限：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;FILE: 在MySQL服务器上读写文件。
+PROCESS: 显示或杀死属于其它用户的服务线程。
+RELOAD: 重载访问控制表，刷新日志等。
+SHUTDOWN: 关闭MySQL服务。
+数据库/数据表/数据列权限：
+ALTER: 修改已存在的数据表(例如增加/删除列)和索引。
+CREATE: 建立新的数据库或数据表。
+DELETE: 删除表的记录。
+DROP: 删除数据表或数据库。
+INDEX: 建立或删除索引。
+INSERT: 增加表的记录。
+SELECT: 显示/搜索表的记录。
+UPDATE: 修改表中已存在的记录。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;特别的权限：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ALL: 允许做任何事(和root一样)。
+USAGE: 只允许登录–其它什么也不允许做。
+
+mysql&amp;gt; grant 权限1,权限2,…权限n on 数据库名称.表名称 to 用户名@用户地址 identified by ‘连接口令’;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;权限1,权限2,…权限n代表select,insert,update,delete,create,drop,index,alter,grant,references,reload,shutdown,process,file等14个权限。&lt;/p&gt;
+
+&lt;p&gt;当权限1,权限2,…权限n被all privileges或者all代替，表示赋予用户全部权限。&lt;br /&gt;
+当数据库名称.表名称被&lt;em&gt;.&lt;/em&gt;代替，表示赋予用户操作服务器上所有数据库所有表的权限。&lt;/p&gt;
+
+&lt;p&gt;用户地址可以是localhost，也可以是ip地址、机器名字、域名。也可以用’%表示从任何地址连接。&lt;/p&gt;
+
+&lt;p&gt;‘连接口令’不能为空，否则创建失败。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql&amp;gt;grant select,insert,update,delete,create,drop on 2012_test_1.* to &#39;2012_test_1_1&#39;@&#39;%&#39; IDENTIFIED BY &#39;2012_test_1&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;给来自172.16.10.1的用户weijunping分配可对数据库vtdc的employee表进行select,insert,update,delete,create,drop等操作的权限，并设定口令为123。&lt;/p&gt;
+
 </description>
       <pubDate>Sun, 29 Jun 2014 00:00:00 +0800</pubDate>
       <link>https://danielyangmeta.github.com//2014/resources-mysql.html</link>
