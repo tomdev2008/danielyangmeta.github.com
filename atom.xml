@@ -4,8 +4,8 @@
     <title>Surely,I am Joking</title>
     <link>https://danielyangmeta.github.com/</link>
     <description>Surely I am Joking</description>
-    <pubDate>Mon, 09 Mar 2015 20:39:26 +0800</pubDate>
-    <lastBuildDate>Mon, 09 Mar 2015 20:39:26 +0800</lastBuildDate>
+    <pubDate>Tue, 10 Mar 2015 09:04:35 +0800</pubDate>
+    <lastBuildDate>Tue, 10 Mar 2015 09:04:35 +0800</lastBuildDate>
     <atom:link href="https://danielyangmeta.github.com//feed.xml" rel="self" type="application/rss+xml"/>
 
   
@@ -24,9 +24,19 @@ src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HT
 
 &lt;p&gt;行内公司如下：&lt;/p&gt;
 
+&lt;pre&gt;&lt;code&gt;$$E=mc^2$$ is a inline formula.
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;E=mc^2&lt;/script&gt; is a inline formula.&lt;/p&gt;
 
 &lt;p&gt;单行：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$$ 
+\begin{aligned} \dot{x} &amp;amp;= \sigma(y-x) \\ 
+\dot{y} &amp;amp;= \rho x - y - xz \\ 
+\dot{z} &amp;amp;= -\beta z + xy \end{aligned} 
+$$
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
  

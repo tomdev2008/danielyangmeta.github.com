@@ -6,7 +6,7 @@
 <meta name="author" content="danielyang">
 
 
-  <meta name="description " content="使用 MathJax 可以让你在网页中使用 LaTeX、MathML、or AsciiMath 标记在任何现代浏览器中显示数学公式。">
+  <meta name="description " content="使用 MathJax 可以让你在网页中使用 LaTeX、MathML 和 AsciiMath 标记在任何现代浏览器中显示数学公式。">
 
 <link rel="shortcut icon" href="/public/img/favicon.png" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -423,9 +423,19 @@ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorM
 
 <p>行内公司如下：</p>
 
+<pre><code>$$E=mc^2$$ is a inline formula.
+</code></pre>
+
 <p><script type="math/tex">E=mc^2</script> is a inline formula.</p>
 
 <p>单行：</p>
+
+<pre><code>$$ 
+\begin{aligned} \dot{x} &amp;= \sigma(y-x) \\ 
+\dot{y} &amp;= \rho x - y - xz \\ 
+\dot{z} &amp;= -\beta z + xy \end{aligned} 
+$$
+</code></pre>
 
 <script type="math/tex; mode=display">% <![CDATA[
  
@@ -517,7 +527,7 @@ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorM
 		<input type="hidden" value="" name="payAmount">
 		<input id="title" type="hidden" value="" name="title">
 		<input type="hidden" value="" name="memo">
-		<input type="image" src="/public/img/alipay.png" value="转账" name="pay" width="138">
+		<input type="image" src="/public/img/alipay.png" value="转账" name="pay" width="128">
 	</form>
 </div>
 
