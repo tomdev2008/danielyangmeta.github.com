@@ -25,10 +25,12 @@
     <div class="col-md-3 col-xs-3 aside1">
       <div>
         <br>
-        <a class="pjaxlink" href="/">
+        <div class="visible-md visible-lg">
+        <a class="pjaxlink " href="/">
           <img src="/public/img/logo.png" class="img-circle avatar img-thumbnail"></a>
         <br>
         <br>
+        </div>
         <ul class="nav nav-pills nav-stacked">
           
           <li>
@@ -82,6 +84,8 @@
             <div class="list-group">
               <br>
               <div class="center aside2_pagetitle">技术</div>
+              
+              <a href="/2015/mathjax-and-jekyll.html" class="list-group-item pjaxlink clearfix">MathJax and Jekyll</a>
               
               <a href="/2014/tech-how-to-config-haskell-environment.html" class="list-group-item pjaxlink clearfix">Windows 下设置 Haskell 的开发环境</a>
               
@@ -338,6 +342,20 @@
                 </div>
               </div>
               
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#Blog">Blog</a>
+                    <span class="badge pull-right">1</span>
+                  </h4>
+                </div>
+                <div id="Blog" class="panel-collapse collapse">
+                  
+                  <a  href='/2015/mathjax-and-jekyll.html' class="list-group-item pjaxlink">MathJax and Jekyll</a>
+                  
+                </div>
+              </div>
+              
             </div>
           </div>
 
@@ -369,7 +387,7 @@
   
   <div class="col-md-12 aside3-title hidden-lg hidden-md" >
     <a href="/" id="aside3_title_a">
-      <div class="pagetitle" style="  text-align: left;"><img src="/public/img/logo.png" class="img-circle avatar img-thumbnail">&nbsp;&nbsp;Surely</div>
+		<div class="pagetitle">我的足迹</div>
     </a>
   </div>
 
@@ -386,8 +404,29 @@
 
     
   <h4 class="tl-year hidden-xs">Year 2015</h4>
-  <h5 class="tl-month hidden-xs">Jan</h5>
+  <h5 class="tl-month hidden-xs">Mar</h5>
   <ul class="tl-content">
+    
+    <li class="tl-title">
+      <span>2015 - 03 - 09</span>
+      &raquo;
+      <a href="/2015/mathjax-and-jekyll.html">MathJax and Jekyll</a>
+    </li>
+    
+        
+          
+</ul>
+<h5 class="tl-month hidden-xs">Jan</h5>
+<ul class="tl-content">
+  
+        
+    
+
+    
+    
+    
+    
+
     
     <li class="tl-title">
       <span>2015 - 01 - 07</span>
@@ -741,10 +780,10 @@
     </div>
   </div>
 
-  <!-- <div class="hidden-lg hidden-md" style="position:fixed;right:10px;top:5px;">
-	<button id="nav_btn" class="btn panel-heading-background-color"> <i class="fa fa-2x fa-columns "></i>
+  <div class="hidden-lg hidden-md" style="position:fixed;right:7px;top:2px;">
+	<button id="nav_btn" class="btn panel-heading-background-color"> <img src="/public/img/logo.png" class="img-circle little_avatar img-thumbnail">
 	</button>
-</div> -->
+</div>
 
 <div class="visible-md visible-lg" style="position:fixed;right:10px;bottom:5px;">
 	<form accept-charset="GBK" target="_blank" method="POST" action="https://shenghuo.alipay.com/send/payment/fill.htm">
@@ -752,12 +791,20 @@
 		<input type="hidden" value="" name="payAmount">
 		<input id="title" type="hidden" value="" name="title">
 		<input type="hidden" value="" name="memo">
-		<input type="image" src="/public/img/alipay.png" value="转账" name="pay" width="118">
+		<input type="image" src="/public/img/alipay.png" value="转账" name="pay" width="138">
 	</form>
 </div>
 
 <script type="text/javascript" src="/public/js/jquery.js"></script>
 <script type="text/javascript" src="/public/js/bootstrap.js"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+                  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+                          });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 <script src="/public/js/jquery.pjax.js"></script>
 <script src="/public/js/prettify/prettify.js"></script>
 <script src="/public/js/base.js"></script>

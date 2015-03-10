@@ -4,19 +4,61 @@
     <title>Surely,I am Joking</title>
     <link>https://danielyangmeta.github.com/</link>
     <description>Surely I am Joking</description>
-    <pubDate>Sun, 08 Mar 2015 09:07:59 +0800</pubDate>
-    <lastBuildDate>Sun, 08 Mar 2015 09:07:59 +0800</lastBuildDate>
+    <pubDate>Mon, 09 Mar 2015 20:39:26 +0800</pubDate>
+    <lastBuildDate>Mon, 09 Mar 2015 20:39:26 +0800</lastBuildDate>
     <atom:link href="https://danielyangmeta.github.com//feed.xml" rel="self" type="application/rss+xml"/>
 
+  
+    <item>
+      <title>MathJax and Jekyll</title>
+      <description>&lt;h2 id=&quot;x01-mathjax-&quot;&gt;0x01 MathJax 的安装&lt;/h2&gt;
+
+&lt;p&gt;在网页中添加如下内容：（我是直接在 footer.html 中加入）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;script type=&quot;text/javascript&quot;
+src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&amp;gt;
+&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x02-mathjax-&quot;&gt;0x02 MathJax 使用&lt;/h2&gt;
+
+&lt;p&gt;行内公司如下：&lt;/p&gt;
+
+&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;E=mc^2&lt;/script&gt; is a inline formula.&lt;/p&gt;
+
+&lt;p&gt;单行：&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+ 
+\begin{aligned} \dot{x} &amp;= \sigma(y-x) \\ 
+\dot{y} &amp;= \rho x - y - xz \\ 
+\dot{z} &amp;= -\beta z + xy \end{aligned} 
+ %]]&gt;&lt;/script&gt;
+
+&lt;h2 id=&quot;x03-&quot;&gt;0x03 参考文献&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://docs.mathjax.org/en/latest/start.html&quot;&gt;MathJax&lt;/a&gt;&lt;/p&gt;
+</description>
+      <pubDate>Mon, 09 Mar 2015 00:00:00 +0800</pubDate>
+      <link>https://danielyangmeta.github.com//2015/mathjax-and-jekyll.html</link>
+      <guid isPermaLink="true">https://danielyangmeta.github.com//2015/mathjax-and-jekyll.html</guid>
+
+      
+      <category>Blog</category>
+      
+
+      
+      <category>技术</category>
+      
+      
+    </item>
   
     <item>
       <title>Maven</title>
       <description>&lt;h2 id=&quot;x01-centos--openjdk&quot;&gt;0x01 CentOS 卸载 OpenJDK&lt;/h2&gt;
 &lt;pre&gt;&lt;code&gt;yum list installed |grep java
-
 yum -y remove java-1.7.0-openjdk*
 yum -y remove tzdata-java.noarch
-
 yum -y list java*
 &lt;/code&gt;&lt;/pre&gt;
 

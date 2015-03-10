@@ -6,7 +6,7 @@
 <meta name="author" content="danielyang">
 
 
-  <meta name="description " content="Haskell 是一种标准化的，通用的纯函数编程语言，有非限定性语义和强静态类型。它的命名源自美国逻辑学家Haskell Brooks Curry，他在数学逻辑方面上的工作使得函数式编程语言有了广泛的基础。这个人很有名，它名字三个词语中有两个字都是计算机科学家绕不过的地方。pandoc 就是 Haskell 写成的，本文是在学习了 Scheme 后，决定学习下 Haskell 是，在 Windows 8.1 环境下的安装记录。">
+  <meta name="description " content="使用 MathJax 可以让你在网页中使用 LaTeX、MathML、or AsciiMath 标记在任何现代浏览器中显示数学公式。">
 
 <link rel="shortcut icon" href="/public/img/favicon.png" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -382,14 +382,14 @@
   <div class="col-md-12 aside3-title visible-md visible-lg" >
     <a href="/" id="aside3_title_a">
       <br>
-      <div class="pagetitle">Windows 下设置 Haskell 的开发环境</div>
+      <div class="pagetitle">MathJax and Jekyll</div>
       <br>
     </a>
   </div>
 
   <div class="col-md-12 aside3-title hidden-lg hidden-md" >
     <a href="/" id="aside3_title_a">
-      <div class="pagetitle">Windows 下设置 Haskell 的开发环境</div>
+      <div class="pagetitle">MathJax and Jekyll</div>
     </a>
   </div>
 
@@ -410,43 +410,33 @@
       <div class="cc-footer">
    <h6>作者：杨迪海（Daniel Yang）</h6>
 </div>
-      <div id="content"><h2 id="x00-">0x00 引言</h2>
+      <div id="content"><h2 id="x01-mathjax-">0x01 MathJax 的安装</h2>
 
-<blockquote>
-  <p>Haskell 是一种标准化的，通用的纯函数编程语言，有非限定性语义和强静态类型。它的命名源自美国逻辑学家Haskell Brooks Curry，他在数学逻辑方面上的工作使得函数式编程语言有了广泛的基础。这个人很有名，它名字三个词语中有两个字都是计算机科学家绕不过的地方。pandoc 就是 Haskell 写成的，本文是在学习了 Scheme 后，决定学习下 Haskell 是，在 Windows 8.1 环境下的安装记录。</p>
-</blockquote>
+<p>在网页中添加如下内容：（我是直接在 footer.html 中加入）</p>
 
-<h2 id="x01--haskell-platform">0x01 安装 Haskell Platform</h2>
-
-<p>去下载 Haskell 安装包。安装完后，进入 CMD ，执行 cabal update，去仓库更新。</p>
-
-<pre><code>cabal install bytestring aeson haskell-src-exts haddock ghc-mod stylish-haskell
+<pre><code>&lt;script type="text/javascript"
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"&gt;
+&lt;/script&gt;
 </code></pre>
 
-<h2 id="x02--sublimehaskell-">0x02 安装 SublimeHaskell 插件</h2>
+<h2 id="x02-mathjax-">0x02 MathJax 使用</h2>
 
-<p>因为从 Emacs 到使用 Sublime 有一段时间了，正好 Sublime 下有一个 Haskell 开发插件。 CTRL + SHIFT + p，安装 SublimeHaskell 插件。</p>
+<p>行内公司如下：</p>
 
-<p>安装完后，进入 Preferences -&gt; Package Settings -&gt; SublimeHaskell -&gt; Settings User 输入以下内容。</p>
+<p><script type="math/tex">E=mc^2</script> is a inline formula.</p>
 
-<pre><code>{
-    "enable_hdevtools": false,
-    "inspect_modules": false,
-    "add_to_PATH": [ ".../AppData/Roaming/cabal/bin" ]
-}
-</code></pre>
+<p>单行：</p>
 
-<h2 id="x03-">0x03 测试</h2>
+<script type="math/tex; mode=display">% <![CDATA[
+ 
+\begin{aligned} \dot{x} &= \sigma(y-x) \\ 
+\dot{y} &= \rho x - y - xz \\ 
+\dot{z} &= -\beta z + xy \end{aligned} 
+ %]]></script>
 
-<p>新建一个 .hs 结尾文件，输入“main”并回车，会产生以下文档：</p>
+<h2 id="x03-">0x03 参考文献</h2>
 
-<pre><code>module Main where
-
-main = putStrLn "Hello World "
-</code></pre>
-
-<p>在其中添加 main :: IO () 后 CRTL + b。</p>
-
+<p><a href="http://docs.mathjax.org/en/latest/start.html">MathJax</a></p>
 </div>
       <br>
       <hr>
@@ -461,11 +451,11 @@ main = putStrLn "Hello World "
 		</li>
 		<li>
 			创作日期：
-			<span>2014年12月16日</span>
+			<span>2015年03月09日</span>
 		</li>
 		<li>
 			更新日期：
-			<span>2015年01月21日</span>
+			<span>2015年03月09日</span>
 		</li>
 	</ul>
 </div>

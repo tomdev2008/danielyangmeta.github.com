@@ -57,6 +57,8 @@ body{
   border-radius: 0px;
 }
 .avatar {width: 60px; height: 60px;}
+.little_avatar {width: 35px; height: 35px;}
+
 .aside1_bottom {
   width: 100%;
   position: absolute; 
