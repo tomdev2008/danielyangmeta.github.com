@@ -4,8 +4,8 @@
     <title>Surely,I am Joking</title>
     <link>https://danielyangmeta.github.com/</link>
     <description>Surely I am Joking</description>
-    <pubDate>Tue, 10 Mar 2015 09:07:28 +0800</pubDate>
-    <lastBuildDate>Tue, 10 Mar 2015 09:07:28 +0800</lastBuildDate>
+    <pubDate>Tue, 10 Mar 2015 09:28:14 +0800</pubDate>
+    <lastBuildDate>Tue, 10 Mar 2015 09:28:14 +0800</lastBuildDate>
     <atom:link href="https://danielyangmeta.github.com//feed.xml" rel="self" type="application/rss+xml"/>
 
   
@@ -45,7 +45,11 @@ $$
 \dot{z} &amp;= -\beta z + xy \end{aligned} 
  %]]&gt;&lt;/script&gt;
 
-&lt;h2 id=&quot;x03-&quot;&gt;0x03 参考文献&lt;/h2&gt;
+&lt;h2 id=&quot;x03--ajax-&quot;&gt;0x03 无法使用 Ajax 加载页面&lt;/h2&gt;
+
+&lt;p&gt;由于 Blog 使用了 Ajax 加载页面， MathJax 的公式无法显示，必须重新刷新后，才能显示出来。&lt;/p&gt;
+
+&lt;h2 id=&quot;x04-&quot;&gt;0x04 参考文献&lt;/h2&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://docs.mathjax.org/en/latest/start.html&quot;&gt;MathJax&lt;/a&gt;&lt;/p&gt;
 </description>
