@@ -17,6 +17,8 @@
 
   /2015/mathjax-and-jekyll.html
 
+  /2015/linear-regression.html
+
   /2015/tools-maven.html
 
   /2015/algorithms-he-dian-zhan-wen-ti.html

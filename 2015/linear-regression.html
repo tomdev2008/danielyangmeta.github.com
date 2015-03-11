@@ -6,8 +6,6 @@
 <meta name="author" content="danielyang">
 
 
-  <meta name="description " content="一个核电站有N个放核物质的坑，坑排列在一条直线上。如果连续3个坑中放入核物质，则会发生爆炸，于是，在某些坑中可能不放核物质。现在，请你计算：对于给定的N，求不发生爆炸的放置核物质的方案总数。">
-
 <link rel="shortcut icon" href="/public/img/favicon.png" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -410,14 +408,14 @@
   <div class="col-md-12 aside3-title visible-md visible-lg" >
     <a href="/" id="aside3_title_a">
       <br>
-      <div class="pagetitle">核电站问题</div>
+      <div class="pagetitle">Linear Regression</div>
       <br>
     </a>
   </div>
 
   <div class="col-md-12 aside3-title hidden-lg hidden-md" >
     <a href="/" id="aside3_title_a">
-      <div class="pagetitle">核电站问题</div>
+      <div class="pagetitle">Linear Regression</div>
     </a>
   </div>
 
@@ -438,70 +436,501 @@
       <div class="cc-footer">
    <h6>作者：杨迪海（Daniel Yang）</h6>
 </div>
-      <div id="content"><h2 id="x01-">0x01 核电站问题</h2>
+      <div id="content"><h2 id="section">单词表</h2>
 
-<h3 id="section">问题描述</h3>
+<table>
+  <tbody>
+    <tr>
+      <td>Fourier Series</td>
+      <td>傅立叶级数</td>
+    </tr>
+    <tr>
+      <td>normal equations</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>regularization parameter</td>
+      <td>惩罚系数</td>
+    </tr>
+    <tr>
+      <td>hession</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Backpropagation Algorithm</td>
+      <td>反向传播算法</td>
+    </tr>
+    <tr>
+      <td>(batch) gradient descent</td>
+      <td>（批量）梯度下降法</td>
+    </tr>
+    <tr>
+      <td>(overall) cost function</td>
+      <td>（整体）代价函数</td>
+    </tr>
+    <tr>
+      <td>squared-error</td>
+      <td>方差</td>
+    </tr>
+    <tr>
+      <td>average sum-of-squares error</td>
+      <td>均方差</td>
+    </tr>
+    <tr>
+      <td>regularization term</td>
+      <td>规则化项</td>
+    </tr>
+    <tr>
+      <td>weight decay</td>
+      <td>权重衰减</td>
+    </tr>
+    <tr>
+      <td>bias terms</td>
+      <td>偏置项</td>
+    </tr>
+    <tr>
+      <td>Bayesian regularization method</td>
+      <td>贝叶斯规则化方法</td>
+    </tr>
+    <tr>
+      <td>Gaussian prior</td>
+      <td>高斯先验概率</td>
+    </tr>
+    <tr>
+      <td>MAP</td>
+      <td>极大后验估计</td>
+    </tr>
+    <tr>
+      <td>maximum likelihood estimation</td>
+      <td>极大似然估计</td>
+    </tr>
+    <tr>
+      <td>activation function</td>
+      <td>激活函数</td>
+    </tr>
+    <tr>
+      <td>tanh function</td>
+      <td>双曲正切函数</td>
+    </tr>
+    <tr>
+      <td>non-convex function</td>
+      <td>非凸函数</td>
+    </tr>
+    <tr>
+      <td>hidden (layer) units</td>
+      <td>隐藏层单元</td>
+    </tr>
+    <tr>
+      <td>symmetry breaking</td>
+      <td>对称失效</td>
+    </tr>
+    <tr>
+      <td>learning rate</td>
+      <td>学习速率</td>
+    </tr>
+    <tr>
+      <td>forward pass</td>
+      <td>前向传导</td>
+    </tr>
+    <tr>
+      <td>hypothesis</td>
+      <td>假设值</td>
+    </tr>
+    <tr>
+      <td>error term</td>
+      <td>残差</td>
+    </tr>
+    <tr>
+      <td>weighted average</td>
+      <td>加权平均值</td>
+    </tr>
+    <tr>
+      <td>feedforward pass</td>
+      <td>前馈传导</td>
+    </tr>
+    <tr>
+      <td>Hadamard product</td>
+      <td>阿达马乘积</td>
+    </tr>
+    <tr>
+      <td>forward propagation</td>
+      <td>前向传播</td>
+    </tr>
+    <tr>
+      <td>vectorization</td>
+      <td>矢量化</td>
+    </tr>
+    <tr>
+      <td>intercept term</td>
+      <td>截距</td>
+    </tr>
+    <tr>
+      <td>the log likelihood</td>
+      <td>对数似然函数</td>
+    </tr>
+    <tr>
+      <td>derivative</td>
+      <td>导函数</td>
+    </tr>
+    <tr>
+      <td>trivial answer</td>
+      <td>平凡解</td>
+    </tr>
+    <tr>
+      <td>norm constrained</td>
+      <td>范数约束</td>
+    </tr>
+    <tr>
+      <td>sparse autoencoder</td>
+      <td>稀疏自编码器</td>
+    </tr>
+    <tr>
+      <td>norm bounded</td>
+      <td>有界范数</td>
+    </tr>
+    <tr>
+      <td>numerical roundoff errors</td>
+      <td>数值舍入误差</td>
+    </tr>
+    <tr>
+      <td>significant digits</td>
+      <td>有效数字</td>
+    </tr>
+    <tr>
+      <td>unrolling</td>
+      <td>组合扩展</td>
+    </tr>
+    <tr>
+      <td>conjugate gradient</td>
+      <td>共轭梯度</td>
+    </tr>
+    <tr>
+      <td>step-size</td>
+      <td>步长值</td>
+    </tr>
+    <tr>
+      <td>hyperbolic tangent</td>
+      <td>双曲正切函数</td>
+    </tr>
+    <tr>
+      <td>normalization</td>
+      <td>归一化</td>
+    </tr>
+    <tr>
+      <td>eigenvector</td>
+      <td>特征向量</td>
+    </tr>
+    <tr>
+      <td>eigenvalue</td>
+      <td>特征值</td>
+    </tr>
+    <tr>
+      <td>magnitude</td>
+      <td>幅值</td>
+    </tr>
+    <tr>
+      <td>decorrelation</td>
+      <td>去相关</td>
+    </tr>
+    <tr>
+      <td>zero-mean</td>
+      <td>均值为零</td>
+    </tr>
+    <tr>
+      <td>symmetric positive semi-definite matrix</td>
+      <td>对称半正定矩阵</td>
+    </tr>
+    <tr>
+      <td>numerically reliable</td>
+      <td>数值计算上稳定</td>
+    </tr>
+    <tr>
+      <td>sorted in decreasing order</td>
+      <td>降序排列</td>
+    </tr>
+    <tr>
+      <td>singular value</td>
+      <td>奇异值</td>
+    </tr>
+    <tr>
+      <td>singular vector</td>
+      <td>奇异向量</td>
+    </tr>
+    <tr>
+      <td>vectorized implementation</td>
+      <td>向量化实现</td>
+    </tr>
+    <tr>
+      <td>diagonal</td>
+      <td>对角线</td>
+    </tr>
+    <tr>
+      <td>class labels</td>
+      <td>类型标记</td>
+    </tr>
+    <tr>
+      <td>hypothesis</td>
+      <td>估值函数/估计值</td>
+    </tr>
+    <tr>
+      <td>fine-tune</td>
+      <td>微调</td>
+    </tr>
+    <tr>
+      <td>pre-training</td>
+      <td>预训练</td>
+    </tr>
+    <tr>
+      <td>represent compactly</td>
+      <td>简洁地表达</td>
+    </tr>
+    <tr>
+      <td>part-whole decompositions</td>
+      <td>“部分-整体”的分解</td>
+    </tr>
+    <tr>
+      <td>parts of objects</td>
+      <td>目标的部件</td>
+    </tr>
+    <tr>
+      <td>highly non-convex optimization problem</td>
+      <td>高度非凸的优化问题</td>
+    </tr>
+    <tr>
+      <td>conjugate gradient</td>
+      <td>共轭梯度</td>
+    </tr>
+    <tr>
+      <td>diffusion of gradients</td>
+      <td>梯度的弥散</td>
+    </tr>
+    <tr>
+      <td>Greedy layer-wise training</td>
+      <td>逐层贪婪训练方法</td>
+    </tr>
+    <tr>
+      <td>Hierarchical grouping</td>
+      <td>层次型分组</td>
+    </tr>
+    <tr>
+      <td>Higher-order features</td>
+      <td>更高阶特征</td>
+    </tr>
+    <tr>
+      <td>Stacked autoencoder</td>
+      <td>栈式自编码神经网络\多层自动编码机\多层自动编码神经网络</td>
+    </tr>
+    <tr>
+      <td>DC component</td>
+      <td>直流分量</td>
+    </tr>
+    <tr>
+      <td>local mean subtraction</td>
+      <td>局部均值消减</td>
+    </tr>
+    <tr>
+      <td>rescaling</td>
+      <td>缩放</td>
+    </tr>
+    <tr>
+      <td>per-example mean subtraction</td>
+      <td>逐样本均值消减</td>
+    </tr>
+    <tr>
+      <td>MFCC</td>
+      <td>Mel倒频系数</td>
+    </tr>
+    <tr>
+      <td>zero-mean</td>
+      <td>零均值化</td>
+    </tr>
+    <tr>
+      <td>low-pass filtering</td>
+      <td>低通滤波</td>
+    </tr>
+    <tr>
+      <td>reconstruction based models</td>
+      <td>基于重构的模型</td>
+    </tr>
+    <tr>
+      <td>orthogonalization</td>
+      <td>正交化</td>
+    </tr>
+    <tr>
+      <td>Independent Component Analysis</td>
+      <td>独立成分分析</td>
+    </tr>
+    <tr>
+      <td>Over-complete basis</td>
+      <td>超完备基</td>
+    </tr>
+    <tr>
+      <td>Orthonormal basis</td>
+      <td>标准正交基</td>
+    </tr>
+    <tr>
+      <td>Sparsity penalty</td>
+      <td>稀疏惩罚项</td>
+    </tr>
+    <tr>
+      <td>Under-complete basis</td>
+      <td>不完备基</td>
+    </tr>
+    <tr>
+      <td>Line-search algorithm</td>
+      <td>线搜索算法</td>
+    </tr>
+    <tr>
+      <td>Topographic cost term</td>
+      <td>拓扑代价项</td>
+    </tr>
+    <tr>
+      <td>degeneracy</td>
+      <td>退化</td>
+    </tr>
+    <tr>
+      <td>generative model</td>
+      <td>生成模型</td>
+    </tr>
+    <tr>
+      <td>linear superposition</td>
+      <td>线性叠加</td>
+    </tr>
+    <tr>
+      <td>additive noise</td>
+      <td>加性噪声</td>
+    </tr>
+    <tr>
+      <td>the empirical distribution</td>
+      <td>经验分布函数</td>
+    </tr>
+    <tr>
+      <td>KL divergence</td>
+      <td>KL 散度</td>
+    </tr>
+    <tr>
+      <td>Gaussian white noise</td>
+      <td>高斯白噪音</td>
+    </tr>
+    <tr>
+      <td>the prior distribution</td>
+      <td>先验分布</td>
+    </tr>
+    <tr>
+      <td>prior probability</td>
+      <td>先验概率</td>
+    </tr>
+    <tr>
+      <td>the energy function</td>
+      <td>能量函数</td>
+    </tr>
+    <tr>
+      <td>least squares</td>
+      <td>最小二乘法</td>
+    </tr>
+    <tr>
+      <td>convex optimization software</td>
+      <td>凸优化软件</td>
+    </tr>
+    <tr>
+      <td>quadratic constraints</td>
+      <td>二次约束</td>
+    </tr>
+    <tr>
+      <td>the Lagrange dual</td>
+      <td>拉格朗日对偶函数</td>
+    </tr>
+    <tr>
+      <td>feedforward architectures</td>
+      <td>前馈结构算法</td>
+    </tr>
+    <tr>
+      <td>Full Connected Networks</td>
+      <td>全联通网络</td>
+    </tr>
+    <tr>
+      <td>Locally Connected Networks</td>
+      <td>部分联通网络</td>
+    </tr>
+    <tr>
+      <td>Contiguous Groups</td>
+      <td>连接区域</td>
+    </tr>
+    <tr>
+      <td>Visual Cortex</td>
+      <td>视觉皮层</td>
+    </tr>
+    <tr>
+      <td>over-fitting</td>
+      <td>过拟合</td>
+    </tr>
+    <tr>
+      <td>translation invariant</td>
+      <td>平移不变性</td>
+    </tr>
+    <tr>
+      <td>object detection</td>
+      <td>物体检测</td>
+    </tr>
+    <tr>
+      <td>linear activation function</td>
+      <td>线性激励函数</td>
+    </tr>
+    <tr>
+      <td>identity activation function</td>
+      <td>恒等激励函数</td>
+    </tr>
+    <tr>
+      <td>sparsity cost</td>
+      <td>稀疏代价</td>
+    </tr>
+    <tr>
+      <td>non-convex</td>
+      <td>非凸的</td>
+    </tr>
+    <tr>
+      <td>weight decay</td>
+      <td>权重衰变</td>
+    </tr>
+    <tr>
+      <td>topographic sparse coding</td>
+      <td>拓扑稀疏编码</td>
+    </tr>
+    <tr>
+      <td>topographically ordered</td>
+      <td>拓扑秩序</td>
+    </tr>
+    <tr>
+      <td>smoothed L1 penalty</td>
+      <td>平滑的一范数惩罚</td>
+    </tr>
+    <tr>
+      <td>mini-batches</td>
+      <td>迷你块</td>
+    </tr>
+    <tr>
+      <td>the rate of convergence</td>
+      <td>收敛速度</td>
+    </tr>
+    <tr>
+      <td>local optima</td>
+      <td>局部最优解</td>
+    </tr>
+    <tr>
+      <td>weight matrix</td>
+      <td>权重矩阵</td>
+    </tr>
+    <tr>
+      <td>identity activation function</td>
+      <td>单位激励函数</td>
+    </tr>
+    <tr>
+      <td>square function</td>
+      <td>平方函数</td>
+    </tr>
+  </tbody>
+</table>
 
-<p>一个核电站有N个放核物质的坑，坑排列在一条直线上。如果连续3个坑中放入核物质，则会发生爆炸，于是，在某些坑中可能不放核物质。现在，请你计算：对于给定的N，求不发生爆炸的放置核物质的方案总数。</p>
-
-<h3 id="section-1">输入数据</h3>
-
-<p>输入文件有多行，每行对应一个正整数 N &lt;= 40;</p>
-
-<h3 id="section-2">输出要求</h3>
-
-<p>输出文件有多行，每行只有一个正整数，表示方案总数。</p>
-
-<h3 id="section-3">输入样例</h3>
-
-<pre><code>1
-2
-3
-4
-10
-</code></pre>
-
-<h3 id="section-4">输出样例</h3>
-
-<pre><code>2
-4
-7
-13
-504
-</code></pre>
-
-<h2 id="x02-">0x02 解题思路</h2>
-
-<p>用动态规划。</p>
-
-<h3 id="section-5">状态转移方程：</h3>
-
-<pre><code>f[i] = 2 * f[i - 1] - f[i - 4]
-</code></pre>
-
-<h2 id="x03-">0x03 代码</h2>
-
-<pre><code>#include &lt;iostream&gt; 
-using namespace std;
-unsigned long long f[60] = { 0 };
-int main()
-{
-	int i = 2, n;
-	f[0] = f[1] = 1;
-	while (cin &gt;&gt; n)
-	{
-		if (0 != f[n + 1]) cout &lt;&lt; f[n + 1];
-		else {
-			for (; i &lt; n + 2; i++)
-			{
-				f[i] = 2 * f[i - 1] - f[i - 4];
-			}
-			cout &lt;&lt; f[n + 1] &lt;&lt; endl;
-		}
-	}
-	return 0;
-}
-</code></pre>
 </div>
       <br>
       <hr>
@@ -516,11 +945,11 @@ int main()
 		</li>
 		<li>
 			创作日期：
-			<span>2015年01月02日</span>
+			<span>2015年03月07日</span>
 		</li>
 		<li>
 			更新日期：
-			<span>2015年01月20日</span>
+			<span>2015年03月07日</span>
 		</li>
 	</ul>
 </div>

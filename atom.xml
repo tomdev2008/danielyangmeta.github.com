@@ -4,8 +4,8 @@
     <title>Surely,I am Joking</title>
     <link>https://danielyangmeta.github.com/</link>
     <description>Surely I am Joking</description>
-    <pubDate>Tue, 10 Mar 2015 09:28:14 +0800</pubDate>
-    <lastBuildDate>Tue, 10 Mar 2015 09:28:14 +0800</lastBuildDate>
+    <pubDate>Wed, 11 Mar 2015 14:43:33 +0800</pubDate>
+    <lastBuildDate>Wed, 11 Mar 2015 14:43:33 +0800</lastBuildDate>
     <atom:link href="https://danielyangmeta.github.com//feed.xml" rel="self" type="application/rss+xml"/>
 
   
@@ -63,6 +63,518 @@ $$
 
       
       <category>技术</category>
+      
+      
+    </item>
+  
+    <item>
+      <title>Linear Regression</title>
+      <description>&lt;h2 id=&quot;section&quot;&gt;单词表&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Fourier Series&lt;/td&gt;
+      &lt;td&gt;傅立叶级数&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;normal equations&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;regularization parameter&lt;/td&gt;
+      &lt;td&gt;惩罚系数&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;hession&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Backpropagation Algorithm&lt;/td&gt;
+      &lt;td&gt;反向传播算法&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;(batch) gradient descent&lt;/td&gt;
+      &lt;td&gt;（批量）梯度下降法&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;(overall) cost function&lt;/td&gt;
+      &lt;td&gt;（整体）代价函数&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;squared-error&lt;/td&gt;
+      &lt;td&gt;方差&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;average sum-of-squares error&lt;/td&gt;
+      &lt;td&gt;均方差&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;regularization term&lt;/td&gt;
+      &lt;td&gt;规则化项&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;weight decay&lt;/td&gt;
+      &lt;td&gt;权重衰减&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;bias terms&lt;/td&gt;
+      &lt;td&gt;偏置项&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bayesian regularization method&lt;/td&gt;
+      &lt;td&gt;贝叶斯规则化方法&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Gaussian prior&lt;/td&gt;
+      &lt;td&gt;高斯先验概率&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;MAP&lt;/td&gt;
+      &lt;td&gt;极大后验估计&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;maximum likelihood estimation&lt;/td&gt;
+      &lt;td&gt;极大似然估计&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;activation function&lt;/td&gt;
+      &lt;td&gt;激活函数&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;tanh function&lt;/td&gt;
+      &lt;td&gt;双曲正切函数&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;non-convex function&lt;/td&gt;
+      &lt;td&gt;非凸函数&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;hidden (layer) units&lt;/td&gt;
+      &lt;td&gt;隐藏层单元&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;symmetry breaking&lt;/td&gt;
+      &lt;td&gt;对称失效&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;learning rate&lt;/td&gt;
+      &lt;td&gt;学习速率&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;forward pass&lt;/td&gt;
+      &lt;td&gt;前向传导&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;hypothesis&lt;/td&gt;
+      &lt;td&gt;假设值&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;error term&lt;/td&gt;
+      &lt;td&gt;残差&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;weighted average&lt;/td&gt;
+      &lt;td&gt;加权平均值&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;feedforward pass&lt;/td&gt;
+      &lt;td&gt;前馈传导&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Hadamard product&lt;/td&gt;
+      &lt;td&gt;阿达马乘积&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;forward propagation&lt;/td&gt;
+      &lt;td&gt;前向传播&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;vectorization&lt;/td&gt;
+      &lt;td&gt;矢量化&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;intercept term&lt;/td&gt;
+      &lt;td&gt;截距&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;the log likelihood&lt;/td&gt;
+      &lt;td&gt;对数似然函数&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;derivative&lt;/td&gt;
+      &lt;td&gt;导函数&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;trivial answer&lt;/td&gt;
+      &lt;td&gt;平凡解&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;norm constrained&lt;/td&gt;
+      &lt;td&gt;范数约束&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;sparse autoencoder&lt;/td&gt;
+      &lt;td&gt;稀疏自编码器&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;norm bounded&lt;/td&gt;
+      &lt;td&gt;有界范数&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;numerical roundoff errors&lt;/td&gt;
+      &lt;td&gt;数值舍入误差&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;significant digits&lt;/td&gt;
+      &lt;td&gt;有效数字&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;unrolling&lt;/td&gt;
+      &lt;td&gt;组合扩展&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;conjugate gradient&lt;/td&gt;
+      &lt;td&gt;共轭梯度&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;step-size&lt;/td&gt;
+      &lt;td&gt;步长值&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;hyperbolic tangent&lt;/td&gt;
+      &lt;td&gt;双曲正切函数&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;normalization&lt;/td&gt;
+      &lt;td&gt;归一化&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;eigenvector&lt;/td&gt;
+      &lt;td&gt;特征向量&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;eigenvalue&lt;/td&gt;
+      &lt;td&gt;特征值&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;magnitude&lt;/td&gt;
+      &lt;td&gt;幅值&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;decorrelation&lt;/td&gt;
+      &lt;td&gt;去相关&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;zero-mean&lt;/td&gt;
+      &lt;td&gt;均值为零&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;symmetric positive semi-definite matrix&lt;/td&gt;
+      &lt;td&gt;对称半正定矩阵&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;numerically reliable&lt;/td&gt;
+      &lt;td&gt;数值计算上稳定&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;sorted in decreasing order&lt;/td&gt;
+      &lt;td&gt;降序排列&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;singular value&lt;/td&gt;
+      &lt;td&gt;奇异值&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;singular vector&lt;/td&gt;
+      &lt;td&gt;奇异向量&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;vectorized implementation&lt;/td&gt;
+      &lt;td&gt;向量化实现&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;diagonal&lt;/td&gt;
+      &lt;td&gt;对角线&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;class labels&lt;/td&gt;
+      &lt;td&gt;类型标记&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;hypothesis&lt;/td&gt;
+      &lt;td&gt;估值函数/估计值&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;fine-tune&lt;/td&gt;
+      &lt;td&gt;微调&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;pre-training&lt;/td&gt;
+      &lt;td&gt;预训练&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;represent compactly&lt;/td&gt;
+      &lt;td&gt;简洁地表达&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;part-whole decompositions&lt;/td&gt;
+      &lt;td&gt;“部分-整体”的分解&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;parts of objects&lt;/td&gt;
+      &lt;td&gt;目标的部件&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;highly non-convex optimization problem&lt;/td&gt;
+      &lt;td&gt;高度非凸的优化问题&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;conjugate gradient&lt;/td&gt;
+      &lt;td&gt;共轭梯度&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;diffusion of gradients&lt;/td&gt;
+      &lt;td&gt;梯度的弥散&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Greedy layer-wise training&lt;/td&gt;
+      &lt;td&gt;逐层贪婪训练方法&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Hierarchical grouping&lt;/td&gt;
+      &lt;td&gt;层次型分组&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Higher-order features&lt;/td&gt;
+      &lt;td&gt;更高阶特征&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Stacked autoencoder&lt;/td&gt;
+      &lt;td&gt;栈式自编码神经网络\多层自动编码机\多层自动编码神经网络&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;DC component&lt;/td&gt;
+      &lt;td&gt;直流分量&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;local mean subtraction&lt;/td&gt;
+      &lt;td&gt;局部均值消减&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;rescaling&lt;/td&gt;
+      &lt;td&gt;缩放&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;per-example mean subtraction&lt;/td&gt;
+      &lt;td&gt;逐样本均值消减&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;MFCC&lt;/td&gt;
+      &lt;td&gt;Mel倒频系数&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;zero-mean&lt;/td&gt;
+      &lt;td&gt;零均值化&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;low-pass filtering&lt;/td&gt;
+      &lt;td&gt;低通滤波&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;reconstruction based models&lt;/td&gt;
+      &lt;td&gt;基于重构的模型&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;orthogonalization&lt;/td&gt;
+      &lt;td&gt;正交化&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Independent Component Analysis&lt;/td&gt;
+      &lt;td&gt;独立成分分析&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Over-complete basis&lt;/td&gt;
+      &lt;td&gt;超完备基&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Orthonormal basis&lt;/td&gt;
+      &lt;td&gt;标准正交基&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Sparsity penalty&lt;/td&gt;
+      &lt;td&gt;稀疏惩罚项&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Under-complete basis&lt;/td&gt;
+      &lt;td&gt;不完备基&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Line-search algorithm&lt;/td&gt;
+      &lt;td&gt;线搜索算法&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Topographic cost term&lt;/td&gt;
+      &lt;td&gt;拓扑代价项&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;degeneracy&lt;/td&gt;
+      &lt;td&gt;退化&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;generative model&lt;/td&gt;
+      &lt;td&gt;生成模型&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;linear superposition&lt;/td&gt;
+      &lt;td&gt;线性叠加&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;additive noise&lt;/td&gt;
+      &lt;td&gt;加性噪声&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;the empirical distribution&lt;/td&gt;
+      &lt;td&gt;经验分布函数&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;KL divergence&lt;/td&gt;
+      &lt;td&gt;KL 散度&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Gaussian white noise&lt;/td&gt;
+      &lt;td&gt;高斯白噪音&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;the prior distribution&lt;/td&gt;
+      &lt;td&gt;先验分布&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;prior probability&lt;/td&gt;
+      &lt;td&gt;先验概率&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;the energy function&lt;/td&gt;
+      &lt;td&gt;能量函数&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;least squares&lt;/td&gt;
+      &lt;td&gt;最小二乘法&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;convex optimization software&lt;/td&gt;
+      &lt;td&gt;凸优化软件&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;quadratic constraints&lt;/td&gt;
+      &lt;td&gt;二次约束&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;the Lagrange dual&lt;/td&gt;
+      &lt;td&gt;拉格朗日对偶函数&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;feedforward architectures&lt;/td&gt;
+      &lt;td&gt;前馈结构算法&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Full Connected Networks&lt;/td&gt;
+      &lt;td&gt;全联通网络&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Locally Connected Networks&lt;/td&gt;
+      &lt;td&gt;部分联通网络&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Contiguous Groups&lt;/td&gt;
+      &lt;td&gt;连接区域&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Visual Cortex&lt;/td&gt;
+      &lt;td&gt;视觉皮层&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;over-fitting&lt;/td&gt;
+      &lt;td&gt;过拟合&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;translation invariant&lt;/td&gt;
+      &lt;td&gt;平移不变性&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;object detection&lt;/td&gt;
+      &lt;td&gt;物体检测&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;linear activation function&lt;/td&gt;
+      &lt;td&gt;线性激励函数&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;identity activation function&lt;/td&gt;
+      &lt;td&gt;恒等激励函数&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;sparsity cost&lt;/td&gt;
+      &lt;td&gt;稀疏代价&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;non-convex&lt;/td&gt;
+      &lt;td&gt;非凸的&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;weight decay&lt;/td&gt;
+      &lt;td&gt;权重衰变&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;topographic sparse coding&lt;/td&gt;
+      &lt;td&gt;拓扑稀疏编码&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;topographically ordered&lt;/td&gt;
+      &lt;td&gt;拓扑秩序&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;smoothed L1 penalty&lt;/td&gt;
+      &lt;td&gt;平滑的一范数惩罚&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;mini-batches&lt;/td&gt;
+      &lt;td&gt;迷你块&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;the rate of convergence&lt;/td&gt;
+      &lt;td&gt;收敛速度&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;local optima&lt;/td&gt;
+      &lt;td&gt;局部最优解&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;weight matrix&lt;/td&gt;
+      &lt;td&gt;权重矩阵&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;identity activation function&lt;/td&gt;
+      &lt;td&gt;单位激励函数&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;square function&lt;/td&gt;
+      &lt;td&gt;平方函数&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+</description>
+      <pubDate>Sat, 07 Mar 2015 00:00:00 +0800</pubDate>
+      <link>https://danielyangmeta.github.com//2015/linear-regression.html</link>
+      <guid isPermaLink="true">https://danielyangmeta.github.com//2015/linear-regression.html</guid>
+
+      
+      <category>UFLDL</category>
+      
+
+      
+      <category>ufldl</category>
       
       
     </item>
@@ -1031,48 +1543,47 @@ main = putStrLn &quot;Hello World &quot;
   
     <item>
       <title>如何成为一名黑客</title>
-      <description>&lt;h2 id=&quot;x00-foreword&quot;&gt;0x00 Foreword&lt;/h2&gt;
+      <description>&lt;h2 id=&quot;x00-&quot;&gt;0x00 前言&lt;/h2&gt;
 
-&lt;p&gt;Nowadays, every other college or school student wants to be a hacker. Due to media hype, the term hacker is considered both cool and criminal at the same time. Now, since my blog is basically about my journey into hacking, I receive many emails on how to become a hacker. “I’m a beginner in hacking, how should I start?” or “I want to be able to hack my friend’s Facebook account” are some of the more frequent queries. In this article I will attempt to answer these and more. I will give detailed technical instructions on how to get started as a beginner and how to evolve as you gain more knowledge and expertise in the domain. Hacking is a skill. And you must remember that if you want to learn hacking solely for the fun of hacking into your friend’s facebook account or email, things will not work out for you. You should decide to learn hacking because of your fascination for technology and your desire to be an expert in computer systems.&lt;/p&gt;
+&lt;p&gt;随着安全行业产业化，很多大学生想成为 hacker。由于媒体宣传的影响，在普通大众人心中 hacker 是一个很酷很厉害的认为，但事实上怎么样？只有经历过的人才能知道。我有幸接触过学习过 hacker 技术，个人觉得 hacker 就是使用一些 tips 获得一些他想要的，hacker 本身应该是属于测试行业的，但由于 tips 技能积累的多了，所以需要很多东西要学习，也就诞生了 hacker 这个行当。本文将介绍一些 hacker 技能，以及一些初级的方向。我更愿意称掌握 hacker 技巧的人为：高级测试程序员，而不是黑客。希望大家有幸获得这种 hack 技能后，用于测试程序，而不是给别人带来麻烦。&lt;/p&gt;
 
-&lt;p&gt;“Being a hacker is lots of fun, but it’s a kind of fun that takes lots of effort. The effort takes motivation.”&lt;/p&gt;
+&lt;h2 id=&quot;x01--hacker-&quot;&gt;0x01 了解 hacker 历史&lt;/h2&gt;
 
-&lt;p&gt;The first important step to becoming a hacker is to read this &lt;a href=&quot;http://www.catb.org/esr/faqs/hacker-howto.html&quot;&gt;article by Eric Raymond&lt;/a&gt; It has become the de-facto standard guideline for aspiring hackers.&lt;/p&gt;
+&lt;p&gt;“不知过去，不知未来”。关于 hacker 的过去有很多人说过，有人记得电子朋克时代？。计算机 hacker 历史，很长很长，他值得任何一名计算机人员去了解。此次我就不再多加讲述，如果有时间以后我可以补充。&lt;/p&gt;
 
-&lt;h2 id=&quot;x01-the-hacker-mindset&quot;&gt;0x01 The hacker mindset&lt;/h2&gt;
+&lt;h2 id=&quot;x02-hacker-&quot;&gt;0x02 hacker 思维&lt;/h2&gt;
 
 &lt;p&gt;In order to become a hacker, you must start thinking like one. We encounter all kinds of technology in our real life. Look at them from a hacker’s perspective by thinking of ways to hack them. Hacking is not only about computers. It is also about how you use logic and ingenuity to solve the problems you encounter in your day today life. Nothing is really hack-proof. Auto-rickshaw meters, electronic voting machines, electronic doors, biometric systems, cars and even a yatch have all been hacked in the past. Whenever you encounter any technology, think about how it can be exploited to perform another action. You should possess a natural curiosity for solving puzzles and taking up challenges.&lt;/p&gt;
 
-&lt;h2 id=&quot;x02-know-your-technology&quot;&gt;0x02 Know your technology&lt;/h2&gt;
+&lt;h2 id=&quot;x03-&quot;&gt;0x03 了解自己的技术技能&lt;/h2&gt;
 
-&lt;p&gt;Becoming a hacker is no easy task. It will not happen in days or weeks. It will take you many months and  even years to reach to the level where you can call yourself a hacker. The main reason for this is that being a hacker requires a lot of technical know-how. If you want to hack a computer, it only seems logical that you first know how it works, right? You should be familiar with the ins and outs of computers and know a little bit about everything in the IT domain. For this, you need to learn many things. This learning phase is when most aspiring hackers will give up.&lt;/p&gt;
+&lt;p&gt;成为一名 hacker 不是一早一夕的事。它应该是一辈子的爱好。当你遇到新的场景的时候，你需要知道你还缺少哪一块知识，知道如何去学习，所以你需要感知本人的知识状态。&lt;/p&gt;
 
-&lt;h2 id=&quot;x03-general-it-knowledge&quot;&gt;0x03 General IT knowledge:&lt;/h2&gt;
-&lt;pre&gt;&lt;code&gt;  · Learn how to install Windows and Linux. Use VirtualBox or VMware to practice this.
-  · Learn networking concepts like IP address, subnets, TCP/IP, OSI model, LAN,WAN
-  · Functions of switch, router, firewall, access point etc
-  · What is DNS, DHCP, SNMP, ARP, NAT?
-  · What is HTTP, FTP, Telnet, RDP, SSH, POP, SMTP, SSL, NetBios?
+&lt;h2 id=&quot;x04--it-&quot;&gt;0x04 必备 IT 技能&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;  · 学习如何安装 Windows、Linux、BSD 和 MAC OS
+  · 学习网络概念
+  · 了解基本网络设备
+  · 知道网络协议
+  · 自学能力
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;These bullet points are just bare minimum concepts, and you have to learn them thoroughly. For instance, you need to know how data travels through the OSI layers, and the role of each layer in the data transfer.&lt;/p&gt;
+&lt;p&gt;以上这些只是最小的技能，是理解 hack tips 的基础。通过这些点你可以去获得关于整个计算机的知识。自学能力是最重要的，因为 hack 行业还有细分，比如 Web hacker、hardware hacker、mobile hacker等。你可能需要学习 Android 设备，云计算环境，根据你的目标特性的不同。&lt;/p&gt;
 
-&lt;p&gt;I would recommend taking a networking course  such as CompTIA’s N+ certification. &lt;/p&gt;
+&lt;h2 id=&quot;x05-&quot;&gt;0x05 编程语言&lt;/h2&gt;
 
-&lt;h2 id=&quot;x04-programming--languages&quot;&gt;0x04 Programming  Languages&lt;/h2&gt;
-
-&lt;p&gt;Programming knowledge is necessary, although not mandatory to become a hacker. Some of the world’s best hackers started out as programmers. If you know programming, you will be able to dissect code and analyze it. You will be able to write your own scripts or your own hacking tools. So, which programming language should you learn then? HTML and JavaScript are languages of the internet. So make sure you learn them first. they are also incredibly easy to grasp and learn.  If your are enrolled in an undergraduate computer science degree, you will most probably be learning C,C++ and Java. These three major languages are good and you should keep learning them, but for a hacker, Python is the best language. “Why?” You ask. Because python is an extremely powerful language and it easy to learn at the same time. With Python you can achieve your results with minimal coding, and it does not need to be compiled. That means, just as you finish writing a script, you can immediately run it without having to compile it. And later on in life, if you decide to become a programmer instead of a hacker, Python can develop GUI applications also. In fact, a large part of YouTube is written in Python.&lt;/p&gt;
+&lt;p&gt;编程知识是必须的，虽然你可以通过网上的软件成为 hacker。在实际应用中你可能需要分析汇编码，高级程序代码。 You will be able to write your own scripts or your own hacking tools. So, which programming language should you learn then? HTML and JavaScript are languages of the internet. So make sure you learn them first. they are also incredibly easy to grasp and learn.  If your are enrolled in an undergraduate computer science degree, you will most probably be learning C,C++ and Java. These three major languages are good and you should keep learning them, but for a hacker, Python is the best language. “Why?” You ask. Because python is an extremely powerful language and it easy to learn at the same time. With Python you can achieve your results with minimal coding, and it does not need to be compiled. That means, just as you finish writing a script, you can immediately run it without having to compile it. And later on in life, if you decide to become a programmer instead of a hacker, Python can develop GUI applications also. In fact, a large part of YouTube is written in Python.&lt;/p&gt;
 
 &lt;p&gt;Another language you should learn is PHP. PHP is also free and open source. It is a server side scripting language, meaning, login pages and other web based forms are handled by PHP. Knowledge of ASP. NET will also be helpful. You should also know MySQL commands and syntax. This knowledge will be vital later when you perform SQL injection attacks against websites. Download XAMPP package and start practicing PHP and MySQL&lt;br /&gt;
 Another important thing to note is that most colleges will not teach you advanced programming concepts. File handling and Network socket programming are two very important concepts you should familiarize yourself with, regardless of the language.&lt;/p&gt;
 
-&lt;h2 id=&quot;x05-open-source&quot;&gt;0x05 Open Source&lt;/h2&gt;
+&lt;h2 id=&quot;x06-&quot;&gt;0x06 开源&lt;/h2&gt;
 
-&lt;p&gt;The hacker community is a big supporter of Open Source software. You should contribute to open source projects when you can. In order to improve your programming skills, you can start an open source project and work on it. Download the source code of popular open source projects and study the code. Sourceforge and Github are excellent starting points. Alternatively, start your own project and post the source code online. This will help you get recognition.&lt;/p&gt;
+&lt;p&gt;hacker 社区是支持开源软件的一个大群体。当你可以贡献开源项目的时候，你应该积极参与开源项目，不管是技术上的、还是资金上的。通过参与开源项目你可以迅速提高你的编程能力，你可以自己开始一个项目，并持续更新，或者参加一个由另一个开源爱好者主导的项目。&lt;a href=&quot;http://github.com&quot;&gt;Github&lt;/a&gt;是一个很优秀的开源平台。这个平台有很多的优秀开源项目，围绕这个平台还有很多支持平台，都很不错。&lt;/p&gt;
 
-&lt;h2 id=&quot;x06-linux&quot;&gt;0x06 Linux&lt;/h2&gt;
+&lt;h2 id=&quot;x07-linux&quot;&gt;0x07 Linux&lt;/h2&gt;
 
-&lt;p&gt;The Windows operating system may be easy and convenient for most users, but it is certainly not suited for hackers. With the exception of few windows only tools, most hacking tools run best under Linux environment. I have given a list of 10 best hacking tools here. 9 out of those 10 tools run best under Linux. You can use any Linux distribution like Ubuntu or Fedora, but BackTrack and Kali are two major Linux distros specifically designed for hackers. They come loaded with all the popular hacking tools, saving you from the trouble of downloading them yourself. If you are not comfortable with leaving windows as yet, you can use VirtualBox to install BackTrack in your system, or you can dual boot your operating systems.&lt;/p&gt;
+&lt;p&gt;MS Windows OS 可能对于大多数是用者来说是最简单的平台，但可能它并不适合所有 hacker，因为它屏蔽了太多的技术细节，你很难有成就感。MS Windows OS 上的 hacker 工具绝大多数是需要购买 license 的，但 Linux 上的工具你可以自己定制，我推荐大家使用 &lt;a href=&quot;http://kali.org&quot;&gt;Kali&lt;/a&gt;，这是一款专门为 hacker 设计的，集成了很多 hack 软件。 &lt;/p&gt;
 
 &lt;p&gt;Information Technology is a huge field. If you look at your college or university, your professors know about programming concepts and theory, the System Administrator knows about networks and systems, the website developers know web programming and designing. You, as a hacker, must know all these things and more.&lt;/p&gt;
 
