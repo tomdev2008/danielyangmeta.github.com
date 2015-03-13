@@ -4,8 +4,8 @@
     <title>Surely,I am Joking</title>
     <link>https://danielyangmeta.github.com/</link>
     <description>Surely I am Joking</description>
-    <pubDate>Wed, 11 Mar 2015 14:43:33 +0800</pubDate>
-    <lastBuildDate>Wed, 11 Mar 2015 14:43:33 +0800</lastBuildDate>
+    <pubDate>Thu, 12 Mar 2015 20:58:01 +0800</pubDate>
+    <lastBuildDate>Thu, 12 Mar 2015 20:58:01 +0800</lastBuildDate>
     <atom:link href="https://danielyangmeta.github.com//feed.xml" rel="self" type="application/rss+xml"/>
 
   
@@ -554,12 +554,12 @@ $$
       &lt;td&gt;权重矩阵&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
-      &lt;td&gt;identity activation function&lt;/td&gt;
-      &lt;td&gt;单位激励函数&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
       &lt;td&gt;square function&lt;/td&gt;
       &lt;td&gt;平方函数&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Confidence Interval&lt;/td&gt;
+      &lt;td&gt;置信区间&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
@@ -1486,7 +1486,7 @@ Terminal
     </item>
   
     <item>
-      <title>Windows 下设置 Haskell 的开发环境</title>
+      <title>Haskell 开发环境</title>
       <description>&lt;h2 id=&quot;x00-&quot;&gt;0x00 引言&lt;/h2&gt;
 
 &lt;blockquote&gt;
@@ -1822,7 +1822,7 @@ git branch --set-upstream develop origin/develop
     </item>
   
     <item>
-      <title>Windows Server 2003</title>
+      <title>Windows 2003</title>
       <description>&lt;h2 id=&quot;x00-&quot;&gt;0x00 引言&lt;/h2&gt;
 
 &lt;blockquote&gt;
@@ -2885,7 +2885,7 @@ void init()
     </item>
   
     <item>
-      <title>VMware 虚拟机访问互联网</title>
+      <title>VMware 网卡设置</title>
       <description>&lt;h2 id=&quot;x00-&quot;&gt;0x00 引言&lt;/h2&gt;
 
 &lt;blockquote&gt;

@@ -76,6 +76,7 @@ body{
   height: 100%;
   border-right: 2px solid #18bc9c;
   overflow-y: auto;
+
 }
 
 .aside2_pagetitle{
@@ -92,10 +93,7 @@ body{
   border:1px solid rgba(0,0,0,0.17);
   box-shadow:0 1px 10px rgba(170,170,170,0.8);
   background-color: #0096D6;
-  padding-left: 30px;
-  padding-right: 30px;
   text-align: center;
-
 }
 
 .aside3-title > a{
@@ -105,8 +103,8 @@ body{
 .aside3-title a:hover,.aside3-title a:focus{color:#066}
 
 .aside3-content {
-  padding-left: 0px;
-  padding-right: 0px;
+  padding-left: 3px;
+  padding-right: 3px;
   background-color: #F5F5D5;
 }
 /* 文章内容排版 */
