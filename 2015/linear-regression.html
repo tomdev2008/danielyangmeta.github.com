@@ -463,7 +463,23 @@
 	</ul>
 </div>
       
-      <div id="content"><h2 id="section">单词表</h2>
+      <div id="content"><h2 id="x01-">0x01 目标函数和其偏导数</h2>
+
+<pre><code>for i = (1 : size(X, 2))
+     temp = theta' * X(1 : size(X, 1), i);
+     temp = (temp - y(i)) ^ 2;
+     f = f + temp;
+end
+f = f / 2;
+
+for i = (1 : size(X, 2))
+    for j = (1 : size(g, 1)) 
+        g(j) = g(j) + X(j, i) * (theta' * X(1 : size(X, 1), i) - y(i));
+    end
+end
+</code></pre>
+
+<h2 id="section">单词表</h2>
 
 <table>
   <tbody>
@@ -954,6 +970,10 @@
     <tr>
       <td>Confidence Interval</td>
       <td>置信区间</td>
+    </tr>
+    <tr>
+      <td>differentiable function</td>
+      <td>可微方程</td>
     </tr>
   </tbody>
 </table>

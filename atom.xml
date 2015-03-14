@@ -4,8 +4,8 @@
     <title>Surely,I am Joking</title>
     <link>https://danielyangmeta.github.com/</link>
     <description>Surely I am Joking</description>
-    <pubDate>Fri, 13 Mar 2015 09:31:22 +0800</pubDate>
-    <lastBuildDate>Fri, 13 Mar 2015 09:31:22 +0800</lastBuildDate>
+    <pubDate>Sat, 14 Mar 2015 10:56:12 +0800</pubDate>
+    <lastBuildDate>Sat, 14 Mar 2015 10:56:12 +0800</lastBuildDate>
     <atom:link href="https://danielyangmeta.github.com//feed.xml" rel="self" type="application/rss+xml"/>
 
   
@@ -69,7 +69,23 @@ $$
   
     <item>
       <title>Linear Regression</title>
-      <description>&lt;h2 id=&quot;section&quot;&gt;单词表&lt;/h2&gt;
+      <description>&lt;h2 id=&quot;x01-&quot;&gt;0x01 目标函数和其偏导数&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;for i = (1 : size(X, 2))
+     temp = theta&#39; * X(1 : size(X, 1), i);
+     temp = (temp - y(i)) ^ 2;
+     f = f + temp;
+end
+f = f / 2;
+
+for i = (1 : size(X, 2))
+    for j = (1 : size(g, 1)) 
+        g(j) = g(j) + X(j, i) * (theta&#39; * X(1 : size(X, 1), i) - y(i));
+    end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;单词表&lt;/h2&gt;
 
 &lt;table&gt;
   &lt;tbody&gt;
@@ -560,6 +576,10 @@ $$
     &lt;tr&gt;
       &lt;td&gt;Confidence Interval&lt;/td&gt;
       &lt;td&gt;置信区间&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;differentiable function&lt;/td&gt;
+      &lt;td&gt;可微方程&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
@@ -1553,7 +1573,7 @@ main = putStrLn &quot;Hello World &quot;
 
 &lt;h2 id=&quot;x02-hacker-&quot;&gt;0x02 hacker 思维&lt;/h2&gt;
 
-&lt;p&gt;In order to become a hacker, you must start thinking like one. We encounter all kinds of technology in our real life. Look at them from a hacker’s perspective by thinking of ways to hack them. Hacking is not only about computers. It is also about how you use logic and ingenuity to solve the problems you encounter in your day today life. Nothing is really hack-proof. Auto-rickshaw meters, electronic voting machines, electronic doors, biometric systems, cars and even a yatch have all been hacked in the past. Whenever you encounter any technology, think about how it can be exploited to perform another action. You should possess a natural curiosity for solving puzzles and taking up challenges.&lt;/p&gt;
+&lt;p&gt;hacker 的思维状态是这样：在生活中不论你遇到什么，你都从一个 hacker 的视觉来思考如何才能 hack 它。作为一名 hacker 你需要对任何你能接触事物的好奇心。&lt;/p&gt;
 
 &lt;h2 id=&quot;x03-&quot;&gt;0x03 了解自己的技术技能&lt;/h2&gt;
 
@@ -1568,14 +1588,13 @@ main = putStrLn &quot;Hello World &quot;
   · 自学能力
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;以上这些只是最小的技能，是理解 hack tips 的基础。通过这些点你可以去获得关于整个计算机的知识。自学能力是最重要的，因为 hack 行业还有细分，比如 Web hacker、hardware hacker、mobile hacker等。你可能需要学习 Android 设备，云计算环境，根据你的目标特性的不同。&lt;/p&gt;
+&lt;p&gt;以上这些只是最小的技能，是理解 hack tips 的基础。通过这些点你可以去获得关于整个计算机的知识。自学能力是最重要的，因为 hack 行业还有细分，比如 Web hacker、hardware hacker、mobile hacker、逆向、电子取证等。你可能需要学习 Android 设备，云计算环境，根据你的目标特性的不同。&lt;/p&gt;
 
 &lt;h2 id=&quot;x05-&quot;&gt;0x05 编程语言&lt;/h2&gt;
 
-&lt;p&gt;编程知识是必须的，虽然你可以通过网上的软件成为 hacker。在实际应用中你可能需要分析汇编码，高级程序代码。 You will be able to write your own scripts or your own hacking tools. So, which programming language should you learn then? HTML and JavaScript are languages of the internet. So make sure you learn them first. they are also incredibly easy to grasp and learn.  If your are enrolled in an undergraduate computer science degree, you will most probably be learning C,C++ and Java. These three major languages are good and you should keep learning them, but for a hacker, Python is the best language. “Why?” You ask. Because python is an extremely powerful language and it easy to learn at the same time. With Python you can achieve your results with minimal coding, and it does not need to be compiled. That means, just as you finish writing a script, you can immediately run it without having to compile it. And later on in life, if you decide to become a programmer instead of a hacker, Python can develop GUI applications also. In fact, a large part of YouTube is written in Python.&lt;/p&gt;
+&lt;p&gt;编程知识是必须的，虽然你可以通过网上的软件成为 hacker。在实际应用中你可能需要分析汇编码，高级程序代码，这是你对相应语言的熟悉程度能决定你 hack 的速度。 一般来说你需要学习 C、Java（C#）、Python（Ruby）和Lisp(Erlang、Haskell)这四种语言，因为这是四种不同的编程语言形态，学会这些后其它的语言也就上手快了。最新的语言中 Rust 很不错，我也正准备学习它。&lt;/p&gt;
 
-&lt;p&gt;Another language you should learn is PHP. PHP is also free and open source. It is a server side scripting language, meaning, login pages and other web based forms are handled by PHP. Knowledge of ASP. NET will also be helpful. You should also know MySQL commands and syntax. This knowledge will be vital later when you perform SQL injection attacks against websites. Download XAMPP package and start practicing PHP and MySQL&lt;br /&gt;
-Another important thing to note is that most colleges will not teach you advanced programming concepts. File handling and Network socket programming are two very important concepts you should familiarize yourself with, regardless of the language.&lt;/p&gt;
+&lt;p&gt;如果你作为 Web hacker，SQL 是你必须学会的一种语言，这种声明式语言好像还不错。&lt;/p&gt;
 
 &lt;h2 id=&quot;x06-&quot;&gt;0x06 开源&lt;/h2&gt;
 
@@ -1585,19 +1604,9 @@ Another important thing to note is that most colleges will not teach you advance
 
 &lt;p&gt;MS Windows OS 可能对于大多数是用者来说是最简单的平台，但可能它并不适合所有 hacker，因为它屏蔽了太多的技术细节，你很难有成就感。MS Windows OS 上的 hacker 工具绝大多数是需要购买 license 的，但 Linux 上的工具你可以自己定制，我推荐大家使用 &lt;a href=&quot;http://kali.org&quot;&gt;Kali&lt;/a&gt;，这是一款专门为 hacker 设计的，集成了很多 hack 软件。 &lt;/p&gt;
 
-&lt;p&gt;Information Technology is a huge field. If you look at your college or university, your professors know about programming concepts and theory, the System Administrator knows about networks and systems, the website developers know web programming and designing. You, as a hacker, must know all these things and more.&lt;/p&gt;
+&lt;h2 id=&quot;x08-end&quot;&gt;0x08 End&lt;/h2&gt;
 
-&lt;p&gt;Even under the domain of hacking, there are many sub categories like web application security, network security, digital forensics, reverse engineering etc. Nobody can be good at everything. After you have adequate knowledge and experience in “general” hacking, you can choose a speciality and become an expert in it.&lt;/p&gt;
-
-&lt;p&gt;Now, let’s talk about actual hacking. Create your own virtual lab and practice hacking. Here is a guide on how to do this. Learn the top ten hacking tools thoroughly and apply them in your practice. If you have a good understanding of the theoretical concepts of hacking and other technologies, these tools will be a breeze to use. Practice web application hacking using live websites that are meant to be hacked. A good example is www.hackthissite.org. There are plenty of other such websites. Google is your best friend.&lt;/p&gt;
-
-&lt;p&gt;One good way to learn hacking is to download pdf and video resources and studying them. CBT-nuggets and other institutes’ video tutorials are available in torrents. YouTube hosts plenty of tutorials on every topic. Take a look at www.securitytube.net as well.&lt;/p&gt;
-
-&lt;p&gt;I would recommend a method that I used when I started off. Start by maintaining a journal and make a list of all the hacks you want to achieve. Example, if you are in college, your objective may be - bypassing web filtration, accessing the attendance logs etc. Work on these objectives until you achieve them. Similarly, your objective may be to get into someone’s system. Work on it consistently without giving up until you are successful. Record everything in your journal. This will help you reflect on how far you have come.&lt;/p&gt;
-
-&lt;p&gt;Keep practicing and keep learning. That is the only way to go. If you are in college, don’t waste your time partying or facebooking. Time is precious. Utilize your every waking moment. If you know people who have websites or small companies, talk to them and ask them to give you a chance at performing penetration tests(ethical hacking) for their websites and networks. This will give you real world experience. You must, however, remember to get their permission in writing. Hacking someone’s website or system without written authorization is illegal and you could very well end up in jail. Verbal authorization is not valid in a court of law. Once you are able to hack their websites, write a report and submit to them.&lt;/p&gt;
-
-&lt;p&gt;So, that is how you become a hacker! As you can see, becoming a hacker is a long process so if you are in it only for the heck of it this is not the domain for you. After all that has been said, you should remember to be ethical at all times. Ethical hacking is a risky domain if you are careless and you do not want to end up in the wrong side of law.&lt;/p&gt;
+&lt;p&gt;一个黑客的理想是成为高级测试工程师，具有发现别人发现不了的错误的能力。关于如何练习 hack、如何配置自己的环境、如何使用 hack 工具，有时间的时候另外开博吧。&lt;/p&gt;
 
 </description>
       <pubDate>Tue, 11 Nov 2014 00:00:00 +0800</pubDate>
