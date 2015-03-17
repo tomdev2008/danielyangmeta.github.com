@@ -13,11 +13,13 @@
 
   /page2/index.html
 
+  /page3/index.html
 
 
-  /2015/mathjax-and-jekyll.html
 
-  /2015/linear-regression.html
+  /2015/tech-mathjax-and-jekyll.html
+
+  /2015/ufldl-linear-regression.html
 
   /2015/tools-maven.html
 
@@ -38,6 +40,8 @@
   /2014/security-how-to-become-a-hacker.html
 
   /2014/tools-git.html
+
+  /2014/tech-data-mining-18-algrithms.html
 
   /2014/tech-setup-windows-server-2003.html
 
