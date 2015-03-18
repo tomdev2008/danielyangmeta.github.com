@@ -4,8 +4,8 @@
     <title>Surely,I am Joking</title>
     <link>https://danielyangmeta.github.com/</link>
     <description>Surely I am Joking</description>
-    <pubDate>Wed, 18 Mar 2015 10:01:00 +0800</pubDate>
-    <lastBuildDate>Wed, 18 Mar 2015 10:01:00 +0800</lastBuildDate>
+    <pubDate>Wed, 18 Mar 2015 10:06:45 +0800</pubDate>
+    <lastBuildDate>Wed, 18 Mar 2015 10:06:45 +0800</lastBuildDate>
     <atom:link href="https://danielyangmeta.github.com//feed.xml" rel="self" type="application/rss+xml"/>
 
   
@@ -95,8 +95,10 @@ f = f / 2;
     for j = (1 : size(g, 1)) 
         g(j) = g(j) + X(j, i) * (theta&#39; * X(1 : size(X, 1), i) - y(i));
     end
-end
+end ## 0x02 实验结果
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/danielyangmeta/danielyangmeta.github.com/blob/master/Gallery/2015/linear-regression.fig&quot; alt=&quot;linear regression&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;section&quot;&gt;单词表&lt;/h2&gt;
 
