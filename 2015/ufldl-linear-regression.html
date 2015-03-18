@@ -6,7 +6,7 @@
 <meta name="author" content="danielyang">
 
 
-  <meta name="description " content="线性回归有很多种">
+  <meta name="description " content="在统计学中，线性回归是利用最小二乘函数对自变量和因变量之间进行回归建模。线性回归有很多种，主要分为线性回归和非线性回归。">
 
 <link rel="shortcut icon" href="/public/img/favicon.png" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -469,7 +469,17 @@
 	</ul>
 </div>
       
-      <div id="content"><h2 id="x01-">0x01 目标函数和其偏导数</h2>
+      <div id="content"><h2 id="x00-">0x00 引言</h2>
+
+<p>在统计学中，线性回归是利用最小二乘函数对自变量和因变量之间进行回归建模。线性回归有很多种，主要分为线性回归和非线性回归。</p>
+
+<h2 id="x01-">0x01 问题的形式化定义</h2>
+
+<p>在看这篇之前，应该先去复习一下 Ng 在 <a href="coursera.org">courses</a> 上的课程。本文将讲述如何实现线性回归，大致思想是获得目标函数，计算梯度和优化参数。这三个基本步骤，基本上是很多优秀算法的基本内容。</p>
+
+<p>本文所使用的实例是对房型进行回归预测，当然这个模型是简化了的房价预测模型，而不是现实生活中的例子。</p>
+
+<p>目标函数：</p>
 
 <pre><code>for i = (1 : size(X, 2))
      temp = theta' * X(1 : size(X, 1), i);
@@ -477,8 +487,11 @@
      f = f + temp;
 end
 f = f / 2;
+</code></pre>
 
-for i = (1 : size(X, 2))
+<p>梯度：</p>
+
+<pre><code>for i = (1 : size(X, 2))
     for j = (1 : size(g, 1)) 
         g(j) = g(j) + X(j, i) * (theta' * X(1 : size(X, 1), i) - y(i));
     end
