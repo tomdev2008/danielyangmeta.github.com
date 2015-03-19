@@ -17,6 +17,10 @@
 
 
 
+  /2015/ufdl-logistic-regression.html
+
+  /2015/resources-markdown.html
+
   /2015/tech-mathjax-and-jekyll.html
 
   /2015/ufldl-linear-regression.html

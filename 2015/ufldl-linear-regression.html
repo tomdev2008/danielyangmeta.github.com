@@ -88,6 +88,8 @@
               <br>
               <div class="center aside2_pagetitle">技术</div>
               
+              <a href="/2015/ufdl-logistic-regression.html" class="list-group-item pjaxlink clearfix"><strong>></strong> Logistic Regression</a>
+              
               <a href="/2015/tech-mathjax-and-jekyll.html" class="list-group-item pjaxlink clearfix"><strong>></strong> MathJax and Jekyll</a>
               
               <a href="/2015/ufldl-linear-regression.html" class="list-group-item pjaxlink clearfix"><strong>></strong> Linear Regression</a>
@@ -125,6 +127,8 @@
             <div class="list-group">
               <br>
               <div class="center aside2_pagetitle">资源</div>
+              
+              <a href="/2015/resources-markdown.html" class="list-group-item pjaxlink clearfix"><strong>></strong> Markdown 语法</a>
               
               <a href="/2014/resources-opensoc.html" class="list-group-item pjaxlink clearfix"><strong>></strong> OpenSOC</a>
               
@@ -367,10 +371,12 @@
                 <div class="panel-heading">
                   <h4 class="panel-title">
                     <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#UFLDL"> UFLDL</a>
-                    <span class="badge pull-right">1</span>
+                    <span class="badge pull-right">2</span>
                   </h4>
                 </div>
                 <div id="UFLDL" class="panel-collapse collapse">
+                  
+                  <a  href='/2015/ufdl-logistic-regression.html' class="list-group-item pjaxlink"><strong>></strong> Logistic Regression</a>
                   
                   <a  href='/2015/ufldl-linear-regression.html' class="list-group-item pjaxlink"><strong>></strong> Linear Regression</a>
                   
@@ -381,10 +387,12 @@
                 <div class="panel-heading">
                   <h4 class="panel-title">
                     <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#Blog"> Blog</a>
-                    <span class="badge pull-right">1</span>
+                    <span class="badge pull-right">2</span>
                   </h4>
                 </div>
                 <div id="Blog" class="panel-collapse collapse">
+                  
+                  <a  href='/2015/resources-markdown.html' class="list-group-item pjaxlink"><strong>></strong> Markdown 语法</a>
                   
                   <a  href='/2015/tech-mathjax-and-jekyll.html' class="list-group-item pjaxlink"><strong>></strong> MathJax and Jekyll</a>
                   
@@ -471,7 +479,7 @@
       
       <div id="content"><h2 id="x00-">0x00 引言</h2>
 
-<p>在统计学中，线性回归是利用最小二乘函数对自变量和因变量之间进行回归建模。线性回归有很多种，主要分为线性回归和非线性回归。</p>
+<p>在统计学中，线性回归是利用最小二乘函数对自变量和因变量之间进行回归建模。线性回归有很多种，主要分为线性回归和非线性回归。在广义线性模型中，依据因变量的不同可以分为很多类，比如：如果因变量是连续的，就是多重线性回归、如果是二项分布，就是 Logistic 回归、如果是 Poisson 分布，就是 Poisson 分布等。</p>
 
 <h2 id="x01-">0x01 问题的形式化定义</h2>
 
@@ -479,7 +487,9 @@
 
 <p>本文所使用的实例是对房型进行回归预测，当然这个模型是简化了的房价预测模型，而不是现实生活中的例子。</p>
 
-<p>目标函数：</p>
+<p>损失函数：</p>
+
+<p><img src="/Gallery/2015/linear-cost-function.jpg" alt="Linear cost Function" /></p>
 
 <pre><code>for i = (1 : size(X, 2))
      temp = theta' * X(1 : size(X, 1), i);
@@ -495,12 +505,41 @@ f = f / 2;
     for j = (1 : size(g, 1)) 
         g(j) = g(j) + X(j, i) * (theta' * X(1 : size(X, 1), i) - y(i));
     end
-end ## 0x02 实验结果
+end
 </code></pre>
+
+<p>向量化实现能充分利用计算优势，所以在 R 和 Matlab 中都不提倡用 for 来计算矩阵。</p>
+
+<pre><code>g = X * ((theta' * X) - y)';
+
+temptheta = repmat(theta, 1, size(theta, 1));
+tempy = repmat(y, size(theta, 1), 1);
+epsilon = 10 ^ -4;
+threshold = 10 ^ -3;
+epsilonm = epsilon * eye(size(theta, 1));
+theta1 = temptheta + epsilonm;
+theta2 = temptheta - epsilonm;
+f1 = (theta1' * X - tempy) .^ 2;
+f1 = 0.5 * sum(f1, 2);
+f2 = (theta2' * X - tempy) .^ 2;
+f2 = 0.5 * sum(f2, 2);
+tempg = (f1 - f2) ./ (2 * epsilon);
+g;
+tempg = abs((tempg - g) ./ g);
+if any(tempg &gt; threshold)
+    fprintf('\n\n\ngradient is not correct.............................................................\n\n\n')
+end
+</code></pre>
+
+<h2 id="x02-">0x02 实验结果</h2>
 
 <p><img src="/Gallery/2015/linear-regression.jpg" alt="linear regression" /></p>
 
-<h2 id="section">单词表</h2>
+<h2 id="x03-">0x03 参考文献</h2>
+
+<p>1.<a href="http://cs229.stanford.edu/notes/cs229-notes1.pdf">Lecture Note</a></p>
+
+<h2 id="x04-">0x04 单词表</h2>
 
 <table>
   <tbody>

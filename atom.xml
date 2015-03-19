@@ -4,10 +4,474 @@
     <title>Surely,I am Joking</title>
     <link>https://danielyangmeta.github.com/</link>
     <description>Surely I am Joking</description>
-    <pubDate>Wed, 18 Mar 2015 10:14:47 +0800</pubDate>
-    <lastBuildDate>Wed, 18 Mar 2015 10:14:47 +0800</lastBuildDate>
+    <pubDate>Thu, 19 Mar 2015 14:53:54 +0800</pubDate>
+    <lastBuildDate>Thu, 19 Mar 2015 14:53:54 +0800</lastBuildDate>
     <atom:link href="https://danielyangmeta.github.com//feed.xml" rel="self" type="application/rss+xml"/>
 
+  
+    <item>
+      <title>Logistic Regression</title>
+      <description>&lt;h2 id=&quot;x00-&quot;&gt;0x00 引言&lt;/h2&gt;
+
+&lt;p&gt;Logistic 回归是一种输出预测概率的回归分析，可以用于回归也可用于分类。&lt;/p&gt;
+
+&lt;h2 id=&quot;x01-logistic-&quot;&gt;0x01 Logistic 回归&lt;/h2&gt;
+
+&lt;p&gt;Linear 回归是用于预测连续值得，有些时候我没需要预测一下离散值得因变量，这个时候就可以用 Logistic 回归。Loginstic 函数（Sigmoid 函数）是一种 S 形函数。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Gallery/2015/logistic-function.jpg&quot; alt=&quot;logistic function&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;logistic 的损失函数如下：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Gallery/2015/logistic-cost-function.jpg&quot; alt=&quot;logistic cost function&quot; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;for i = (1 : size(X, 2))
+    hthetax = 1 / (1 + exp(-1 * theta&#39; * X(1 : size(X, 1), i)));
+    f = f + y(i) * log(hthetax) + (1 - y(i)) * log(1 - hthetax);
+end
+f = -1 * f;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Gallery/2015/logistic-min-cost-function.jpg&quot; alt=&quot;logistic cost function&quot; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;for i = (1 : size(X, 2))
+    for j = (1 : size(g, 1))
+        g(j) = g(j) + X(j, i) * (hthetax - y(i));
+    end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;向量化实现能充分利用计算优势，所以在 R 和 Matlab 中都不提倡用 for 来计算矩阵。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;temp = theta&#39; * X;
+hthetax = 1 ./ (1 + exp(-1 * temp));
+size(hthetax)
+size(y)
+temp = y * log(hthetax)&#39; + (1 - y) * log(1 - hthetax)&#39;;
+f = -1 * sum(temp(:));
+
+temp = hthetax - y;
+g = X * temp&#39;;
+
+size(g)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x02-&quot;&gt;0x02 实验结果&lt;/h2&gt;
+
+&lt;p&gt;这个实验做的就是大名鼎鼎的手写数字识别。&lt;/p&gt;
+
+&lt;p&gt;Optimization took 31.642443 seconds.&lt;br /&gt;
+Training accuracy: 99.3%&lt;br /&gt;
+Test accuracy: 99.5%&lt;/p&gt;
+
+&lt;h2 id=&quot;x03-&quot;&gt;0x03 参考文献&lt;/h2&gt;
+
+&lt;p&gt;1.&lt;a href=&quot;http://blog.csdn.net/pakko/article/details/37878837&quot;&gt;逻辑回归&lt;/a&gt;&lt;br /&gt;
+1.&lt;a href=&quot;http://cs229.stanford.edu/notes/cs229-notes1.pdf&quot;&gt;CS229 Notes&lt;/a&gt;&lt;/p&gt;
+
+</description>
+      <pubDate>Wed, 18 Mar 2015 00:00:00 +0800</pubDate>
+      <link>https://danielyangmeta.github.com//2015/ufdl-logistic-regression.html</link>
+      <guid isPermaLink="true">https://danielyangmeta.github.com//2015/ufdl-logistic-regression.html</guid>
+
+      
+      <category>UFLDL</category>
+      
+
+      
+      <category>技术</category>
+      
+      
+    </item>
+  
+    <item>
+      <title>Markdown 语法</title>
+      <description>&lt;h2 id=&quot;x00-&quot;&gt;0x00 引言&lt;/h2&gt;
+
+&lt;p&gt;Markdown 是 HTML 的父集，所以任何 HTML 文件都是有效的 Markdown。这意味着我们可以在 Markdown 里使用任何 HTML 元素，比如注释元素，且不会被 Markdown 解析器所影响。在不同的解析器中，Markdown 的实现方法有所不同。此教程会指出当某功能是否通用及是否只对某一解析器有效。比如，如果你想了解 Github 的解析器语法，可以产科&lt;a href=&quot;https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet&quot;&gt;这里&lt;/a&gt;。&lt;/p&gt;
+
+&lt;h2 id=&quot;x01-&quot;&gt;0x01 标头&lt;/h2&gt;
+
+&lt;h1 id=&quot;h1&quot;&gt;这是一个 &amp;lt;h1&amp;gt;&lt;/h1&gt;
+
+&lt;h2 id=&quot;h2&quot;&gt;这是一个 &amp;lt;h2&amp;gt;&lt;/h2&gt;
+
+&lt;h3 id=&quot;h3&quot;&gt;这是一个 &amp;lt;h3&amp;gt;&lt;/h3&gt;
+
+&lt;h4 id=&quot;h4&quot;&gt;这是一个 &amp;lt;h4&amp;gt;&lt;/h4&gt;
+
+&lt;h5 id=&quot;h5&quot;&gt;这是一个 &amp;lt;h5&amp;gt;&lt;/h5&gt;
+
+&lt;h6 id=&quot;h6&quot;&gt;这是一个 &amp;lt;h6&amp;gt;&lt;/h6&gt;
+
+&lt;h1 id=&quot;h1-1&quot;&gt;这是一个 h1&lt;/h1&gt;
+
+&lt;h2 id=&quot;h2-1&quot;&gt;这是一个 h2&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;# 这是一个 &amp;lt;h1&amp;gt;
+## 这是一个 &amp;lt;h2&amp;gt;
+### 这是一个 &amp;lt;h3&amp;gt;
+#### 这是一个 &amp;lt;h4&amp;gt;
+##### 这是一个 &amp;lt;h5&amp;gt;
+###### 这是一个 &amp;lt;h6&amp;gt;
+
+对于 &amp;lt;h1&amp;gt; 和 &amp;lt;h2&amp;gt; 元素，Markdown 额外提供了两种添加方式。
+
+这是一个 h1
+=============
+
+这是一个 h2
+-------------
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x02-&quot;&gt;0x02 简易文本样式&lt;/h2&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;文本的斜体，粗体，和删除线&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;此文本为斜体。&lt;/em&gt;&lt;br /&gt;
+&lt;em&gt;此文本也是。&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;此文本为粗体。&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;此文本也是&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;此文本是斜体加粗体。&lt;/em&gt;&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;&lt;em&gt;或者这样。&lt;/em&gt;&lt;/strong&gt;&lt;br /&gt;
+&lt;em&gt;&lt;strong&gt;这个也是！&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;*此文本为斜体。*
+_此文本也是。_
+
+**此文本为粗体。**
+__此文本也是__
+
+***此文本是斜体加粗体。***
+**_或者这样。_**
+*__这个也是！__*
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;段落&lt;/h3&gt;
+
+&lt;p&gt;单个段落由一句或多句邻近的句子组成，这些句子由一个或多个空格分隔。&lt;/p&gt;
+
+&lt;p&gt;这是第一段落. 这句话在同一个段落里，好玩么？&lt;/p&gt;
+
+&lt;p&gt;现在我是第二段落。&lt;br /&gt;
+这句话也在第二段落！&lt;/p&gt;
+
+&lt;p&gt;这句话在第三段落！&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;这是第一段落. 这句话在同一个段落里，好玩么？
+
+现在我是第二段落。
+这句话也在第二段落！
+
+这句话在第三段落！
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;!-- 段落引用可由 &gt; 字符轻松实现。--&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;这是一个段落引用. 你可以&lt;br /&gt;
+手动断开你的句子，然后在每句句子前面添加 “&amp;gt;” 字符。或者让你的句子变得很长，以至于他们自动得断开。&lt;br /&gt;
+只要你的文字以“&amp;gt;” 字符开头，两种方式无异。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; 这是一个段落引用. 你可以
+&amp;gt; 手动断开你的句子，然后在每句句子前面添加 “&amp;gt;” 字符。或者让你的句子变得很长，以至于他们自动得断开。
+&amp;gt; 只要你的文字以“&amp;gt;” 字符开头，两种方式无异。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x03-&quot;&gt;0x03 序列&lt;/h2&gt;
+
+&lt;!-- 无序序列可由星号，加号或者减号来建立 --&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;项目&lt;/li&gt;
+  &lt;li&gt;项目&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;另一个项目&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;  * 项目
+  * 项目
+  * 另一个项目
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;或者&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;项目&lt;/li&gt;
+  &lt;li&gt;项目&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;另一个项目&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;  + 项目
+  + 项目
+  + 另一个项目
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;或者 &lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;项目&lt;/li&gt;
+  &lt;li&gt;项目&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;最后一个项目&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;  - 项目
+  - 项目
+  - 最后一个项目
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- 有序序列可由数字加点来实现 --&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;项目一&lt;/li&gt;
+  &lt;li&gt;项目二&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;项目三&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; 1. 项目一
+ 2. 项目二
+ 3. 项目三
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;!-- 即使你的标签数字有误，Markdown 依旧会呈现出正确的序号，
+不过这并不是一个好主意--&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;项目一&lt;/li&gt;
+  &lt;li&gt;项目二&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;项目三&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; 1. 项目一
+ 1. 项目二
+ 1. 项目三
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;!-- 你也可以使用子序列 --&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;项目一&lt;/li&gt;
+  &lt;li&gt;项目二&lt;/li&gt;
+  &lt;li&gt;项目三
+    &lt;ul&gt;
+      &lt;li&gt;子项目&lt;/li&gt;
+      &lt;li&gt;子项目&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;项目四&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt; 1. 项目一
+ 2. 项目二
+ 3. 项目三
+     * 子项目
+     * 子项目
+ 4. 项目四
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;x04-&quot;&gt;0x04 代码段落&lt;/h2&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;代码段落&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;This is code
+So is this
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;!-- 在你的代码中，你仍然使用tab可以进行缩进操作 --&gt;
+
+&lt;pre&gt;&lt;code&gt;my_array.each do |item|
+    puts item
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;内联代码可由反引号 ` 实现&lt;/h3&gt;
+
+&lt;p&gt;John 甚至不知道 &lt;code&gt;go_to()&lt;/code&gt; 方程是干嘛的!&lt;/p&gt;
+
+&lt;h3 id=&quot;x05-&quot;&gt;0x05 水平线&lt;/h3&gt;
+
+&lt;p&gt;水平线可由三个或以上的星号或者减号创建，可带可不带空格。&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;hr /&gt;
+&lt;hr /&gt;
+&lt;hr /&gt;
+
+&lt;pre&gt;&lt;code&gt;***
+---
+- - - 
+****************
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x06-&quot;&gt;0x06 链接&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://test.com/&quot;&gt;点我点我!&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[点我点我!](http://test.com/)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;!-- 你也可以为链接加入一个标题：在括弧内使用引号 --&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://test.com/&quot; title=&quot;连接到Test.com&quot;&gt;点我点我!&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[点我点我!](http://test.com/ &quot;连接到Test.com&quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;!-- 相对路径也可以有 --&gt;
+
+&lt;p&gt;&lt;a href=&quot;/music/&quot;&gt;去 music&lt;/a&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[去 music](/music/).
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;!-- Markdown同样支持引用样式的链接 --&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://test.com/&quot; title=&quot;Cool!&quot;&gt;点此链接&lt;/a&gt;以获取更多信息！&lt;br /&gt;
+&lt;a href=&quot;http://foobar.biz/&quot; title=&quot;Alright!&quot;&gt;看一看这个链接&lt;/a&gt; 如果你愿意的话.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[点此链接][link1]以获取更多信息！
+[看一看这个链接][foobar] 如果你愿意的话.
+
+[link1]: http://test.com/ &quot;Cool!&quot;
+[foobar]: http://foobar.biz/ &quot;Alright!&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;链接的标题可以处于单引号中，括弧中或是被忽略。引用名可以在文档的任意何处，并且可以随意命名，只要名称不重复。&lt;/p&gt;
+
+&lt;h2 id=&quot;x07-&quot;&gt;0x07 图像&lt;/h2&gt;
+
+&lt;p&gt;图像与链接相似，只需在前添加一个感叹号。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://imgur.com/myimage.jpg&quot; alt=&quot;这是我图像的悬停文本(alt text)&quot; title=&quot;可选命名&quot; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;![这是我图像的悬停文本(alt text)](http://imgur.com/myimage.jpg &quot;可选命名&quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;!-- 引用样式也同样起作用 --&gt;
+
+&lt;p&gt;![这是我的悬停文本.][myimage]&lt;br /&gt;
+[myimage]: relative/urls/cool/image.jpg “在此输入标题”&lt;/p&gt;
+
+&lt;p&gt;![这是我的悬停文本.][myimage]&lt;br /&gt;
+[myimage]: relative/urls/cool/image.jpg “在此输入标题”&lt;/p&gt;
+
+&lt;h2 id=&quot;x08-&quot;&gt;0x08 杂项&lt;/h2&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;自动链接&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://testwebsite.com/&quot;&gt;http://testwebsite.com/&lt;/a&gt; 与&lt;br /&gt;
+&lt;a href=&quot;http://testwebsite.com/&quot;&gt;http://testwebsite.com/&lt;/a&gt; 等同&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;http://testwebsite.com/&amp;gt; 与 [http://testwebsite.com/](http://testwebsite.com/) 等同
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-5&quot;&gt;电子邮件的自动链接&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;&amp;#109;&amp;#097;&amp;#105;&amp;#108;&amp;#116;&amp;#111;:&amp;#102;&amp;#111;&amp;#111;&amp;#064;&amp;#098;&amp;#097;&amp;#114;&amp;#046;&amp;#099;&amp;#111;&amp;#109;&quot;&gt;&amp;#102;&amp;#111;&amp;#111;&amp;#064;&amp;#098;&amp;#097;&amp;#114;&amp;#046;&amp;#099;&amp;#111;&amp;#109;&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;foo@bar.com&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-6&quot;&gt;转义字符&lt;/h3&gt;
+
+&lt;p&gt;我希望 &lt;em&gt;将这段文字置于星号之间&lt;/em&gt; 但是我不希望它被斜体化, 所以我就: *这段置文字于星号之间*。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;我希望 *将这段文字置于星号之间* 但是我不希望它被斜体化, 所以我就: \*这段置文字于星号之间\*。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x09-&quot;&gt;0x09 表格&lt;/h2&gt;
+
+&lt;p&gt;表格只被 Github 的 Markdown 支持，并且有一点笨重，但如果你真的要用的话。&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;第一列&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;第二列&lt;/th&gt;
+      &lt;th style=&quot;text-align: right&quot;&gt;第三列&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;左对齐&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;居个中&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;右对齐&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;某某某&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;某某某&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;某某某&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;pre&gt;&lt;code&gt;| 第一列        | 第二列    | 第三列       |
+| :----------   | :------:  | ----------:  |
+| 左对齐        | 居个中    | 右对齐       |
+| 某某某        | 某某某    | 某某某       |
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;!-- 或者, 同样的 --&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;第一列&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;第二列&lt;/th&gt;
+      &lt;th style=&quot;text-align: right&quot;&gt;第三列&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;这太丑了&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;药不能&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;停&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;pre&gt;&lt;code&gt;第一列 | 第二列 | 第三列
+:-- | :-: | --:
+这太丑了 | 药不能 | 停
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x10-&quot;&gt;0x10 注释&lt;/h2&gt;
+
+&lt;!-- 如果你插入一个 HTML中的&lt;br /&gt;标签，你可以在段末加入两个以上的空格，
+然后另起一段。--&gt;
+
+&lt;!-- 注释。--&gt;
+
+&lt;h2 id=&quot;x11-&quot;&gt;0x11 参考文献&lt;/h2&gt;
+
+</description>
+      <pubDate>Wed, 18 Mar 2015 00:00:00 +0800</pubDate>
+      <link>https://danielyangmeta.github.com//2015/resources-markdown.html</link>
+      <guid isPermaLink="true">https://danielyangmeta.github.com//2015/resources-markdown.html</guid>
+
+      
+      <category>Blog</category>
+      
+
+      
+      <category>资源</category>
+      
+      
+    </item>
   
     <item>
       <title>MathJax and Jekyll</title>
@@ -71,7 +535,7 @@ $$
       <title>Linear Regression</title>
       <description>&lt;h2 id=&quot;x00-&quot;&gt;0x00 引言&lt;/h2&gt;
 
-&lt;p&gt;在统计学中，线性回归是利用最小二乘函数对自变量和因变量之间进行回归建模。线性回归有很多种，主要分为线性回归和非线性回归。&lt;/p&gt;
+&lt;p&gt;在统计学中，线性回归是利用最小二乘函数对自变量和因变量之间进行回归建模。线性回归有很多种，主要分为线性回归和非线性回归。在广义线性模型中，依据因变量的不同可以分为很多类，比如：如果因变量是连续的，就是多重线性回归、如果是二项分布，就是 Logistic 回归、如果是 Poisson 分布，就是 Poisson 分布等。&lt;/p&gt;
 
 &lt;h2 id=&quot;x01-&quot;&gt;0x01 问题的形式化定义&lt;/h2&gt;
 
@@ -79,7 +543,9 @@ $$
 
 &lt;p&gt;本文所使用的实例是对房型进行回归预测，当然这个模型是简化了的房价预测模型，而不是现实生活中的例子。&lt;/p&gt;
 
-&lt;p&gt;目标函数：&lt;/p&gt;
+&lt;p&gt;损失函数：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Gallery/2015/linear-cost-function.jpg&quot; alt=&quot;Linear cost Function&quot; /&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;for i = (1 : size(X, 2))
      temp = theta&#39; * X(1 : size(X, 1), i);
@@ -95,12 +561,41 @@ f = f / 2;
     for j = (1 : size(g, 1)) 
         g(j) = g(j) + X(j, i) * (theta&#39; * X(1 : size(X, 1), i) - y(i));
     end
-end ## 0x02 实验结果
+end
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;向量化实现能充分利用计算优势，所以在 R 和 Matlab 中都不提倡用 for 来计算矩阵。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;g = X * ((theta&#39; * X) - y)&#39;;
+
+temptheta = repmat(theta, 1, size(theta, 1));
+tempy = repmat(y, size(theta, 1), 1);
+epsilon = 10 ^ -4;
+threshold = 10 ^ -3;
+epsilonm = epsilon * eye(size(theta, 1));
+theta1 = temptheta + epsilonm;
+theta2 = temptheta - epsilonm;
+f1 = (theta1&#39; * X - tempy) .^ 2;
+f1 = 0.5 * sum(f1, 2);
+f2 = (theta2&#39; * X - tempy) .^ 2;
+f2 = 0.5 * sum(f2, 2);
+tempg = (f1 - f2) ./ (2 * epsilon);
+g;
+tempg = abs((tempg - g) ./ g);
+if any(tempg &amp;gt; threshold)
+    fprintf(&#39;\n\n\ngradient is not correct.............................................................\n\n\n&#39;)
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;x02-&quot;&gt;0x02 实验结果&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&quot;/Gallery/2015/linear-regression.jpg&quot; alt=&quot;linear regression&quot; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;section&quot;&gt;单词表&lt;/h2&gt;
+&lt;h2 id=&quot;x03-&quot;&gt;0x03 参考文献&lt;/h2&gt;
+
+&lt;p&gt;1.&lt;a href=&quot;http://cs229.stanford.edu/notes/cs229-notes1.pdf&quot;&gt;Lecture Note&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;x04-&quot;&gt;0x04 单词表&lt;/h2&gt;
 
 &lt;table&gt;
   &lt;tbody&gt;
@@ -2732,336 +3227,6 @@ ls Desktop 能显示Desktop文件下有什么文件
 
       
       <category>资源</category>
-      
-      
-    </item>
-  
-    <item>
-      <title>MySQL</title>
-      <description>&lt;h2 id=&quot;x00-&quot;&gt;0x00 引言&lt;/h2&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;本来最好的学习方案是：小时候对数学和计算机的基本概念要有所了解。学习的时候不能人浮于事，而是要多学习基础课程（多读基础教程）。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;x01-&quot;&gt;0x01 设置支持中文&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;ps -aux|grep mysql              #检查Mysql服务器系统进程
-netstat -nlt|grep 3306          #检查mysql服务器占用的端口
-sudo /etc/init.d/mysql status   #通过启动命令检查mysql服务器状态
-service mysql status            #通过系统服务命令检查mysql服务器状态
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;修改mysql服务器的配置&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;sudo vi /etc/mysql/my.cnf  #将字符编码设置为UTF-8
-
-[client]
-default-character-set = utf8
-[mysqld]
-character-set-server=utf8
-collation-server=utf8_general_ci
-
-sudo vi /etc/mysql/my.cnf  然mysql服务器能被运程访问
-
-#bind-address =127.0.0.1
-sudo /etc/init.d/mysql restart
-show variables like &#39;%char%&#39;;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;x02-&quot;&gt;0x02 新建用户&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;grant all on databasename.* to new_user@&#39;%&#39; identified by &#39;password&#39;
-grant all on databasename.* to new_user@localhost identified by &#39;password&#39;
-mysql -u new_user -p -h 192.168.2.21
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;添加一个远程用户，名为username密码为password&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;GRANT ALL PRIVILEGES ON *.* TO username@&quot;%&quot; IDENTIFIED BY &#39;password&#39;
-CREATE USER &#39;username&#39;@&#39;host&#39; IDENTIFIED BY &#39;password&#39;; 
-SET PASSWORD FOR &#39;username&#39;@&#39;host&#39; = PASSWORD
-(&#39;newpassword&#39;);如果是当前登陆用户用SET PASSWORD = PASSWORD(&quot;newpassword&quot;); 
-DROP USER &#39;username&#39;@&#39;host&#39;;           #删除用户
-REVOKE SELECT ON *.* FROM &#39;pig&#39;@&#39;%&#39;;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;x03-&quot;&gt;0x03 如何创建视图&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;CREATE or REPLACE view view_will as select college.collegeid,mat.stuid,sum(score.chinese+score.math+score.english+score.complex) from college,mat,score where college.collegeid=mat.first_will and mat.stuid=score.stuid group by SCORE.STUID,COLLEGE.COLLEGEID,MAT.STUID having sum(score.chinese+score.math+score.english+score.complex)&amp;gt;500
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;x04-mysql-&quot;&gt;0x04 MySQL 常用命令&lt;/h2&gt;
-
-&lt;p&gt;0:安装和登录&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;sudo apt-get install mysql-server 
-use root
-pad root
-mysql -u root 
-mysql -u root -p
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;1:使用SHOW语句找出在服务器上当前存在什么数据库：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;mysql&amp;gt; SHOW DATABASES;                            
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;2、创建一个数据库MYSQLDATA&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;mysql&amp;gt; CREATE DATABASE MYSQLDATA;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;3:选择你所创建的数据库&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;mysql&amp;gt; USE MYSQLDATA; (按回车键出现Database changed 时说明操作成功！)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;4:查看现在的数据库中存在什么表&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;mysql&amp;gt; SHOW TABLES;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;5:创建一个数据库表&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;mysql&amp;gt; CREATE TABLE MYTABLE (name VARCHAR(20), sex CHAR(1));
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;6:显示表的结构：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;mysql&amp;gt; DESCRIBE MYTABLE;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;7:往表中加入记录&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;mysql&amp;gt; insert into MYTABLE values (”hyq”,”M”);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;8:用文本方式将数据装入数据库表中（例如D:/mysql.txt）&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;mysql&amp;gt; LOAD DATA LOCAL INFILE “D:/mysql.txt” INTO TABLE MYTABLE;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;9:导入.sql文件命令（例如D:/mysql.sql）&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;mysql&amp;gt;use database;
-mysql&amp;gt;source d:/mysql.sql;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;10:删除表&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;mysql&amp;gt;drop TABLE MYTABLE;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;11:清空表&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;mysql&amp;gt;delete from MYTABLE;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;12:更新表中数据&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;mysql&amp;gt;update MYTABLE set sex=”f” where name=’hyq’;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;以下是无意中在网络看到的使用MySql的管理心得,&lt;/p&gt;
-
-&lt;p&gt;在windows中MySql以服务形式存在，在使用前应确保此服务已经启动，未启动可用net start mysql命令启动。而Linux中启动时可用“/etc/rc.d/init.d/mysqld start”命令，注意启动者应具有管理员权限。&lt;/p&gt;
-
-&lt;p&gt;刚安装好的MySql包含一个含空密码的root帐户和一个匿名帐户，这是很大的安全隐患，对于一些重要的应用我们应将安全性尽可能提高，在这里应把匿名帐户删除、 root帐户设置密码，可用如下命令进行：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;use mysql;
-delete from User where User=”&quot;;
-update User set Password=PASSWORD(’newpassword’) where User=’root’;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;如果要对用户所用的登录终端进行限制，可以更新User表中相应用户的Host字段，在进行了以上更改后应重新启动数据库服务，此时登录时可用如下类似命令：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;mysql -uroot -p;
-mysql -uroot -pnewpassword;
-mysql mydb -uroot -p;
-mysql mydb -uroot -pnewpassword;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;上面命令参数是常用参数的一部分，详细情况可参考文档。此处的mydb是要登录的数据库的名称。&lt;/p&gt;
-
-&lt;p&gt;在 进行开发和实际应用中，用户不应该只用root用户进行连接数据库，虽然使用root用户进行测试时很方便，但会给系统带来重大安全隐患，也不利于管理技 术的提高。我们给一个应用中使用的用户赋予最恰当的数据库权限。如一个只进行数据插入的用户不应赋予其删除数据的权限。MySql的用户管理是通过 User表来实现的，添加新用户常用的方法有两个，一是在User表插入相应的数据行，同时设置相应的权限；二是通过GRANT命令创建具有某种权限的用 户。其中GRANT的常用用法如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;grant all on mydb.* to NewUserName@HostName identified by “password” ;
-grant usage on *.* to NewUserName@HostName identified by “password”;
-grant select,insert,update on mydb.* to NewUserName@HostName identified by “password”;
-grant update,delete on mydb.TestTable to NewUserName@HostName identified by “password”;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;若要给此用户赋予他在相应对象上的权限的管理能力，可在GRANT后面添加WITH GRANT OPTION选项。而对于用插入User表添加的用户，Password字段应用PASSWORD 函数进行更新加密，以防不轨之人窃看密码。对于那些已经不用的用户应给予清除，权限过界的用户应及时回收权限，回收权限可以通过更新User表相应字段， 也可以使用REVOKE操作。&lt;/p&gt;
-
-&lt;p&gt;下面给出本人从&lt;a href=&quot;http://www.cn-java.com&quot;&gt;其它资料&lt;/a&gt;获得的对常用权限的解释：&lt;/p&gt;
-
-&lt;p&gt;全局管理权限：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;FILE: 在MySQL服务器上读写文件。
-PROCESS: 显示或杀死属于其它用户的服务线程。
-RELOAD: 重载访问控制表，刷新日志等。
-SHUTDOWN: 关闭MySQL服务。
-数据库/数据表/数据列权限：
-ALTER: 修改已存在的数据表(例如增加/删除列)和索引。
-CREATE: 建立新的数据库或数据表。
-DELETE: 删除表的记录。
-DROP: 删除数据表或数据库。
-INDEX: 建立或删除索引。
-INSERT: 增加表的记录。
-SELECT: 显示/搜索表的记录。
-UPDATE: 修改表中已存在的记录。
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;特别的权限：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;ALL: 允许做任何事(和root一样)。
-USAGE: 只允许登录–其它什么也不允许做。
-
-mysql&amp;gt; grant 权限1,权限2,…权限n on 数据库名称.表名称 to 用户名@用户地址 identified by ‘连接口令’;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;权限1,权限2,…权限n代表select,insert,update,delete,create,drop,index,alter,grant,references,reload,shutdown,process,file等14个权限。&lt;/p&gt;
-
-&lt;p&gt;当权限1,权限2,…权限n被all privileges或者all代替，表示赋予用户全部权限。&lt;br /&gt;
-当数据库名称.表名称被&lt;em&gt;.&lt;/em&gt;代替，表示赋予用户操作服务器上所有数据库所有表的权限。&lt;/p&gt;
-
-&lt;p&gt;用户地址可以是localhost，也可以是ip地址、机器名字、域名。也可以用’%表示从任何地址连接。&lt;/p&gt;
-
-&lt;p&gt;‘连接口令’不能为空，否则创建失败。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;mysql&amp;gt;grant select,insert,update,delete,create,drop on 2012_test_1.* to &#39;2012_test_1_1&#39;@&#39;%&#39; IDENTIFIED BY &#39;2012_test_1&#39;;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;给来自172.16.10.1的用户weijunping分配可对数据库vtdc的employee表进行select,insert,update,delete,create,drop等操作的权限，并设定口令为123。&lt;/p&gt;
-
-</description>
-      <pubDate>Sun, 29 Jun 2014 00:00:00 +0800</pubDate>
-      <link>https://danielyangmeta.github.com//2014/resources-mysql.html</link>
-      <guid isPermaLink="true">https://danielyangmeta.github.com//2014/resources-mysql.html</guid>
-
-      
-      <category>MySQL</category>
-      
-
-      
-      <category>资源</category>
-      
-      
-    </item>
-  
-    <item>
-      <title>数字三角形</title>
-      <description>&lt;h2 id=&quot;x01-&quot;&gt;0x01 数字三角形问题&lt;/h2&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;问题描述&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;7 
-3 8 
-8 1 0 
-2 7 4 4 
-4 5 2 6 5 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;上图的数字三角形。从三角形的顶部到底部有很多条不同的路径。对于每条路径，把路径上面的数加起来可以得到一个和，和最大的路径称为最佳路径。你的任务就是求出最佳路径上的数字之和。&lt;/p&gt;
-
-&lt;p&gt;注意：路径上的每一步只能从一个数走到下一层上和它最近的左边的数或者右边的数。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;输入数据&lt;/h3&gt;
-
-&lt;p&gt;输入的第一行是一个整数 N (1 &amp;lt; N &amp;lt;= 100)，给出三角形的行数。下面的 N行给出数字三角形。数字三角形上的数的范围都在 0和 100之间。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;输出要求&lt;/h3&gt;
-
-&lt;p&gt;输出最大的和。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;输入样例&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;5 
-7 
-3 8 
-8 1 0 
-2 7 4 4 
-4 5 2 6 5 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-4&quot;&gt;输出样例&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;30 
-193
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;x02-&quot;&gt;0x02 解题思路&lt;/h2&gt;
-
-&lt;p&gt;从题目上看，如果不适用打表技术，会存在很多重复计算，一定会影响效率。所以使用动态规划方法。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-5&quot;&gt;状态转移方程：&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;1: a_max[i][j] = max(a_max[i - 1][j - 1], a_max[i - 1][j]) + a[i][j]; #下三角形
-2: a_max[i-1][j] = max(a_max[i][j], a_max[i][j + 1]) + a[i-1][j];     #上三角形
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;x03-&quot;&gt;0x03 代码&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;#include&amp;lt;iostream&amp;gt;
-using namespace std;
-
-int max(int, int);
-void init();
-
-int _tmain(int argc, _TCHAR* argv[])
-{
-	int a[100][100] = { 0 },a_max[100][100] = { 0 };
-	int  T = 0, N = 0, i = 0, j = 0, ans = 0;
-
-	cin &amp;gt;&amp;gt; T;
-	while (T--)
-	{
-		cin &amp;gt;&amp;gt; N;
-		for (i = 1; i &amp;lt;= N; i++)
-			for (j = 1; j &amp;lt;= i; j++)
-			{
-				cin &amp;gt;&amp;gt; a[i][j];
-				a_max[i][j] = max(a_max[i - 1][j - 1], a_max[i - 1][j]) + a[i][j];
-			}
-				
-		for (i = 1; i &amp;lt;= N; i++)
-		{
-			if (a_max[N][i] &amp;gt; ans)
-				ans = a_max[N][i];
-		}
-		cout &amp;lt;&amp;lt; ans &amp;lt;&amp;lt; endl;
-		init();
-	}
-
-	int k;
-	cin &amp;gt;&amp;gt; k;
-	return 0;
-}
-int max(int a, int b)
-{
-	if (a &amp;gt;= b) 
-		return a;
-	else
-		return b;
-}
-void init()
-{
-	int a[100][100] = { 0 }, a_max[100][100] = { 0 };
-	int  T = 0, N = 0, i = 0, j = 0, max = 0;
-}
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-      <pubDate>Sun, 29 Jun 2014 00:00:00 +0800</pubDate>
-      <link>https://danielyangmeta.github.com//2014/algorithms-shu-zi-san-jiao-xing.html</link>
-      <guid isPermaLink="true">https://danielyangmeta.github.com//2014/algorithms-shu-zi-san-jiao-xing.html</guid>
-
-      
-      <category>Algorithms</category>
-      
-
-      
-      <category>解题</category>
       
       
     </item>

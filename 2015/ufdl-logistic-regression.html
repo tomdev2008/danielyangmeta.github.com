@@ -6,6 +6,8 @@
 <meta name="author" content="danielyang">
 
 
+  <meta name="description " content="Logistic 回归是一种输出预测概率的回归分析，可以用于回归也可用于分类。">
+
 <link rel="shortcut icon" href="/public/img/favicon.png" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -418,42 +420,163 @@
       <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12 aside3">
         <div id="container">
           <div id="pjax"><div class="row">
-  <div class="col-md-12 aside3-title visible-md visible-lg">
-	<a href="/" id="aside3_title_a">
-	  <br>
-		<div class="pagetitle">关于</div>
-	  <br>
-	</a>
-  </div>
-  <div class="col-md-12 aside3-title hidden-lg hidden-md" >
+  <div class="col-md-12 aside3-title visible-md visible-lg" >
     <a href="/" id="aside3_title_a">
-      <div class="pagetitle">关于</div>
+      <br>
+      <div class="pagetitle">Logistic Regression</div>
+      <br>
     </a>
   </div>
-  <div class="col-md-12 aside3-content">
-	<div class="wrapper">
-	  <div id="page-content"><hr>
-<p>自己从什么时候开始接触计算机？很早吧？很晚吧？嗯应该是很晚，正式接触时在我本科时，之前也接触过，但觉得不算。</p>
-<p>到现在已经很多年了，慢慢学会放弃和选择，我会用这个blog来记录一点点过去的时间。</p>
-<hr>
-<p>我喜欢那些在乱世接盘的人，比如杨坚、袁世凯</p>
 
-<hr>
-<center>
-	<img src="/public/img/me.png" class="img-thumbnail">
-	<br> <strong>图：牛叉</strong>
-</center>
-<hr>
-<!-- <a href="" target="_blank"> <i class="fa fa-github fa-2x"></i>
-</a>
-<a href="/atom.xml" target="_blank"> <i class="fa fa-rss fa-2x"></i>
-</a>
-<a href="mailto:danielyangmeta@gmail.com">
-	<i class="fa fa-envelope-o fa-2x"></i>
-</a> --></div>
+  <div class="col-md-12 aside3-title hidden-lg hidden-md" >
+    <a href="/" id="aside3_title_a">
+      <div class="pagetitle">Logistic Regression</div>
+    </a>
+  </div>
+
+  <div class="col-md-12 aside3-content">
+    <div class="wrapper">
+
+      <!-- 目录 -->
+<div class="content">
+	<h3>
+		<a href="javascript:;" id="content_btn">[目录]</a>
+	</h3>
+
+	<div id="content_table" style="display:none;">
+		<div id="nav"></div>
 	</div>
+	
 	<br>
-	<footer class="footer center">
+</div>
+      <div class="cc-footer">
+	<ul>
+		<br>
+		<br>
+
+		<span>
+			
+   上一篇：&nbsp;
+			<a href="/2015/resources-markdown.html">&laquo; Markdown 语法</a>
+			
+		</span>
+		
+		<span style="float:right;" class="visible-md visible-lg">
+			
+		</span>
+
+		<div class="hidden-lg hidden-md">
+			
+		</div>
+	</ul>
+</div>
+      
+      <div id="content"><h2 id="x00-">0x00 引言</h2>
+
+<p>Logistic 回归是一种输出预测概率的回归分析，可以用于回归也可用于分类。</p>
+
+<h2 id="x01-logistic-">0x01 Logistic 回归</h2>
+
+<p>Linear 回归是用于预测连续值得，有些时候我没需要预测一下离散值得因变量，这个时候就可以用 Logistic 回归。Loginstic 函数（Sigmoid 函数）是一种 S 形函数。</p>
+
+<p><img src="/Gallery/2015/logistic-function.jpg" alt="logistic function" /></p>
+
+<p>logistic 的损失函数如下：</p>
+
+<p><img src="/Gallery/2015/logistic-cost-function.jpg" alt="logistic cost function" /></p>
+
+<pre><code>for i = (1 : size(X, 2))
+    hthetax = 1 / (1 + exp(-1 * theta' * X(1 : size(X, 1), i)));
+    f = f + y(i) * log(hthetax) + (1 - y(i)) * log(1 - hthetax);
+end
+f = -1 * f;
+</code></pre>
+
+<p><img src="/Gallery/2015/logistic-min-cost-function.jpg" alt="logistic cost function" /></p>
+
+<pre><code>for i = (1 : size(X, 2))
+    for j = (1 : size(g, 1))
+        g(j) = g(j) + X(j, i) * (hthetax - y(i));
+    end
+end
+</code></pre>
+
+<p>向量化实现能充分利用计算优势，所以在 R 和 Matlab 中都不提倡用 for 来计算矩阵。</p>
+
+<pre><code>temp = theta' * X;
+hthetax = 1 ./ (1 + exp(-1 * temp));
+size(hthetax)
+size(y)
+temp = y * log(hthetax)' + (1 - y) * log(1 - hthetax)';
+f = -1 * sum(temp(:));
+
+temp = hthetax - y;
+g = X * temp';
+
+size(g)
+</code></pre>
+
+<h2 id="x02-">0x02 实验结果</h2>
+
+<p>这个实验做的就是大名鼎鼎的手写数字识别。</p>
+
+<p>Optimization took 31.642443 seconds.<br />
+Training accuracy: 99.3%<br />
+Test accuracy: 99.5%</p>
+
+<h2 id="x03-">0x03 参考文献</h2>
+
+<p>1.<a href="http://blog.csdn.net/pakko/article/details/37878837">逻辑回归</a><br />
+1.<a href="http://cs229.stanford.edu/notes/cs229-notes1.pdf">CS229 Notes</a></p>
+
+</div>
+      <br>
+      <hr>
+      <div class="cc-footer">
+	<h3>文档信息</h3>
+	<ul>
+		<li>作者：杨迪海（Daniel Yang）</li>
+		<li>
+			版权声明：署名-非商业性使用-禁止演绎 4.0（
+			<a href="http://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh_TW#">创意共享4.0许可证</a>
+			）
+		</li>
+		<li>
+			创作日期：
+			<span>2015年03月18日</span>
+		</li>
+		<li>
+			更新日期：
+			<span>2015年03月18日</span>
+		</li>
+	</ul>
+</div>
+      <br>
+      <hr><!-- <div id="disqus_thread">
+<button type="button" name="chezguile" class="btn btn-default show-commend">显示评论</button>
+</div>
+-->
+<div id="disqus_thread"></div>
+
+	<script type="text/javascript">
+	    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	    var disqus_shortname = 'chezguile'; // required: replace example with your forum shortname
+
+	    /* * * DON'T EDIT BELOW THIS LINE * * */
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+	</script>
+
+	<noscript>
+		Please enable JavaScript to view the
+		<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+	</noscript>
+</div>
+    <br>
+    <footer class="footer center">
  	<p>
 		&copy; 2015
 		<a href="https://danielyangmeta.github.com/" target="_blank" title="Surely I am Joking"> danielyang </a>
@@ -468,8 +591,7 @@
 		. 
 	</p>
 </footer>
-	<br>
-  </div>
+    <br></div>
 </div></div>
         </div>
       </div>
