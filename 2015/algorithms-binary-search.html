@@ -6,7 +6,7 @@
 <meta name="author" content="danielyang">
 
 
-  <meta name="description " content="思科在BroCON大会上开源了其安全大数据分析架构OpenSOC。OpenSOC是一个针对网络包和流的大数据分析框架，它是大数据分析与安全分析技术的结合, 能够实时的检测网络异常情况并且可以扩展很多节点，它的存储使用开源项目Hadoop，实时索引使用开源项目ElasticSearch，在线流分析使用著名的开源项目Storm。开源时还没到稳定版，所以对于个人用户来说不是很友好。">
+  <meta name="description " content="Binary search is a famous question in algorithm. For a given sorted array (ascending order) and a target number, find the first index of this number in O(log n) time complexity. If the target number does not exist in the array, return -1.">
 
 <link rel="shortcut icon" href="/public/img/favicon.png" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -431,14 +431,14 @@
   <div class="col-md-12 aside3-title visible-md visible-lg" >
     <a href="/" id="aside3_title_a">
       <br>
-      <div class="pagetitle">OpenSOC</div>
+      <div class="pagetitle">二分查找</div>
       <br>
     </a>
   </div>
 
   <div class="col-md-12 aside3-title hidden-lg hidden-md" >
     <a href="/" id="aside3_title_a">
-      <div class="pagetitle">OpenSOC</div>
+      <div class="pagetitle">二分查找</div>
     </a>
   </div>
 
@@ -465,165 +465,140 @@
 		<span>
 			
    上一篇：&nbsp;
-			<a href="/2014/resources-css.html">&laquo; CSS</a>
+			<a href="/2015/algorithms-backpack.html">&laquo; 背包问题（1）</a>
 			
 		</span>
 		
 		<span style="float:right;" class="visible-md visible-lg">
-			 
-    下一篇：&nbsp;
-			<a  href="/2014/tools-vagrant.html">Vagrant &raquo;</a>
 			
 		</span>
 
 		<div class="hidden-lg hidden-md">
-			 
-    下一篇：&nbsp;
-			<a  href="/2014/tools-vagrant.html">&raquo; Vagrant</a>
 			
 		</div>
 	</ul>
 </div>
       
-      <div id="content"><h2 id="x00-">0x00 引言</h2>
+      <div id="content"><h2 id="x01-">0x01 二分查找</h2>
 
-<blockquote>
-  <p>思科在BroCON大会上开源了其安全大数据分析架构OpenSOC。OpenSOC是一个针对网络包和流的大数据分析框架，它是大数据分析与安全分析技术的结合, 能够实时的检测网络异常情况并且可以扩展很多节点，它的存储使用开源项目Hadoop，实时索引使用开源项目ElasticSearch，在线流分析使用著名的开源项目Storm。开源时还没到稳定版，所以对于个人用户来说不是很友好。</p>
-</blockquote>
+<p>Binary search is a famous question in algorithm.</p>
 
-<h2 id="x01-opensoc-">0x01 OpenSoc 的组成</h2>
+<p>For a given sorted array (ascending order) and a target number, find the first index of this number in O(log n) time complexity.</p>
 
-<p>OpenSOC 是 cisco 公司的一个开源项目，bro 项目中包含 OpenSOC ，所以应该 bro 项目是 OpenSOC 的一个封装。</p>
+<p>If the target number does not exist in the array, return -1.</p>
 
-<p>2 Network Capture Cards (Recommend Napatech NT20E2-CAP)</p>
+<h3 id="example">Example</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>component</th>
-      <th>function</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Apache Flume 1.4.0 +</td>
-      <td>Telemetry Capture Layer</td>
-    </tr>
-    <tr>
-      <td>Apache Kafka 0.8.1+</td>
-      <td>Data Bus</td>
-    </tr>
-    <tr>
-      <td>Apache Storm 0.9 +</td>
-      <td>Stream Processor</td>
-    </tr>
-    <tr>
-      <td>Apache Hadoop 2.x (any distribution)</td>
-      <td>Cloud Platform</td>
-    </tr>
-    <tr>
-      <td>Apache Hive 12 + (13 recommended)</td>
-      <td>Long-Term Data Store</td>
-    </tr>
-    <tr>
-      <td>Apache Hbase 0.94+</td>
-      <td>Long-Term Packet Store</td>
-    </tr>
-    <tr>
-      <td>Elastic Search 1.1 +</td>
-      <td>Real-Time Index and Search</td>
-    </tr>
-    <tr>
-      <td>MySQL 5.6+</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>Kibana</td>
-      <td>Visualization Platform</td>
-    </tr>
-  </tbody>
-</table>
+<p>If the array is [1, 2, 3, 3, 4, 5, 10], for given target 3, return 2.</p>
 
-<p>mysql、kibana、elastic search、opensoc</p>
+<h3 id="challenge">Challenge</h3>
 
-<p>OpenSOC-Streaming<br />
-OpenSOC-Aggregation<br />
-OpenSOC-ML</p>
+<p>If the count of numbers is bigger than MAXINT, can your code work properly?</p>
 
-<h2 id="x02-survey-of-algorithms-used-by-opensoc">0x02 Survey of Algorithms Used by OpenSOC</h2>
+<h2 id="x02-">0x02 解题要点</h2>
 
-<h3 id="offline">Offline</h3>
+<p>注意输入数据可以重复，输出是索引最小的那个索引。</p>
 
-<p>Hypothesis Tests</p>
+<h2 id="x03-">0x03 代码</h2>
 
-<p>Decision Trees/Random Forests</p>
+<h3 id="c">C++</h3>
 
-<p>Association Rules (Apriori)</p>
+<pre><code>class Solution {
+public:
+    /**
+     * @param nums: The integer array.
+     * @param target: Target number to find.
+     * @return: The first position of target. Position starts from 0. 
+     */
+    int binarySearch(vector&lt;int&gt; &amp;array, int target) {
+        // write your code here
+        int left = 0;
+        int right = array.size() - 1;
+	    int mean = 0;
+	    int result = -1;
+	    while (left &lt;= right) {
+	    	mean = left + (right - left) / 2;
+	    	if (array[mean] == target) {
+	    		result = mean;
+	    		right = mean - 1;
+	    		continue;
+	    	} else if (array[mean] &gt; target) {
+	    		right = mean - 1;
+	    	} else {
+	    		left = mean + 1;
+	    	}
+    	}
+    	if (-1 == result) {
+    		return -1;
+    	}
 
-<p>BIRCH/DBSCAN Clustering</p>
+	return result;
+    }
+};
+</code></pre>
 
-<p>Auto Regressive (AR) Moving Average (MA)</p>
+<h3 id="java">Java</h3>
 
-<h3 id="online">Online</h3>
+<pre><code>public class Solution {
+    /**
+     * @param ums: The integer array.
+     * @param target: Target to find.
+     * @return: The first position of target. Position starts fromean0.
+     */
+    public int binarySearch(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length - 1;
+        int mean = 0;
+        int result = -1;
+        while (left &lt;= right) {
+            mean = left + (right - left) / 2;
+            if (nums[mean] == target) {
+                result = mean;
+                right = mean - 1;
+                continue;
+            } else if (nums[mean] &gt; target) {
+                right = mean - 1;
+            } else {
+                left = mean + 1;
+            }
+        }
+        if (-1 == result) {
+            return -1;
+        }
 
-<h4 id="stream-clustering">Stream Clustering</h4>
+        return result;
+    }
+}
+</code></pre>
 
-<p>StreamKM++: computes a small weighted sample of the data stream and it uses the kmeans++ algorithm as a randomized seeding technique to choose the first values for the clusters.</p>
+<h3 id="python">Python</h3>
 
-<p>CluStream: micro-clusters are temporal extensions of cluster feature vectors. The microclusters are stored at snapshots in time following a pyramidal pattern.</p>
+<pre><code>class Solution:
+    # @param nums: The integer array
+    # @param target: Target number to find
+    # @return the first position of target in nums, position start from 0 
+    def binarySearch(self, nums, target):
+        # write your code here
+        left = 0
+        right = len(nums) - 1
+        mean = 0
+        result = -1
+        while (left &lt;= right):
+            mean = left + (right - left) // 2
+            if (nums[mean] == target):
+                result = mean
+                right = mean - 1
+                continue
+            elif (nums[mean] &gt; target):
+                right = mean - 1
+            else:
+                left = mean + 1
 
-<p>ClusTree: It is a parameter free algorithm automatically adapting to the speed of the stream and it is capable of detecting concept drift, novelty, and outliers in the stream.</p>
+        if (-1 == result):
+            return -1
 
-<p>DenStream: uses dense micro-clusters (named core-micro-cluster) to summarize clusters. To maintain and distinguish the potential clusters and outliers, this method presents coremicro-cluster and outlier micro-cluster structures.</p>
-
-<p>D-Stream: maps each input data record into a grid and it computes the grid density. The grids are clustered based on the density. This algorithm adopts a density decaying technique to capture the dynamic changes of a data stream.</p>
-
-<p>CobWeb: uses a classification tree. Each node in a classification tree represents a class (concept) and is labeled by a probabilistic concept that summarizes the attribute-value distributions of objects classified under the node</p>
-
-<h4 id="stream-classification">Stream Classification</h4>
-
-<p>Hoeffding Tree (VFDT)：incremental, anytime decision tree induction algorithm that is capable of learning from massive data streams, assuming that the distribution generating examples does not change over time</p>
-
-<p>Half-Space Trees：ensemble model that randomly spits data into half spaces. They are created online and detect anomalies by their deviations in placement within the forest relative to other data from the same window</p>
-
-<h4 id="outlier-detection">Outlier Detection</h4>
-
-<p>Median Absolute Deviation: Telemetry is anomalous if the deviation of its latest datapoint with respect to the median is X times larger than the median of deviations </p>
-
-<p>Standard Deviation from Average: Telemetry is anomalous if the absolute value of the average of the latest three datapoint minus the moving average is greater than three standard deviations of the average.</p>
-
-<p>Standard Deviation from Moving Average: Telemetry is anomalous if the absolute value of the average of the latest three datapoints minus the moving average is greater than three standard deviations of the moving average.</p>
-
-<p>Mean Subtraction Cumulation: Telemetry is anomalous if the value of the next datapoint in the series is farther than three standard deviations out in cumulative terms after subtracting the mean from each data point </p>
-
-<p>Least Squares: Telemetry is anomalous if the average of the last three datapoints on a projected least squares model is greater than three sigma</p>
-
-<p>Histogram Bins: Telemetry is anomalous if the average of the last three datapoints falls into a histogram bin with less than x </p>
-
-<h3 id="approximation-for-streaming">Approximation for Streaming</h3>
-
-<p>Skip Lists</p>
-
-<p>HyperLogLog</p>
-
-<p>Bloom Filters</p>
-
-<p>Sketches</p>
-
-<p>Digest</p>
-
-<h2 id="x03-">0x03 参考文献</h2>
-
-<p><a href="https://github.com/OpenSOC/opensoc/wiki/CONTRIBUTING.md">OpenSOC CONTRIBUTING</a><br />
-<a href="https://www.bro.org/sitemap/index.html">www.bro.org</a><br />
-<a href="https://www.bro.org/sphinx-git/index.html">Bro Manual</a><br />
-<a href="https://www.bro.org/documentation/index.html">bro Documentation and Training</a><br />
-<a href="https://www.bro.org/community/software.html">Related Software</a><br />
-<a href="https://www.bro.org/community/traces.html">bro Packet Traces</a><br />
-<a href="https://github.com/grutz/bro/blob/master/doc/install/install.rst">bro Installing Bro</a><br />
-<a href="https://www.bro.org/documentation/exercises/index.html">bro Exercises</a><br />
-<a href="https://www.bro.org/research/index.html">Research</a><br />
-<a href="http://try.bro.org/#/trybro">Try Bro</a></p>
+        return result
+</code></pre>
 </div>
       <br>
       <hr>
@@ -638,11 +613,11 @@ OpenSOC-ML</p>
 		</li>
 		<li>
 			创作日期：
-			<span>2014年12月23日</span>
+			<span>2015年03月24日</span>
 		</li>
 		<li>
 			更新日期：
-			<span>2015年01月21日</span>
+			<span>2015年03月24日</span>
 		</li>
 	</ul>
 </div>

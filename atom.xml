@@ -4,10 +4,147 @@
     <title>Surely,I am Joking</title>
     <link>https://danielyangmeta.github.com/</link>
     <description>Surely I am Joking</description>
-    <pubDate>Tue, 24 Mar 2015 15:17:00 +0800</pubDate>
-    <lastBuildDate>Tue, 24 Mar 2015 15:17:00 +0800</lastBuildDate>
+    <pubDate>Tue, 24 Mar 2015 20:45:59 +0800</pubDate>
+    <lastBuildDate>Tue, 24 Mar 2015 20:45:59 +0800</lastBuildDate>
     <atom:link href="https://danielyangmeta.github.com//feed.xml" rel="self" type="application/rss+xml"/>
 
+  
+    <item>
+      <title>二分查找</title>
+      <description>&lt;h2 id=&quot;x01-&quot;&gt;0x01 二分查找&lt;/h2&gt;
+
+&lt;p&gt;Binary search is a famous question in algorithm.&lt;/p&gt;
+
+&lt;p&gt;For a given sorted array (ascending order) and a target number, find the first index of this number in O(log n) time complexity.&lt;/p&gt;
+
+&lt;p&gt;If the target number does not exist in the array, return -1.&lt;/p&gt;
+
+&lt;h3 id=&quot;example&quot;&gt;Example&lt;/h3&gt;
+
+&lt;p&gt;If the array is [1, 2, 3, 3, 4, 5, 10], for given target 3, return 2.&lt;/p&gt;
+
+&lt;h3 id=&quot;challenge&quot;&gt;Challenge&lt;/h3&gt;
+
+&lt;p&gt;If the count of numbers is bigger than MAXINT, can your code work properly?&lt;/p&gt;
+
+&lt;h2 id=&quot;x02-&quot;&gt;0x02 解题要点&lt;/h2&gt;
+
+&lt;p&gt;注意输入数据可以重复，输出是索引最小的那个索引。&lt;/p&gt;
+
+&lt;h2 id=&quot;x03-&quot;&gt;0x03 代码&lt;/h2&gt;
+
+&lt;h3 id=&quot;c&quot;&gt;C++&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;class Solution {
+public:
+    /**
+     * @param nums: The integer array.
+     * @param target: Target number to find.
+     * @return: The first position of target. Position starts from 0. 
+     */
+    int binarySearch(vector&amp;lt;int&amp;gt; &amp;amp;array, int target) {
+        // write your code here
+        int left = 0;
+        int right = array.size() - 1;
+	    int mean = 0;
+	    int result = -1;
+	    while (left &amp;lt;= right) {
+	    	mean = left + (right - left) / 2;
+	    	if (array[mean] == target) {
+	    		result = mean;
+	    		right = mean - 1;
+	    		continue;
+	    	} else if (array[mean] &amp;gt; target) {
+	    		right = mean - 1;
+	    	} else {
+	    		left = mean + 1;
+	    	}
+    	}
+    	if (-1 == result) {
+    		return -1;
+    	}
+
+	return result;
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;java&quot;&gt;Java&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;public class Solution {
+    /**
+     * @param ums: The integer array.
+     * @param target: Target to find.
+     * @return: The first position of target. Position starts fromean0.
+     */
+    public int binarySearch(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length - 1;
+        int mean = 0;
+        int result = -1;
+        while (left &amp;lt;= right) {
+            mean = left + (right - left) / 2;
+            if (nums[mean] == target) {
+                result = mean;
+                right = mean - 1;
+                continue;
+            } else if (nums[mean] &amp;gt; target) {
+                right = mean - 1;
+            } else {
+                left = mean + 1;
+            }
+        }
+        if (-1 == result) {
+            return -1;
+        }
+
+        return result;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;python&quot;&gt;Python&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;class Solution:
+    # @param nums: The integer array
+    # @param target: Target number to find
+    # @return the first position of target in nums, position start from 0 
+    def binarySearch(self, nums, target):
+        # write your code here
+        left = 0
+        right = len(nums) - 1
+        mean = 0
+        result = -1
+        while (left &amp;lt;= right):
+            mean = left + (right - left) // 2
+            if (nums[mean] == target):
+                result = mean
+                right = mean - 1
+                continue
+            elif (nums[mean] &amp;gt; target):
+                right = mean - 1
+            else:
+                left = mean + 1
+
+        if (-1 == result):
+            return -1
+
+        return result
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+      <pubDate>Tue, 24 Mar 2015 00:00:00 +0800</pubDate>
+      <link>https://danielyangmeta.github.com//2015/algorithms-binary-search.html</link>
+      <guid isPermaLink="true">https://danielyangmeta.github.com//2015/algorithms-binary-search.html</guid>
+
+      
+      <category>Algorithms</category>
+      
+
+      
+      <category>解题</category>
+      
+      
+    </item>
   
     <item>
       <title>背包问题（1）</title>
@@ -2743,288 +2880,6 @@ http://wenku.baidu.com/link?url cD2Z12Gt6YDSLY5N0LW-KsAhFi8EuBGXv0kBO561RvsCa5p9
 
       
       <category>技术</category>
-      
-      
-    </item>
-  
-    <item>
-      <title>Octopress</title>
-      <description>&lt;h2 id=&quot;x00-&quot;&gt;0x00 引言&lt;/h2&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Octopress是一款基于 Jekyll 的优秀的静态化博客系统，也是一个本地化的博客系统。如果你是 Github 深度用户，一定知道可用用 Github Pages 托管静态 Blog。学计算机，就应该多动手，这样才能有成就感。作为一名动手的 programer 还是需要一个 Blog 的。不过我现在已经不用 Octopress 搭建的 Blog 了。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;x01-github&quot;&gt;0x01 什么是github?&lt;/h2&gt;
-
-&lt;p&gt;github 是一个源代码托管平台，有很多类似的比如gitcafe等。&lt;/p&gt;
-
-&lt;h3 id=&quot;github-pages&quot;&gt;什么是github pages?&lt;/h3&gt;
-
-&lt;p&gt;github pages 是github的一个创新，来增加github的layers。更多有关github pages的文档，见：&lt;a href=&quot;http://pages.github.com/&quot;&gt;http://pages.github.com/&lt;/a&gt;。&lt;/p&gt;
-
-&lt;h3 id=&quot;github-pages-1&quot;&gt;为什么用github pages?&lt;/h3&gt;
-
-&lt;p&gt;用github pages搭建博客，你可以享受到免费的服务器，免费的流量和相对不错的服务体验。另外，这种blog对于控制欲强悍的程序员来说，很适合，一切由你决定，还有近乎0成本迁移到任意服务器。&lt;/p&gt;
-
-&lt;h2 id=&quot;x02-octopress&quot;&gt;0x02 什么是octopress?&lt;/h2&gt;
-
-&lt;p&gt;octopress提供了一组自动化的工具和模版帮助用户简化博客系统的创建。octopress生成的博客系统可以被方便地部署到github pages及heroku，当然，由于生成的是静态文件，你也可以将其部署到任何一个你自己的vhost或server。&lt;/p&gt;
-
-&lt;p&gt;octopress的安装文档见：&lt;a href=&quot;http://octopress.org/docs/setup/&quot;&gt;http://octopress.org/docs/setup/&lt;/a&gt;。本文接下来的部分会详细介绍如何用github pages和octopress部署一个自己的博客，及简单介绍如何进行写作。&lt;/p&gt;
-
-&lt;h2 id=&quot;x03-&quot;&gt;0x03 安装&lt;/h2&gt;
-
-&lt;h3 id=&quot;repository&quot;&gt;创建博客repository项目&lt;/h3&gt;
-
-&lt;p&gt;在你的github账号下创建名为yourname.github.com的repository项目。&lt;/p&gt;
-
-&lt;h3 id=&quot;ruby-git&quot;&gt;安装ruby ，git&lt;/h3&gt;
-
-&lt;p&gt;如果你的系统中没有ruby或者 &lt;code&gt;ruby --version&lt;/code&gt; 的版本不是1.9.3，请使用 &lt;a href=&quot;https://rvm.io/rvm/install/&quot;&gt;rvm&lt;/a&gt; 或者你熟悉的version manager安装1.9.3.&lt;/p&gt;
-
-&lt;p&gt;使用rvm安装ruby 1.9.3:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;curl -L https://get.rvm.io | bash -s stable --ruby   #安装rvm
-$ sudo apt-get install git ruby ruby-dev -y
-$ rvm install 1.9.3
-$ rvm use 1.9.3
-$ rvm rubygems latest
-ruby 1.9.3p0 (2011-10-30 revision 33570) [x86_64-darwin12.2.0]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;octopress&quot;&gt;设置octopress&lt;/h3&gt;
-
-&lt;h4 id=&quot;section&quot;&gt;安装依赖&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;$ git clone git://github.com/imathis/octopress.git octopress
-$ cd octopress
-$ gem install bundler
-$ bundle install   #不要用root权限，使用root权限后以后不能再用普通用户
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&quot;section-1&quot;&gt;安装缺省的模版&lt;/h4&gt;
-
-&lt;p&gt;使用rake install 后会产生三个目录&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;source:来自于.themes\classic目录中的source，并添加来_posts目录
-sass:来自于.themes\classic目录中的source
-public: 
-
-$ rake install
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&quot;repository-1&quot;&gt;设置博客使用的repository&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;$ rake setup_github_pages
-Enter the read/write url for your repository
-(For example, &#39;git@github.com:your_username/your_username.github.com)
-Repository url: 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;请输入：&lt;code&gt;git@github.com:yourname/yourname.github.com.git&lt;/code&gt; (将yourname替换成你的github登录名)&lt;/p&gt;
-
-&lt;p&gt;这个步骤rake会做很多事情：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;在.git/config中替换origin为你输入的repository，并把原来的origin写到octopress中。&lt;/li&gt;
-  &lt;li&gt;创建新的branch source并切换到这个branch。&lt;/li&gt;
-  &lt;li&gt;在生成的_deploy目录下，初始化git repository为你的repository。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;以下是两个git config的内容，just for your information。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;~/projects/octopress$ cat .git/config 
-[core]
-	repositoryformatversion = 0
-	filemode = true
-	bare = false
-	logallrefupdates = true
-	ignorecase = true
-[remote &quot;octopress&quot;]
-	url = git://github.com/imathis/octopress.git
-	fetch = +refs/heads/*:refs/remotes/octopress/*
-[branch &quot;source&quot;]
-	remote = origin
-	merge = refs/heads/master
-	rebase = true
-[remote &quot;origin&quot;]
-	url = git@github.com:tyrchen/tyrchen.github.com.git
-	fetch = +refs/heads/*:refs/remotes/origin/*
-
-~/projects/octopress$ cat _deploy/.git/config 
-[core]
-	repositoryformatversion = 0
-	filemode = true
-	bare = false
-	logallrefupdates = true
-	ignorecase = true
-[remote &quot;origin&quot;]
-	url = git@github.com:tyrchen/tyrchen.github.com.git
-	fetch = +refs/heads/*:refs/remotes/origin/*
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&quot;section-2&quot;&gt;创建博文&lt;/h4&gt;
-
-&lt;p&gt;接下来可以试试创建一个新的博文：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ rake new_post[&quot;My first blog&quot;]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;这会在source/_posts下创建一个以时间和标题为名称的markdown文件，它就是你的第一篇博文。&lt;/p&gt;
-
-&lt;p&gt;使用：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ rake preview
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;rake会启动一个server，打开浏览器访问 &lt;a href=&quot;http://localhost:4000&quot;&gt;http://localhost:4000&lt;/a&gt; 可以看到你的最新更改。&lt;/p&gt;
-
-&lt;h4 id=&quot;section-3&quot;&gt;部署你的博客&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;$ rake gen_deploy
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;这个命令会把_deploy下的内容重新生成一遍，然后提交到你的repository。但你并不能立马访问你的博客，需要等待几分钟的样子。&lt;/p&gt;
-
-&lt;h4 id=&quot;section-4&quot;&gt;保存你的更改&lt;/h4&gt;
-
-&lt;p&gt;当你完成修改后，需要使用git工具提交修改。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ git add .
-$ git commit -m &quot;notes&quot;
-$ git push origin source    
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;最后一句可以不要，这样源代码就不会上传&lt;/p&gt;
-
-&lt;h4 id=&quot;section-5&quot;&gt;撰写博文&lt;/h4&gt;
-
-&lt;p&gt;博客系统搭建好之后，如何撰写博文呢？你要使用 &lt;code&gt;rake new_post&lt;/code&gt; 命令创建一篇新的文章，然后使用称手的markdown编辑器进行编辑即可。可选择的markdown编辑器很多，vim，sublime text 2，textmate 2等等。我个人喜欢sublime text 2。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-6&quot;&gt;个性化&lt;/h2&gt;
-
-&lt;h3 id=&quot;section-7&quot;&gt;添加个人域名&lt;/h3&gt;
-&lt;p&gt;在octopress目录下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ echo &#39;blog.yourdomain.com&#39; &amp;gt;&amp;gt; source/CNAME
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;然后在你的DNS服务商，如 &lt;a href=&quot;http://dnspod.cn&quot;&gt;dnspod.cn&lt;/a&gt;，添加相应的CNAME指向 yourname.github.com。如果你要使用顶级域名，如 &lt;code&gt;http://yourdomain.com&lt;/code&gt; 访问你的博客，则需要使用A记录指向 &lt;code&gt;207.97.227.245&lt;/code&gt;。详细内容请参考：&lt;a href=&quot;http://octopress.org/docs/deploying/github/&quot;&gt;http://octopress.org/docs/deploying/github/&lt;/a&gt;。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-8&quot;&gt;设置博客&lt;/h3&gt;
-
-&lt;p&gt;主要设置文件包括：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;_config.yml       # Main config (Jekyll&#39;s settings)
-Rakefile          # Configs for deployment
-config.rb         # Compass config
-config.ru         # Rack config 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;主要设置内容：&lt;br /&gt;
-    设置网站的description和keywords&lt;br /&gt;
-    设置首页&lt;br /&gt;
-    导航栏设置&lt;br /&gt;
-    设置文件版权&lt;br /&gt;
-按照 &lt;a href=&quot;http://octopress.org/docs/configuring/&quot;&gt;http://octopress.org/docs/configuring/&lt;/a&gt; 的说明进行设置即可。注意把不需要的asides都删除，免得加载不必要的js，拖累访问速度。&lt;/p&gt;
-
-&lt;h2 id=&quot;x04-configyml-&quot;&gt;0x04 我的_config.yml 的配置&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;url: http://chez-guile.github.io
-title: Chez
-subtitle: 一个迷失的人
-author: Chez-Guile
-simple_search: http://google.com/search
-description: Hello Everyone. I am a Vimer,Emacser and i am using Ubuntu,Now.
-
-github_user: Chez-Guile
-github_repo_count: 1
-github_show_profile_link: true
-github_skip_forks: true
-
-# Disqus Comments
-disqus_short_name: chezguile
-disqus_show_comment_count: true
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-9&quot;&gt;使用主题&lt;/h3&gt;
-
-&lt;p&gt;本文使用了 &lt;a href=&quot;https://github.com/shashankmehta/greyshade&quot;&gt;https://github.com/shashankmehta/greyshade&lt;/a&gt; 的主题。使用方法很简单：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ cd octopress
-$ git clone git@github.com:shashankmehta/greyshade.git .themes/greyshade
-$ echo &quot;\$greyshade: color;&quot; &amp;gt;&amp;gt; sass/custom/_colors.scss //Substitue &#39;color&#39; with your highlight color 0x000000
-$ rake &quot;install[greyshade]&quot;
-$ rake generate
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-10&quot;&gt;更新&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;git pull octopress master     # Get the latest Octopress
-bundle install                # Keep gems updated
-rake update_source            # update the template&#39;s source
-rake update_style             # update the template&#39;s style
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;x05-&quot;&gt;0x05 常用命令&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;$ rake setup_github_pages
-$ rake new_post[&quot;name&quot;]
-$ rake generate
-$ rake preview
-$ rake watch   # 监控source 和sass 目录的变动
-$ rake deploy
-$ rake gen_deploy
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;x06-&quot;&gt;0x06 所需工具&lt;/h2&gt;
-
-&lt;p&gt;git rvm(这个工具的使用还是应该学会的) edit ruby &lt;/p&gt;
-
-&lt;h2 id=&quot;x07-&quot;&gt;0x07 常见错误及其解决方案&lt;/h2&gt;
-
-&lt;p&gt;1：Make sure that &lt;code&gt;gem install RedCloth -v &#39;4.2.9&#39;&lt;/code&gt; succeeds before bundling.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ sudo apt-get install ruby-dev
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;2：RVM is not a function, selecting rubies with ‘rvm use …’ will not work.&lt;br /&gt;
-You need to change your terminal settings to allow shell login.&lt;br /&gt;
-Please visit https://rvm.io/workflow/screen/ for example.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ bash --login
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;3：这个文件名不能出现标点符号。数字和数学符号&lt;/p&gt;
-
-&lt;p&gt;4：You have already activated rake 0.9.2.2, but your Gemfile requires rake 0.9.2. Consider using bundle exec.&lt;/p&gt;
-
-&lt;p&gt;可以在rake install命令前添加bundle exec或者直接修改octopress目录文件Gemfile,修改rake版本为当前版本&lt;/p&gt;
-
-&lt;p&gt;5：/home/chez/.rvm/gems/ruby-1.9.3-p547/gems/execjs-2.2.2/lib/execjs/runtimes.rb:51:in `autodetect’: Could not find a JavaScript runtime. See https://github.com/sstephenson/execjs for a list of available runtimes. (ExecJS::RuntimeUnavailable)&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;sudo apt-get install nodejs
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;x07--1&quot;&gt;0x07 参考文献&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://octopress.org&quot;&gt;Octopress&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://justcoding.iteye.com/blog/1959737&quot;&gt;Octopress 配置&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-      <pubDate>Sun, 29 Jun 2014 00:00:00 +0800</pubDate>
-      <link>https://danielyangmeta.github.com//2014/tools-How-to-use-Octopress.html</link>
-      <guid isPermaLink="true">https://danielyangmeta.github.com//2014/tools-How-to-use-Octopress.html</guid>
-
-      
-      <category>Tool</category>
-      
-
-      
-      <category>工具</category>
       
       
     </item>
