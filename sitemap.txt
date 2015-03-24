@@ -17,6 +17,8 @@
 
 
 
+  /2015/algorithms-backpack.html
+
   /2015/ufdl-logistic-regression.html
 
   /2015/resources-markdown.html

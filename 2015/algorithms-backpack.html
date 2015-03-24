@@ -6,7 +6,7 @@
 <meta name="author" content="danielyang">
 
 
-  <meta name="description " content="Maven 是常用 Java 工具，是基于项目对象模型(POM)，可以通过一小段描述信息来管理项目的构建，报告和文档的软件项目管理工具。但它不是万能的。本文介绍 Maven 操作和基础概念。">
+  <meta name="description " content="有一个可以装 m 体检的背包，和体积为 A[i] 的 n 件物品。问：如何装才能装最多的东西。">
 
 <link rel="shortcut icon" href="/public/img/favicon.png" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -427,14 +427,14 @@
   <div class="col-md-12 aside3-title visible-md visible-lg" >
     <a href="/" id="aside3_title_a">
       <br>
-      <div class="pagetitle">Maven</div>
+      <div class="pagetitle">背包问题（1）</div>
       <br>
     </a>
   </div>
 
   <div class="col-md-12 aside3-title hidden-lg hidden-md" >
     <a href="/" id="aside3_title_a">
-      <div class="pagetitle">Maven</div>
+      <div class="pagetitle">背包问题（1）</div>
     </a>
   </div>
 
@@ -461,93 +461,90 @@
 		<span>
 			
    上一篇：&nbsp;
-			<a href="/2015/algorithms-he-dian-zhan-wen-ti.html">&laquo; 核电站问题</a>
+			<a href="/2015/ufdl-logistic-regression.html">&laquo; Logistic Regression</a>
 			
 		</span>
 		
 		<span style="float:right;" class="visible-md visible-lg">
-			 
-    下一篇：&nbsp;
-			<a  href="/2015/ufldl-linear-regression.html">Linear Regression &raquo;</a>
 			
 		</span>
 
 		<div class="hidden-lg hidden-md">
-			 
-    下一篇：&nbsp;
-			<a  href="/2015/ufldl-linear-regression.html">&raquo; Linear Regression</a>
 			
 		</div>
 	</ul>
 </div>
       
-      <div id="content"><h2 id="x01-centos--openjdk">0x01 CentOS 卸载 OpenJDK</h2>
-<pre><code>yum list installed |grep java
-yum -y remove java-1.7.0-openjdk*
-yum -y remove tzdata-java.noarch
-yum -y list java*
+      <div id="content"><h2 id="x01-">0x01 背包问题</h2>
+
+<h3 id="backpack">Backpack</h3>
+<p>Given n items with size A[i], an integer m denotes the size of a backpack. How full you can fill this backpack? </p>
+
+<h3 id="note">Note</h3>
+<p>You can not divide any item into small pieces.</p>
+
+<h3 id="example">Example</h3>
+<p>If we have 4 items with size [2, 3, 5, 7], the backpack size is 11, we can select 2, 3 and 5, so that the max size we can fill this backpack is 10. If the backpack size is 12. we can select [2, 3, 7] so that we can fulfill the backpack.</p>
+
+<p>You function should return the max size we can fill in the given backpack.</p>
+
+<h2 id="x02-">0x02 解题思路</h2>
+
+<p>这个解法好暴力，状态转移方程：</p>
+
+<pre><code>result[j] = result[j - A[i]] + A[i], result[j];
 </code></pre>
 
-<h2 id="x02-centos--maven">0x02 CentOS 安装 Maven</h2>
+<h2 id="x03-">0x03 代码</h2>
 
-<p>OpenJDK 的安装目录和 Oracle JDK的安装目录不一样。</p>
+<h3 id="c">C++</h3>
 
-<pre><code>export M2_HOME=/usr/local/apache-maven/apache-maven-3.2.5
-export MAVEN_OPTS="-Xms256m -Xmx512m"
-M2=$M2_HOME/bin
-PATH=$M2:$PATH
-export JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk-1.7.0.71.x86_64/jre/
-export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
-export PATH=$PATH:$JAVA_HOME/bin
-
-source /etc/profile
+<pre><code>class Solution {
+public:
+    /**
+     * @param m: An integer m denotes the size of a backpack
+     * @param A: Given n items with size A[i]
+     * @return: The maximum size
+     */
+    int backPack(int m, vector&lt;int&gt; A) {
+        // write your code here
+        int result[100000] = { 0, 0, 0 };
+	    for (int i = 0; i &lt; A.size(); i++) {
+		    for (int j = m; j &gt;= A[i]; j--) {
+			    if (result[j - A[i]] + A[i] &gt; result[j]) {
+			    	result[j] = result[j - A[i]] + A[i];
+			    }
+		     	else {
+			    	result[j] = result[j];
+		    	}
+	     	}
+    	}
+    	return result[m];
+    }
+};
 </code></pre>
 
-<h2 id="x03--maven-">0x03 修改 Maven 的库地址</h2>
+<h3 id="python">Python</h3>
 
-<pre><code>${user.home}/.m2/settings.xml
-</code></pre>
+<h3 id="java">Java</h3>
 
-<h2 id="x04-maven-phases">0x04 Maven Phases</h2>
-
-<pre><code>mvn validate：      验证工程是否正确，所有需要的资源是否可用。 
-mvn compile：       编译项目的源代码。   
-mvn test：          使用合适的单元测试框架来测试已编译的源代码。这些测试不需要已打包和布署。 
-mvn Package：       把已编译的代码打包成可发布的格式，比如jar。 
-mvn integration-test： 如有需要，将包处理和发布到一个能够进行集成测试的环境。 
-mvn verify：        运行所有检查，验证包是否有效且达到质量标准。 
-mvn install：       把包安装在本地的repository中，可以被其他工程作为依赖来使用。 
-mvn Deploy：        在集成或者发布环境下执行，将最终版本的包拷贝到远程的repository，使得其他的开发者或者工程可以共享。 
-mvn clean：         清除先前构建的artifacts（在maven中，把由项目生成的包都叫作artifact）。 
-mvn site：          为项目生成文档站点。 
-mvn idea:idea       提供 IntelliJ IDEA 工程支持
-mvn eclipse:eclipse 提供 Eclipse IDE 工程支持
-</code></pre>
-
-<p>Phases 和 goals 可以按顺序执行：</p>
-
-<pre><code>mvn clean dependency:copy-dependencies package
-</code></pre>
-
-<p>这条命令会先清理项目，然后复制依赖，最后执行 package Phases	</p>
-
-<h2 id="x05-standard-directory-layout">0x05 Standard Directory Layout</h2>
-
-<pre><code>src/main/java       Application/Library sources
-src/main/resources	Application/Library resources
-src/main/filters	Resource filter files
-src/main/config     Configuration files
-src/main/scripts	Application/Library scripts
-src/main/webapp  	Web application sources
-src/test/java       Test sources
-src/test/resources	Test resources
-src/test/filters	Test resource filter files
-src/it              Integration Tests (primarily for plugins)
-src/assembly        Assembly descriptors
-src/site	        Site
-LICENSE.txt	        Project's license
-NOTICE.txt	        Notices and attributions required by libraries that the project depends on
-README.txt	        Project's readme
+<pre><code>public class Solution {
+    /**
+     * @param m: An integer m denotes the size of a backpack
+     * @param A: Given n items with size A[i]
+     * @return: The maximum size
+     */
+    public int backPack(int m, int[] A) {
+        // write your code here
+        int[] result = new int[m + 1];
+        for (int i = 0; i &lt; A.length; i++) {
+            for (int j = m; j &gt;= A[i]; j--) {
+                result[j] = Math.max(result[j - A[i]] + A[i], result[j]);
+            }
+        }
+        return result[m];
+    }
+}
 </code></pre>
 
 </div>
@@ -564,11 +561,11 @@ README.txt	        Project's readme
 		</li>
 		<li>
 			创作日期：
-			<span>2015年01月07日</span>
+			<span>2015年03月23日</span>
 		</li>
 		<li>
 			更新日期：
-			<span>2015年01月20日</span>
+			<span>2015年03月20日</span>
 		</li>
 	</ul>
 </div>
